@@ -32,7 +32,7 @@ from OSC import OSCClient, OSCMessage, OSCServer
 ################################################
 #           PORTS
 # OF_APP in = 12343
-# OF_node in =  12342
+# OF_web in =  12342
 # Python in = 12344
 # webapp in = 12345
 # vermouth in = ??
@@ -76,6 +76,11 @@ class SimpleServer(OSCServer):
                 quit_app()
                 update()
                 reboot()
+            if(splitAddress[2]=="update_all"):
+                quit_app()
+                update_of()
+                update()
+                reboot()
                 
 
         ############## RPI itself #############
@@ -83,14 +88,60 @@ class SimpleServer(OSCServer):
             if(splitAddress[2]=="shutdown"):
                 print("Turning off the rpi")
                 powerOff();
-        ############# OTHERS MESSAGES  ####
+            if(splitAddress[2]=="reboot"):
+                print("Reboot the machine")
+                reboot();
         ############ FORWARD TO OPENSTAGECONTROL ###
-        else :
+        elif(splitAddress[1]=="player" || splitAddress[1]=="message" ):
             oscmsg = OSC.OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
-            client.send(oscmsg)
+            forwardMsgToOf(oscmsg)
+        ############ FORWARD TO OF_WEB ######
+        elif(splitAddress[1]=="addMovie" || splitAddress[1]=="playPercentage" || splitAddress[1]=="playIndex" ):
+            oscmsg = OSC.OSCMessage()
+            oscmsg.setAddress(oscAddress)
+            oscmsg.append(data)
+            forwardMsgToOfWeb(oscmsg)
+        ############ FORWARD TO WEBAPP #######
+        elif( False ):
+            oscmsg = OSC.OSCMessage()
+            oscmsg.setAddress(oscAddress)
+            oscmsg.append(data)
+            forwardMsgToWebApp (oscmsg)
+        ########### FORWARD TO VERMUTH #######
+        elif( splitAddress[1]=="averageColor"):
+            print("Forwarding to vermouth no implemeted yet")
 
+
+
+def forwardMsgToOf(msg):
+    try:
+        client_of.sendto(msg)
+        msg.clearData()
+     except:
+        print(" error on sending")
+
+def forwardMsgToOfWeb(msg):
+    try:
+        client_ofWeb.sendto(msg)
+        msg.clearData()
+     except:
+        print(" error on sending")
+
+
+def forwardMsgToWebApp(msg):
+    try:
+        client_webapp.sendto(msg)
+        msg.clearData()
+     except:
+        print(" error on sending")
+
+    # EXEMPLE HOW TO SEND AN OSC MESSAGE
+    # oscmsg = OSC.OSCMessage()
+    # oscmsg.setAddress("/startup")
+    # oscmsg.append('HELLO')
+    # c.send(oscmsg)
 
 def powerOff():
 
@@ -196,6 +247,11 @@ def main():
         global client_of
         client_of = OSCClient()
         client_of.connect( ('127.0.0.1', 12343))
+
+        # OSC CLIENT : OPENFRAMEWORKS WEB APP
+        global client_ofWeb
+        client_ofWeb = OSCClient()
+        client_ofWeb.connect( ('127.0.0.1', 12342))
 
         # OSC CLIENT : WEBAPP APP ( the one on this repo)
         global client_webapp
