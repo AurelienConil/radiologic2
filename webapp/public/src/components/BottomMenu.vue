@@ -1,0 +1,74 @@
+<template>
+  <b-container fluid class="bg-dark py-2 px-3">
+    <b-row>
+      <b-col v-for="(item, index) in listOfButton" :key="item" class="px-1">
+        <b-button block variant="primary" v-on:click="clickMe(index)">{{item}}</b-button>
+      </b-col>
+    </b-row>
+  </b-container>
+</template>
+
+<script>
+export default {
+  name: "BottomMenu",
+  props: {
+    title: String,
+    listOfLight: Array
+  },
+  data: function() {
+    return {
+      listOfButton: []
+    };
+  },
+  methods: {
+    startVideo: function() {
+      this.$emit("menu-event", ["/player/play", [1]]);
+    },
+    stopVideo: function() {
+      this.$emit("menu-event", ["/player/stop", [1]]);
+    },
+    stopLight: function() {
+      this.$emit("menu-event", ["/light/blackout", [1]]);
+    },
+    clearMsg: function() {
+      this.$emit("menu-event", ["/message/clear", [1]]);
+    },
+    clickMe: function(index) {
+      if (index < this.listOfButton.length) {
+        switch (index) {
+          case 0:
+            this.startVideo();
+            break;
+          case 1:
+            this.stopVideo();
+            break;
+          case 2:
+            this.clearMsg();
+            break;
+          case this.listOfButton.length - 1:
+            this.stopLight();
+            break;
+
+          default:
+            break;
+        }
+      }
+    },
+    updateListOfButton: function() {
+      console.log("update list of button");
+
+      this.listOfButton.push("start video");
+      this.listOfButton.push("stop video");
+      this.listOfButton.push("clear msg");
+      this.listOfLight.forEach(element => {
+        this.listOfButton.push(element);
+      });
+      this.listOfButton.push("OFF");
+    }
+  },
+  beforeMount: function() {
+    //console.log("Bottom Menu, before Mount");
+    this.updateListOfButton();
+  }
+};
+</script>
