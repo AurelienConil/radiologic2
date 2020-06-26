@@ -96,14 +96,14 @@ def powerOff():
 
     time.sleep(5)
     print("========= POWER OFF ======")
-    os.chdir("/home/pi/radiologic2/script/")
+    os.chdir("/home/pi/Documents/radiologic2/script/")
     subprocess.call(['./shutdown.sh'])
 
 def reboot():
 
     time.sleep(5)
     print("========= POWER OFF ======")
-    os.chdir("/home/pi/radiologic2/script/")
+    os.chdir("/home/pi/Documents/radiologic2/script/")
     subprocess.call(['./reboot.sh'])
 
 def get_ip():
@@ -125,19 +125,19 @@ def closing_app():
 
 def quit_app():
     print("========= QUIT ALL APP ======")
-    os.chdir("/home/pi/radiologic2/script/")
+    os.chdir("/home/pi/Documents/radiologic2/script/")
     subprocess.call(["./quit.sh"])
     print("======== ALL APP QUITTED ====")
 
 def update_of():
     print("========= UPDATE OF APP ======")
-    os.chdir("/home/pi/of/app/universalMediaPlayer/script")
+    os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/script")
     subprocess.call(["./update.sh"])
     print("========= OF APP UPDATED ======")
 
 def update_of():
     print("========= UPDATE RADIOLOGIC2 ======")
-    os.chdir("/home/pi/radiologic2/script/")
+    os.chdir("/home/pi/Documents/radiologic2/script/")
     subprocess.call(["./update.sh"])
     print("========= RADIOLOGIC2 then reboot ======")
 
@@ -145,14 +145,16 @@ def start_app():
     
     if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
         print("========= START OF_APP ======")
-        os.chdir("/home/pi/of/app/universalMediaPlayer/of_universalMediaPlayer/bin")
-        subprocess.call(["./UniversalMediaPlayer"])
+        os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/of_universalMediaPlayer/bin")
+	cmd = ["./of_universalMediaPlayer"]
+        subprocess.Popen(cmd)
         print("========= START OF_webapp =======")
-        os.chdir("/home/pi/of/app/universalMediaPlayer/node")
-        subprocess.call(["node", "."])
+        os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/node")
+        cmd = ["node", "."]
+	subprocess.Popen(cmd)
         print("========= START RADIOLOGIC2 webapp =======")
-        os.chdir("/home/pi/radiologic2/webapp")
-        subprocess.call(["node", "."])
+        os.chdir("/home/pi/Documents/radiologic2/webapp")
+        #subprocess.Popen(["node", "."])
         #print("========= START VERMUTH ======")
         #os.chdir("/home/pi/vermouth")
         #subprocess.call(["node", "."])
@@ -171,7 +173,7 @@ def start_app():
 def main():
         
         # OSC SERVER      
-        myip = socket.gethostbyname(socket.gethostname())
+        myip = get_ip()
         #myip = "127.0.0.1"
         print("IP adress is : "+myip)
         try:
