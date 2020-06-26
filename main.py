@@ -69,17 +69,17 @@ class SimpleServer(OSCServer):
                 start_app()
             if(splitAddress[2]=="update_of"):
                 print("update Universal Media Player")
-		quit_app()
+        quit_app()
                 time.sleep(2)
                 update_of()
                 start_app()
             if(splitAddress[2]=="update"):
-		print("update Radiologic2")
+        print("update Radiologic2")
                 quit_app()
                 update()
                 reboot()
             if(splitAddress[2]=="update_all"):
-		print("update all")
+        print("update all")
                 quit_app()
                 update_of()
                 update()
@@ -119,25 +119,31 @@ class SimpleServer(OSCServer):
 
 def forwardMsgToOf(msg):
     try:
-        client_of.sendto(msg)
-        msg.clearData()
-    except:
-	print(" error on sending")
+        oscmsg = OSCMessage()
+        oscmsg.setAddress("/message/message")
+        oscmsg.append("bijour")
+        client_of.send(oscmsg)
+        #msg.clearData()
+    except Exception, e:
+        print(" error on sending to of. ")
+        print(e)
 
 def forwardMsgToOfWeb(msg):
     try:
-        client_ofWeb.sendto(msg)
-        msg.clearData()
-    except:
-        print(" error on sending")
+        client_ofWeb.send(msg)
+        #msg.clearData()
+    except Exception, e:
+        print(" error on sending to ofWeb. ")
+        print(e)
 
 
 def forwardMsgToWebApp(msg):
     try:
-        client_webapp.sendto(msg)
+        client_webapp.send(msg)
         msg.clearData()
-    except:
-        print(" error on sending")
+    except Exception, e:
+        print(" error on sending to web app ")
+        print(e)
 
     # EXEMPLE HOW TO SEND AN OSC MESSAGE
     # oscmsg = OSC.OSCMessage()
@@ -199,12 +205,12 @@ def start_app():
     if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
         print("========= START OF_APP ======")
         os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/of_universalMediaPlayer/bin")
-	cmd = ["./of_universalMediaPlayer"]
+        cmd = ["./of_universalMediaPlayer"]
         subprocess.Popen(cmd)
         print("========= START OF_webapp =======")
         os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/node")
         cmd = ["node", "."]
-	subprocess.Popen(cmd)
+        subprocess.Popen(cmd)
         print("========= START RADIOLOGIC2 webapp =======")
         os.chdir("/home/pi/Documents/radiologic2/webapp")
         subprocess.Popen(["node", "."])
