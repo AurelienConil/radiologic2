@@ -229,8 +229,8 @@ def start_app():
 def main():
         
         # OSC SERVER      
-        myip = get_ip()
-        #myip = "127.0.0.1"
+        #myip = get_ip()
+        myip = "0.0.0.0"
         print("IP adress is : "+myip)
         try:
             server = SimpleServer((myip, 12344)) 
