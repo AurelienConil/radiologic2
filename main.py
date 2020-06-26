@@ -67,11 +67,22 @@ class SimpleServer(OSCServer):
                 quit_app()
                 time.sleep(2)
                 start_app()
+            if(splitAddress[2]=="update_of"):
+                quit_app()
+                time.sleep(2)
+                update_of()
+                start_app()
+            if(splitAddress[2]=="update"):
+                quit_app()
+                update()
+                reboot()
+                
+
         ############## RPI itself #############
         elif(splitAddress[1]=="rpi"):
             if(splitAddress[2]=="shutdown"):
                 print("Turning off the rpi")
-                forwardPowerOff();
+                powerOff();
         ############# OTHERS MESSAGES  ####
         ############ FORWARD TO OPENSTAGECONTROL ###
         else :
@@ -81,12 +92,19 @@ class SimpleServer(OSCServer):
             client.send(oscmsg)
 
 
-def forwardPowerOff():
+def powerOff():
 
     time.sleep(5)
     print("========= POWER OFF ======")
     os.chdir("/home/pi/radiologic2/script/")
     subprocess.call(['./shutdown.sh'])
+
+def reboot():
+
+    time.sleep(5)
+    print("========= POWER OFF ======")
+    os.chdir("/home/pi/radiologic2/script/")
+    subprocess.call(['./reboot.sh'])
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -110,6 +128,18 @@ def quit_app():
     os.chdir("/home/pi/radiologic2/script/")
     subprocess.call(["./quit.sh"])
     print("======== ALL APP QUITTED ====")
+
+def update_of():
+    print("========= UPDATE OF APP ======")
+    os.chdir("/home/pi/of/app/universalMediaPlayer/script")
+    subprocess.call(["./update.sh"])
+    print("========= OF APP UPDATED ======")
+
+def update_of():
+    print("========= UPDATE RADIOLOGIC2 ======")
+    os.chdir("/home/pi/radiologic2/script/")
+    subprocess.call(["./update.sh"])
+    print("========= RADIOLOGIC2 then reboot ======")
 
 def start_app():
     
@@ -142,7 +172,7 @@ def main():
         
         # OSC SERVER      
         myip = socket.gethostbyname(socket.gethostname())
-        myip = "127.0.0.1"
+        #myip = "127.0.0.1"
         print("IP adress is : "+myip)
         try:
             server = SimpleServer((myip, 12354)) 
