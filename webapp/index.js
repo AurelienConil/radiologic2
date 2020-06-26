@@ -42,9 +42,9 @@ var getIPAddresses = function () {
 
 var udp = new osc.UDPPort({
     localAddress: "0.0.0.0",
-    localPort: 7500,
+    localPort: 12345,
     remoteAddress: "127.0.0.1",
-    remotePort: 12345
+    remotePort: 12343
 });
 
 udp.on("ready", function () {
