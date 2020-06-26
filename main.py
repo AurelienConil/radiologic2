@@ -69,17 +69,17 @@ class SimpleServer(OSCServer):
                 start_app()
             if(splitAddress[2]=="update_of"):
                 print("update Universal Media Player")
-        quit_app()
+                quit_app()
                 time.sleep(2)
                 update_of()
                 start_app()
             if(splitAddress[2]=="update"):
-        print("update Radiologic2")
+                print("update Radiologic2")
                 quit_app()
                 update()
                 reboot()
             if(splitAddress[2]=="update_all"):
-        print("update all")
+                print("update all")
                 quit_app()
                 update_of()
                 update()
