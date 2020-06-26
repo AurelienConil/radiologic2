@@ -68,20 +68,22 @@ class SimpleServer(OSCServer):
                 time.sleep(2)
                 start_app()
             if(splitAddress[2]=="update_of"):
-                quit_app()
+                print("update Universal Media Player")
+		quit_app()
                 time.sleep(2)
                 update_of()
                 start_app()
             if(splitAddress[2]=="update"):
+		print("update Radiologic2")
                 quit_app()
                 update()
                 reboot()
             if(splitAddress[2]=="update_all"):
+		print("update all")
                 quit_app()
                 update_of()
                 update()
                 reboot()
-                
 
         ############## RPI itself #############
         elif(splitAddress[1]=="rpi"):
@@ -92,13 +94,13 @@ class SimpleServer(OSCServer):
                 print("Reboot the machine")
                 reboot();
         ############ FORWARD TO OPENSTAGECONTROL ###
-        elif(splitAddress[1]=="player" || splitAddress[1]=="message" ):
+        elif(splitAddress[1]=="player" or splitAddress[1]=="message" ):
             oscmsg = OSC.OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToOf(oscmsg)
         ############ FORWARD TO OF_WEB ######
-        elif(splitAddress[1]=="addMovie" || splitAddress[1]=="playPercentage" || splitAddress[1]=="playIndex" ):
+        elif(splitAddress[1]=="addMovie" or splitAddress[1]=="playPercentage" or splitAddress[1]=="playIndex" ):
             oscmsg = OSC.OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
@@ -119,14 +121,14 @@ def forwardMsgToOf(msg):
     try:
         client_of.sendto(msg)
         msg.clearData()
-     except:
-        print(" error on sending")
+    except:
+	print(" error on sending")
 
 def forwardMsgToOfWeb(msg):
     try:
         client_ofWeb.sendto(msg)
         msg.clearData()
-     except:
+    except:
         print(" error on sending")
 
 
@@ -134,7 +136,7 @@ def forwardMsgToWebApp(msg):
     try:
         client_webapp.sendto(msg)
         msg.clearData()
-     except:
+    except:
         print(" error on sending")
 
     # EXEMPLE HOW TO SEND AN OSC MESSAGE
@@ -228,7 +230,7 @@ def main():
         #myip = "127.0.0.1"
         print("IP adress is : "+myip)
         try:
-            server = SimpleServer((myip, 12354)) 
+            server = SimpleServer((myip, 12344)) 
         except:
             print(" ERROR : creating server") 
         print("server created") 
