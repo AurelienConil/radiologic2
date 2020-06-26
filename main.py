@@ -191,7 +191,7 @@ def update_of():
     subprocess.call(["./update.sh"])
     print("========= OF APP UPDATED ======")
 
-def update_of():
+def update():
     print("========= UPDATE RADIOLOGIC2 ======")
     os.chdir("/home/pi/Documents/radiologic2/script/")
     subprocess.call(["./update.sh"])
