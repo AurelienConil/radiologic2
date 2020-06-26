@@ -55,7 +55,9 @@ export default {
       listOfScenario: [],
       list: [],
       listOfButton: ["edit", "new", "undo", "reset"],
-      port: new osc.WebSocketPort({ url: "ws://localhost:8082" })
+      port: new osc.WebSocketPort({
+        url: "ws://" + self.location.host.split(":")[0] + ":8082" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
+      })
     };
   },
   methods: {
@@ -134,10 +136,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  min-height:100vh;
+  min-height: 100vh;
 }
-#bottommenu{
+#bottommenu {
   position: fixed;
-    bottom: 0;
+  bottom: 0;
 }
 </style>
