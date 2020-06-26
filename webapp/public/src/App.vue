@@ -56,7 +56,7 @@ export default {
       list: [],
       listOfButton: ["edit", "new", "undo", "reset"],
       port: new osc.WebSocketPort({
-        url: "ws://" + self.location.host.split(":")[0] + ":8082" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
+        url: "ws://" + self.location.host.split(":")[0] + ":8081" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
       })
     };
   },

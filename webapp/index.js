@@ -59,7 +59,7 @@ udp.on("ready", function () {
 udp.open();
 
 var wss = new WebSocket.Server({
-    port: 8082
+    port: 8081
 });
 
 wss.on("connection", function (socket) {
