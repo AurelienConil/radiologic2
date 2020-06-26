@@ -95,19 +95,19 @@ class SimpleServer(OSCServer):
                 reboot();
         ############ FORWARD TO OPENSTAGECONTROL ###
         elif(splitAddress[1]=="player" or splitAddress[1]=="message" ):
-            oscmsg = OSC.OSCMessage()
+            oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToOf(oscmsg)
         ############ FORWARD TO OF_WEB ######
         elif(splitAddress[1]=="addMovie" or splitAddress[1]=="playPercentage" or splitAddress[1]=="playIndex" ):
-            oscmsg = OSC.OSCMessage()
+            oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToOfWeb(oscmsg)
         ############ FORWARD TO WEBAPP #######
         elif( False ):
-            oscmsg = OSC.OSCMessage()
+            oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToWebApp (oscmsg)
