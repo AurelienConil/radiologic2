@@ -1,3 +1,3 @@
 #!/bin/sh
-sudo pkill of
+sudo pkill of_universalMediaPlayer
 sudo killall node
