@@ -119,10 +119,7 @@ class SimpleServer(OSCServer):
 
 def forwardMsgToOf(msg):
     try:
-        oscmsg = OSCMessage()
-        oscmsg.setAddress("/message/message")
-        oscmsg.append("bijour")
-        client_of.send(oscmsg)
+        client_of.send(msg)
         #msg.clearData()
     except Exception, e:
         print(" error on sending to of. ")
