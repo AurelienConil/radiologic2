@@ -154,7 +154,7 @@ def start_app():
 	subprocess.Popen(cmd)
         print("========= START RADIOLOGIC2 webapp =======")
         os.chdir("/home/pi/Documents/radiologic2/webapp")
-        #subprocess.Popen(["node", "."])
+        subprocess.Popen(["node", "."])
         #print("========= START VERMUTH ======")
         #os.chdir("/home/pi/vermouth")
         #subprocess.call(["node", "."])
