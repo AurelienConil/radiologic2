@@ -26,6 +26,7 @@
       v-if="actualScenarioIndex>=0"
     ></Scenario>
     <bottom-menu
+      id="bottommenu"
       title="menu"
       v-bind:listOfLight="['truc', 'machin']"
       v-on:menu-event="sendMessageFromEvent"
@@ -133,5 +134,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+  min-height:100vh;
+}
+#bottommenu{
+  position: fixed;
+    bottom: 0;
 }
 </style>
