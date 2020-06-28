@@ -13,9 +13,11 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="p-3 m-3"><b-button variant="success">redémarrer </b-button></b-col>
       <b-col class="p-3 m-3">
-       <b-button variant="danger">ETEINDRE </b-button>
+        <b-button variant="success">redémarrer</b-button>
+      </b-col>
+      <b-col class="p-3 m-3">
+        <b-button variant="danger">ETEINDRE</b-button>
       </b-col>
     </b-row>
   </b-container>
