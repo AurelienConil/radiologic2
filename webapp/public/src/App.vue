@@ -33,6 +33,7 @@
     ></bottom-menu>
     <b-modal title="Settings" id="modal-settings">
       <p class="my-4">Hello from modal!</p>
+      <Settings v-on:settings-event="sendMessageFromEvent"></Settings>
     </b-modal>
   </div>
 </template>
@@ -41,6 +42,7 @@
 import Scenario from "./components/Scenario.vue";
 import MenuScenario from "./components/MenuScenario.vue";
 import BottomMenu from "./components/BottomMenu.vue";
+import Settings from "./components/Settings.vue";
 import datafilejson from "./datajson.json";
 import osc from "osc";
 
@@ -123,7 +125,8 @@ export default {
   components: {
     Scenario,
     MenuScenario,
-    BottomMenu
+    BottomMenu,
+    Settings
   }
 };
 </script>
