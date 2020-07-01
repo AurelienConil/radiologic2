@@ -5,9 +5,11 @@
         <b-col cols="1" class="py-2" align-v="center">
           <img src="./assets/left-white.png" v-on:click="backToMenu" />
         </b-col>
-        <b-col cols="10" align-v="end" class>
+        <b-col align-v="end" class>
           <h5 class="text-light my-3">RADIOLOGIC</h5>
+          <b-badge v-if="portOpenState!=='open'" variant="warning">Server déconnecté</b-badge>
         </b-col>
+
         <b-col cols="1" class="py-2" align-v="center">
           <img src="./assets/gear-white.png" v-on:click="setDisplayMenuSettings(true)" />
         </b-col>
@@ -55,6 +57,7 @@ export default {
       listOfScenario: [],
       list: [],
       listOfButton: ["edit", "new", "undo", "reset"],
+      portOpenState: "closed",
       port: new osc.WebSocketPort({
         url: "ws://" + self.location.host.split(":")[0] + ":8081" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
       })
@@ -81,9 +84,6 @@ export default {
     backToMenu: function() {
       this.switchScenario(-1);
     },
-    sendMessage: function() {
-      this.sendOscMessage("/bonjour/machin", 1);
-    },
     sendMessageFromEvent: function(msg) {
       console.log("send message from event");
       //Msg must be [ "/oscAdress", [arg1, arg2, arg3]]
@@ -109,11 +109,43 @@ export default {
       } else {
         this.$bvModal.hide("modal-settings");
       }
+    },
+    portClose() {
+      if (this.portOpenState != "trying") {
+        this.portOpenState = "trying";
+        setTimeout(() => {
+          this.tryOpenPort();
+        }, 100);
+      }
+    },
+    tryOpenPort(force) {
+      const openPort = () => {
+        console.warn("trying openning port");
+        const res = this.port.open();
+        console.warn("res openning port", res);
+      };
+
+      if (!!force || this.portOpenState !== "open") {
+        openPort();
+        setTimeout(() => {
+          this.tryOpenPort();
+        }, 3000);
+      }
     }
   },
-  beforeMount() {
+  created() {
     console.log("before mount is called");
-    this.port.open();
+
+    this.port.on("close", this.portClose);
+    this.port.on("error", this.portClose);
+    this.port.on("open", () => {
+      console.warn("port send open message");
+      this.portOpenState = "open";
+    });
+
+    this.tryOpenPort(true);
+  },
+  beforeMount() {
     if (this.datafile == null) {
       console.log("data file is null");
     } else {
