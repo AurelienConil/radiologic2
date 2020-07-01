@@ -7,7 +7,7 @@
     <b-col cols="6" class="py-2" align-v="center">{{msg}}</b-col>
     <b-col cols="3" class="py-2">
       <b-badge variant="success" v-if="countdown>0">Decompte {{countdown}}</b-badge>
-      <b-badge variant="warning" v-if="light.length>0">Lumiere</b-badge>
+      <b-badge variant="warning" v-if="light.length>0">Lumiere:{{light}}</b-badge>
     </b-col>
   </b-row>
 </template>
@@ -30,6 +30,12 @@ export default {
         [this.msg, this.countdown],
         this.index
       ]);
+      if(this.light){
+      this.$emit("radiologic-event",[
+        "/light/preset",
+        [this.light]
+      ])
+      }
     }
   },
   data: function() {
