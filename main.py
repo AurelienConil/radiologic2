@@ -339,7 +339,7 @@ def main():
     # OSC CLIENT : VERMUTH APP
     global client_vermuth
     client_vermuth = OSCClient()
-    client_vermuth.connect(('127.0.0.1', 3000))
+    client_vermuth.connect(('127.0.0.1', 11000))
 
     global client_interupteur
     client_interupteur = SafeOSCClient(('192.168.50.50', 3005))
