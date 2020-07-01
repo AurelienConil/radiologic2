@@ -31,8 +31,7 @@
       v-bind:listOfLight="['truc', 'machin']"
       v-on:menu-event="sendMessageFromEvent"
     ></bottom-menu>
-    <b-modal title="Settings" id="modal-settings">
-      <p class="my-4">Hello from modal!</p>
+    <b-modal title="Settings" id="modal-settings" :hide-footer="true">
       <Settings v-on:settings-event="sendMessageFromEvent"></Settings>
     </b-modal>
   </div>
