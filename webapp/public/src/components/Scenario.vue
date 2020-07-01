@@ -28,6 +28,7 @@
         :light="item.light"
         :isSelected="index==currentSelection"
         v-on:radiologic-event="sendRadiologicEvent"
+        v-on:button-clicked="currentSelection=$event"
       ></radiologicEvent>
     </b-container>
   </div>
@@ -44,10 +45,11 @@ export default {
   },
   methods: {
     sendRadiologicEvent: function(data) {
-      if (data.length > 2) {
+      if (data.length >= 2) {
         this.$emit("radio-event", data);
-        let newSelection = data[2];
-        this.currentSelection = newSelection;
+      }
+      else{
+        console.error("bad event formatting",data)
       }
     }
   },

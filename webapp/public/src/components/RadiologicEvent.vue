@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     clickMe: function() {
+      this.$emit("button-clicked",this.index)
       this.$emit("radiologic-event", [
         "/message/message",
-        [this.msg, this.countdown],
-        this.index
+        [this.msg, this.countdown]
       ]);
       if(this.light){
       this.$emit("radiologic-event",[
