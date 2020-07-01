@@ -5,13 +5,13 @@ import time
 import threading
 import struct
 import socket
-import subprocess 
+import subprocess
 import platform
 from OSC import OSCClient, OSCMessage, OSCServer
 
 #################################################
 # This is Radiologic Deamon
-# Always running 
+# Always running
 # start & stop all programs needed for Radiologic
 # turn off rpi, manage update,
 # dispi osc message
@@ -26,7 +26,7 @@ from OSC import OSCClient, OSCMessage, OSCServer
 
 ################################################
 # Script and app are launched through subprocess module
-# subprocess.Popen is nonblocking 
+# subprocess.Popen is nonblocking
 # subprocess.call are blocking
 ################################################
 
@@ -38,7 +38,7 @@ from OSC import OSCClient, OSCMessage, OSCServer
 # Python in = 12344
 # webapp in = 12345
 # vermuth in = 3000
-# interupteur = ????:?? 
+# interupteur = ????:??
 ################################################
 
 
@@ -46,51 +46,51 @@ RADIOLOGIC_PATH = "/home/pi/Documents/radiologic2"
 UNIVERSALMEDIAPLAYER_PATH = "/home/pi/Documents/openFrameworks/apps/universalMediaPlayer"
 VERMUTH_PATH = "/home/pi/Documents/vermuth"
 
-if (platform.machine().startswith("x86") ):
+if (platform.machine().startswith("x86")):
     RADIOLOGIC_PATH = "/home/tinmar/Dev/ornormes/radiologic2"
     UNIVERSALMEDIAPLAYER_PATH = "/home/tinmar/Dev/ornormes/universalMediaPlayer"
-    VERMUTH_PATH = "/home/tinmar/Dev/ornormes/vermuth"
+    VERMUTH_PATH = "/home/tinmar/Dev/vermuth"
+
 
 class SimpleServer(OSCServer):
-    def __init__(self,t):
-        OSCServer.__init__(self,t)
+    def __init__(self, t):
+        OSCServer.__init__(self, t)
         self.selfInfos = t
         self.addMsgHandler('default', self.handleMsg)
 
-    
-    def handleMsg(self,oscAddress, tags, data, client_address):
+    def handleMsg(self, oscAddress, tags, data, client_address):
         global machine
         global client
         print("OSC message received on : "+oscAddress)
 
         splitAddress = oscAddress.split("/")
         print(splitAddress)
-        
+
         ############## APP itself #############
-        if(splitAddress[1]=="app"):
-            if(splitAddress[2]=="close"):
+        if(splitAddress[1] == "app"):
+            if(splitAddress[2] == "close"):
                 print("closing the app")
                 quit_app()
-            if(splitAddress[2]=="start"):
+            if(splitAddress[2] == "start"):
                 print("starting the app")
                 start_app()
-            if(splitAddress[2]=="restart"):
+            if(splitAddress[2] == "restart"):
                 print("restart the app")
                 quit_app()
                 time.sleep(2)
                 start_app()
-            if(splitAddress[2]=="update_of"):
+            if(splitAddress[2] == "update_of"):
                 print("update Universal Media Player")
                 quit_app()
                 time.sleep(2)
                 update_of()
                 start_app()
-            if(splitAddress[2]=="update"):
+            if(splitAddress[2] == "update"):
                 print("update Radiologic2")
                 quit_app()
                 update()
                 reboot()
-            if(splitAddress[2]=="update_all"):
+            if(splitAddress[2] == "update_all"):
                 print("update all")
                 quit_app()
                 update_of()
@@ -98,87 +98,98 @@ class SimpleServer(OSCServer):
                 reboot()
 
         ############## RPI itself #############
-        elif(splitAddress[1]=="rpi"):
-            if(splitAddress[2]=="shutdown"):
+        elif(splitAddress[1] == "rpi"):
+            if(splitAddress[2] == "shutdown"):
                 print("Turning off the rpi")
-                powerOff();
-            if(splitAddress[2]=="reboot"):
+                powerOff()
+            if(splitAddress[2] == "reboot"):
                 print("Reboot the machine")
-                reboot();
+                reboot()
         ############ FORWARD TO OPENSTAGECONTROL ###
-        elif(splitAddress[1]=="player" or splitAddress[1]=="message" ):
+        elif(splitAddress[1] == "player" or splitAddress[1] == "message"):
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToOf(oscmsg)
         ############ FORWARD TO OF_WEB ######
-        elif(splitAddress[1]=="addMovie" or splitAddress[1]=="playPercentage" or splitAddress[1]=="playIndex" ):
+        elif(splitAddress[1] == "addMovie" or splitAddress[1] == "playPercentage" or splitAddress[1] == "playIndex"):
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToOfWeb(oscmsg)
-        
+
         ########### FORWARD TO VERMUTH #######
-        elif( splitAddress[1]=="light"):
-            if(splitAddress[2]=="preset"):
+        elif(splitAddress[1] == "light"):
+            if(splitAddress[2] == "preset"):
                 oscmsg = OSCMessage()
                 oscmsg.setAddress("/stateList/recallStateNamed")
                 oscmsg.append(data)
                 forwardMsgToVermuth(oscmsg)
             else:
-                print("Forwarding not supported for light/",splitAddress[2])
+                print("Forwarding not supported for light/", splitAddress[2])
         ########### HANDLE "VEILLE" MODE #########
-        elif(( splitAddress[1]=="interupteur" and splitAddress[2]=="veille") or splitAddress[1]=="veille"):
-            v = len(data)==0 or data[0]==1
+        elif((splitAddress[1] == "interupteur" and splitAddress[2] == "veille") or splitAddress[1] == "veille"):
+            v = len(data) == 0 or data[0] == 1
             setVeille(v)
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
-            forwardMsgToVermuth(oscmsg)        
+            forwardMsgToVermuth(oscmsg)
         ############ FORWARD TO WEBAPP #######
-        elif( False ):
+        elif(False):
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
-            forwardMsgToWebApp (oscmsg)
+            forwardMsgToWebApp(oscmsg)
+
 
 veille = False
+
+
 def setVeille(v):
-    print("going to sleep mode : ",v)
+    print("going to sleep mode : ", v)
     global veille
-    veille=(1 if v==1 else 0)
+    veille = (1 if v == 1 else 0)
     oscmsg = OSCMessage()
     oscmsg.setAddress(oscAddress)
     oscmsg.append(v)
-    forwardMsgToInterupteur(oscmsg)  
+    forwardMsgToInterupteur(oscmsg)
 
-def forwardMessage(client,msg):
+
+def forwardMessage(client, msg):
     try:
         client.send(msg)
-        #msg.clearData()
+        # msg.clearData()
     except Exception, e:
         print(" error on sending to client ")
         print(e)
 
+
 def forwardMsgToOf(msg):
-    forwardMessage(client_of,msg)
+    forwardMessage(client_of, msg)
+
 
 def forwardMsgToInterupteur(msg):
-    forwardMessage(client_interupteur,msg)
+    client_interupteur.safeSend(msg)
+
+
 def forwardMsgToOfWeb(msg):
-    forwardMessage(client_ofWeb,msg)
-   
+    forwardMessage(client_ofWeb, msg)
+
+
 def forwardMsgToWebApp(msg):
-    forwardMessage(client_webapp,msg)
-    
+    forwardMessage(client_webapp, msg)
+
+
 def forwardMsgToVermuth(msg):
-    forwardMessage(client_vermuth,msg)
+    forwardMessage(client_vermuth, msg)
 
     # EXEMPLE HOW TO SEND AN OSC MESSAGE
     # oscmsg = OSC.OSCMessage()
     # oscmsg.setAddress("/startup")
     # oscmsg.append('HELLO')
     # c.send(oscmsg)
+
 
 def powerOff():
 
@@ -187,12 +198,14 @@ def powerOff():
     os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(['./shutdown.sh'])
 
+
 def reboot():
 
     time.sleep(5)
     print("========= POWER OFF ======")
     os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(['./reboot.sh'])
+
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -205,11 +218,13 @@ def get_ip():
     finally:
         s.close()
     return IP
-        
+
+
 def closing_app():
     global runningApp
     runningApp = False
     print("Closing App")
+
 
 def quit_app():
     print("========= QUIT ALL APP ======")
@@ -217,11 +232,13 @@ def quit_app():
     subprocess.call(["./quit.sh"])
     print("======== ALL APP QUITTED ====")
 
+
 def update_of():
     print("========= UPDATE OF APP ======")
     os.chdir(UNIVERSALMEDIAPLAYER_PATH+"/script")
     subprocess.call(["./update.sh"])
     print("========= OF APP UPDATED ======")
+
 
 def update():
     print("========= UPDATE RADIOLOGIC2 ======")
@@ -229,7 +246,8 @@ def update():
     subprocess.call(["./update.sh"])
     print("========= RADIOLOGIC2 then reboot ======")
 
-def launchCmd(dir,cmd):
+
+def launchCmd(dir, cmd):
     try:
         os.chdir(dir)
         subprocess.Popen(cmd)
@@ -237,19 +255,18 @@ def launchCmd(dir,cmd):
         print(" error on running cmd " + str(cmd))
         print(e)
 
+
 def start_app():
     if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
         print("========= START OF_APP ======")
-        launchCmd(UNIVERSALMEDIAPLAYER_PATH+"/of_universalMediaPlayer/bin",["./of_universalMediaPlayer"])
+        launchCmd(UNIVERSALMEDIAPLAYER_PATH +
+                  "/of_universalMediaPlayer/bin", ["./of_universalMediaPlayer"])
         print("========= START OF_webapp =======")
         launchCmd(UNIVERSALMEDIAPLAYER_PATH+"/node", ["node", "."])
         print("========= START RADIOLOGIC2 webapp =======")
-        launchCmd(RADIOLOGIC_PATH+"/webapp",["node", "."])
+        launchCmd(RADIOLOGIC_PATH+"/webapp", ["node", "."])
         print("========= START VERMUTH ======")
-        launchCmd(VERMUTH_PATH,["./run.sh"]) # TODO start node instead
-
-    
-
+        launchCmd(VERMUTH_PATH, ["./run.sh"])  # TODO start node instead
 
         ########################
         # exemple using POPEN : which is a non blocking process
@@ -261,79 +278,96 @@ def start_app():
         # subprocess.Popen(cmd)
         # print("========= OPEN STAGE CONTROL STARTED ======")
 
-def main():
-        
-        # OSC SERVER      
-        #myip = get_ip()
-        myip = "0.0.0.0"
-        print("IP adress is : "+myip)
+
+class SafeOSCClient(OSCClient):
+    def __init__(self, ipPortTuple):
+        self.ipPortTuple = ipPortTuple
+        self.tryConnect()
+
+    def tryConnect(self):
         try:
-            server = SimpleServer((myip, 12344)) 
-        except:
-            print(" ERROR : creating server") 
-        print("server created") 
-        try:
-            st = threading.Thread(target = server.serve_forever) 
-        except:
-            print(" ERROR : creating thread") 
-        try:
-            st.start()
-        except:
-            print(" ERROR : starting thread")
+            self.connect((self.ipPortTuple[0], self.ipPortTuple[1]))
+            self.isConnected = True
+        except Exception, e:
+            self.isConnected = False
 
-        print(" OSC server is running") 
-
-        # OSC CLIENT : OPENFRAMEWORKS APP
-        global client_of
-        client_of = OSCClient()
-        client_of.connect( ('127.0.0.1', 12343))
-
-        # OSC CLIENT : OPENFRAMEWORKS WEB APP
-        global client_ofWeb
-        client_ofWeb = OSCClient()
-        client_ofWeb.connect( ('127.0.0.1', 12342))
-
-        # OSC CLIENT : WEBAPP APP ( the one on this repo)
-        global client_webapp
-        client_webapp = OSCClient()
-        client_webapp.connect( ('127.0.0.1', 12345))
-
-        # OSC CLIENT : VERMUTH APP
-        global client_vermuth
-        client_vermuth = OSCClient()
-        client_vermuth.connect( ('127.0.0.1', 3000))
-
-        # OSC CLIENT : Interuptezur
-        global client_interupteur
-        client_interupteur = OSCClient()
-        client_interupteur.connect( ('192.168.1.100', 30001)) ## need to set right address:port
-
-        #START ON BOOT
-        start_app() 
-
-        # MAIN LOOP 
-        global runningApp
-        runningApp = True
-
-        
-        print(" ===== STARTING MAIN LOOP ====" )
-        while runningApp:
-            # This is the main loop
-            # Do something here
+    def safeSend(msg):
+        if(isConnected):
             try:
-                time.sleep(1)
-            except:
-                print("User attempt to close programm")
-                runningApp = False
-        
-        #CLOSING THREAD AND SERVER
-        print(" Ending programme") 
-        server.running = False
-        print(" Join thread") 
-        st.join()
-        server.close()
-        print(" This is probably the end") 
+                self.send(msg)
+            except Exception, e:
+                self.tryConnect()
 
+
+def main():
+
+    # OSC SERVER
+    #myip = get_ip()
+    myip = "0.0.0.0"
+    print("IP adress is : "+myip)
+    try:
+        server = SimpleServer((myip, 12344))
+    except:
+        print(" ERROR : creating server")
+    print("server created")
+    try:
+        st = threading.Thread(target=server.serve_forever)
+    except:
+        print(" ERROR : creating thread")
+    try:
+        st.start()
+    except:
+        print(" ERROR : starting thread")
+
+    print(" OSC server is running")
+
+    # OSC CLIENT : OPENFRAMEWORKS APP
+    global client_of
+    client_of = OSCClient()
+    client_of.connect(('127.0.0.1', 12343))
+
+    # OSC CLIENT : OPENFRAMEWORKS WEB APP
+    global client_ofWeb
+    client_ofWeb = OSCClient()
+    client_ofWeb.connect(('127.0.0.1', 12342))
+
+    # OSC CLIENT : WEBAPP APP ( the one on this repo)
+    global client_webapp
+    client_webapp = OSCClient()
+    client_webapp.connect(('127.0.0.1', 12345))
+
+    # OSC CLIENT : VERMUTH APP
+    global client_vermuth
+    client_vermuth = OSCClient()
+    client_vermuth.connect(('127.0.0.1', 3000))
+
+    global client_interupteur
+    client_interupteur = SafeOSCClient(('192.168.50.50', 3005))
+
+    # START ON BOOT
+    start_app()
+
+    # MAIN LOOP
+    global runningApp
+    runningApp = True
+
+    print(" ===== STARTING MAIN LOOP ====")
+    while runningApp:
+        # This is the main loop
+        # Do something here
+        try:
+            time.sleep(1)
+        except:
+            print("User attempt to close programm")
+            runningApp = False
+
+    # CLOSING THREAD AND SERVER
+    print(" Ending programme")
+    server.running = False
+    print(" Join thread")
+    st.join()
+    server.close()
+    print(" This is probably the end")
 
 
 if __name__ == "__main__":
