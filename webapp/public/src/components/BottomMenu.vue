@@ -33,6 +33,9 @@ export default {
     clearMsg: function() {
       this.$emit("menu-event", ["/message/clear", [1]]);
     },
+    sendLightPreset:function(name){
+      this.$emit("menu-event", ["/light/preset", [name]]);
+    },
     clickMe: function(index) {
       if (index < this.listOfButton.length) {
         switch (index) {
@@ -50,6 +53,7 @@ export default {
             break;
 
           default:
+            this.sendLightPreset(this.listOfButton[index])
             break;
         }
       }

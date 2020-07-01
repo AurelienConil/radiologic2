@@ -6,6 +6,7 @@ import threading
 import struct
 import socket
 import subprocess 
+import platform
 from OSC import OSCClient, OSCMessage, OSCServer
 
 #################################################
@@ -20,6 +21,7 @@ from OSC import OSCClient, OSCMessage, OSCServer
 # /player/...  are messages for OF app
 # /messages/... are messages for OF app
 # /rpi/... are system messages
+# /interupteur/... are interupteur messages (from/to)
 ################################################
 
 ################################################
@@ -35,9 +37,19 @@ from OSC import OSCClient, OSCMessage, OSCServer
 # OF_web in =  12342
 # Python in = 12344
 # webapp in = 12345
-# vermouth in = ??
+# vermuth in = 3000
+# interupteur = ????:?? 
 ################################################
 
+
+RADIOLOGIC_PATH = "/home/pi/Documents/radiologic2"
+UNIVERSALMEDIAPLAYER_PATH = "/home/pi/Documents/openFrameworks/apps/universalMediaPlayer"
+VERMUTH_PATH = "/home/pi/Documents/vermuth"
+
+if (platform.machine().startswith("x86") ):
+    RADIOLOGIC_PATH = "/home/tinmar/Dev/ornormes/radiologic2"
+    UNIVERSALMEDIAPLAYER_PATH = "/home/tinmar/Dev/ornormes/universalMediaPlayer"
+    VERMUTH_PATH = "/home/tinmar/Dev/ornormes/vermuth"
 
 class SimpleServer(OSCServer):
     def __init__(self,t):
@@ -105,42 +117,62 @@ class SimpleServer(OSCServer):
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToOfWeb(oscmsg)
+        
+        ########### FORWARD TO VERMUTH #######
+        elif( splitAddress[1]=="light"):
+            if(splitAddress[2]=="preset"):
+                oscmsg = OSCMessage()
+                oscmsg.setAddress("/stateList/recallStateNamed")
+                oscmsg.append(data)
+                forwardMsgToVermuth(oscmsg)
+            else:
+                print("Forwarding not supported for light/",splitAddress[2])
+        ########### HANDLE "VEILLE" MODE #########
+        elif(( splitAddress[1]=="interupteur" and splitAddress[2]=="veille") or splitAddress[1]=="veille"):
+            v = len(data)==0 or data[0]==1
+            setVeille(v)
+            oscmsg = OSCMessage()
+            oscmsg.setAddress(oscAddress)
+            oscmsg.append(data)
+            forwardMsgToVermuth(oscmsg)        
         ############ FORWARD TO WEBAPP #######
         elif( False ):
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToWebApp (oscmsg)
-        ########### FORWARD TO VERMUTH #######
-        elif( splitAddress[1]=="averageColor"):
-            print("Forwarding to vermouth no implemeted yet")
 
+veille = False
+def setVeille(v):
+    print("going to sleep mode : ",v)
+    global veille
+    veille=(1 if v==1 else 0)
+    oscmsg = OSCMessage()
+    oscmsg.setAddress(oscAddress)
+    oscmsg.append(v)
+    forwardMsgToInterupteur(oscmsg)  
 
+def forwardMessage(client,msg):
+    try:
+        client.send(msg)
+        #msg.clearData()
+    except Exception, e:
+        print(" error on sending to client ")
+        print(e)
 
 def forwardMsgToOf(msg):
-    try:
-        client_of.send(msg)
-        #msg.clearData()
-    except Exception, e:
-        print(" error on sending to of. ")
-        print(e)
+    forwardMessage(client_of,msg)
 
+def forwardMsgToInterupteur(msg):
+    forwardMessage(client_interupteur,msg)
 def forwardMsgToOfWeb(msg):
-    try:
-        client_ofWeb.send(msg)
-        #msg.clearData()
-    except Exception, e:
-        print(" error on sending to ofWeb. ")
-        print(e)
-
-
+    forwardMessage(client_ofWeb,msg)
+   
 def forwardMsgToWebApp(msg):
-    try:
-        client_webapp.send(msg)
-        msg.clearData()
-    except Exception, e:
-        print(" error on sending to web app ")
-        print(e)
+    forwardMessage(client_webapp,msg)
+    
+def forwardMsgToVermuth(msg):
+    forwardMessage(client_vermuth,msg)
 
     # EXEMPLE HOW TO SEND AN OSC MESSAGE
     # oscmsg = OSC.OSCMessage()
@@ -152,14 +184,14 @@ def powerOff():
 
     time.sleep(5)
     print("========= POWER OFF ======")
-    os.chdir("/home/pi/Documents/radiologic2/script/")
+    os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(['./shutdown.sh'])
 
 def reboot():
 
     time.sleep(5)
     print("========= POWER OFF ======")
-    os.chdir("/home/pi/Documents/radiologic2/script/")
+    os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(['./reboot.sh'])
 
 def get_ip():
@@ -181,39 +213,42 @@ def closing_app():
 
 def quit_app():
     print("========= QUIT ALL APP ======")
-    os.chdir("/home/pi/Documents/radiologic2/script/")
+    os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(["./quit.sh"])
     print("======== ALL APP QUITTED ====")
 
 def update_of():
     print("========= UPDATE OF APP ======")
-    os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/script")
+    os.chdir(UNIVERSALMEDIAPLAYER_PATH+"/script")
     subprocess.call(["./update.sh"])
     print("========= OF APP UPDATED ======")
 
 def update():
     print("========= UPDATE RADIOLOGIC2 ======")
-    os.chdir("/home/pi/Documents/radiologic2/script/")
+    os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(["./update.sh"])
     print("========= RADIOLOGIC2 then reboot ======")
 
+def launchCmd(dir,cmd):
+    try:
+        os.chdir(dir)
+        subprocess.Popen(cmd)
+    except Exception, e:
+        print(" error on running cmd " + str(cmd))
+        print(e)
+
 def start_app():
-    
     if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
         print("========= START OF_APP ======")
-        os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/of_universalMediaPlayer/bin")
-        cmd = ["./of_universalMediaPlayer"]
-        subprocess.Popen(cmd)
+        launchCmd(UNIVERSALMEDIAPLAYER_PATH+"/of_universalMediaPlayer/bin",["./of_universalMediaPlayer"])
         print("========= START OF_webapp =======")
-        os.chdir("/home/pi/Documents/openFrameworks/apps/universalMediaPlayer/node")
-        cmd = ["node", "."]
-        subprocess.Popen(cmd)
+        launchCmd(UNIVERSALMEDIAPLAYER_PATH+"/node", ["node", "."])
         print("========= START RADIOLOGIC2 webapp =======")
-        os.chdir("/home/pi/Documents/radiologic2/webapp")
-        subprocess.Popen(["node", "."])
-        #print("========= START VERMUTH ======")
-        #os.chdir("/home/pi/vermouth")
-        #subprocess.call(["node", "."])
+        launchCmd(RADIOLOGIC_PATH+"/webapp",["node", "."])
+        print("========= START VERMUTH ======")
+        launchCmd(VERMUTH_PATH,["./run.sh"]) # TODO start node instead
+
+    
 
 
         ########################
@@ -264,9 +299,14 @@ def main():
         client_webapp.connect( ('127.0.0.1', 12345))
 
         # OSC CLIENT : VERMUTH APP
-        #global client_webapp
-        #client_webapp = OSCClient()
-        #client_webapp.connect( ('127.0.0.1', 12346))
+        global client_vermuth
+        client_vermuth = OSCClient()
+        client_vermuth.connect( ('127.0.0.1', 3000))
+
+        # OSC CLIENT : Interuptezur
+        global client_interupteur
+        client_interupteur = OSCClient()
+        client_interupteur.connect( ('192.168.1.100', 30001)) ## need to set right address:port
 
         #START ON BOOT
         start_app() 
