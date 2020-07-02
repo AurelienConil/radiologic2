@@ -4,7 +4,17 @@
             "fastAccessPresets": [
                 "noir",
                 "bleuVertCanard"
-            ]
+            ],
+            "fadeTime": 3,
+            "veilleStateName": "__black",
+            "defaultStateName": "__full"
+        },
+        "interrupteur": {
+            "ip": "192.168.10.10",
+            "port": 12333
+        },
+        "video": {
+            "defaultMessageHoldTime": 2
         }
     },
     "tete": [

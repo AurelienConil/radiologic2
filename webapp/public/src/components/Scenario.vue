@@ -25,23 +25,26 @@
         :title="item.nom"
         :msg="item.message"
         :countdown="item.countdown"
+        :holdTime="item.display!==undefined?item.display: defaultMessageHoldTime"
         :light="item.light"
         :isSelected="index==currentSelection"
         v-on:radiologic-event="sendRadiologicEvent"
-        v-on:button-clicked="currentSelection=$event"
+        v-on:button-clicked="startAtIndex(index)"
       ></radiologicEvent>
     </b-container>
   </div>
 </template>
 
 <script>
+
 import RadiologicEvent from "./RadiologicEvent.vue";
 
 export default {
   name: "Scenario",
   props: {
     title: String,
-    listOfEvent: Array
+    listOfEvent: Array,
+    defaultMessageHoldTime:Number,
   },
   methods: {
     sendRadiologicEvent: function(data) {
@@ -51,17 +54,25 @@ export default {
       else{
         console.error("bad event formatting",data)
       }
+    },
+    startAtIndex(i){
+      this.currentSelection = i;
     }
+
+  },
+  computed:{
+
   },
   data: function() {
     return {
-      currentSelection: 2
+      currentSelection: 2,
     };
   },
   mounted: function() {
     console.log("mount Scenario");
     this.currentSelection = -1;
   },
+
   watch: {
     listOfEvent: function() {
       //Once the scenario is changed, reset de current selection

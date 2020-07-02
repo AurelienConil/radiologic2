@@ -1,6 +1,6 @@
 <template>
-  <b-container fluid class="bg-dark py-2 px-3">
-    <b-container fluid class="bg-light py-5 px-3 app-buttons">
+  <b-container fluid class="bg-light py-2 px-3">
+    <b-container fluid class=" py-5 px-3 app-buttons">
       <b-form-input
         type="range"
         :value="numGetter('volume')"
@@ -12,7 +12,7 @@
       ></b-form-input>
       <div>Volume</div>
     </b-container>
-    <b-container fluid class="bg-light py-5 px-3 app-buttons">
+    <b-container fluid class=" py-5 px-3 app-buttons">
       <b-form-input
         type="range"
         :value="numGetter('masterLight')"
@@ -42,9 +42,9 @@
       <b-button
         block
         size="lg"
-        variant="secondary"
-        @click="promptBeforeSend('mettre en veille','/app/veille')"
-      >Veille</b-button>
+        :variant="hasVeille?'outline-':''+'secondary'"
+        @click="toggleVeille"
+      >{{hasVeille?"Allumer":"Veille"}}</b-button>
     </div>
   </b-container>
 </template>
@@ -59,17 +59,32 @@ export default {
     settingsData: {}
   },
   data: function() {
-    return {};
+    return {
+      hasVeille:false
+    };
   },
 
   methods: {
-    promptBeforeSend(action, addr, arg) {
-      if (alert(`êtes vous sûr de vouloir ${action} le système?`)) {
-        this.sendEv(addr, arg);
+    toggleVeille(){
+      this.setVeille(!this.hasVeille)
+
+    },
+    setVeille(v){
+      if(v){
+      this.sendEv("/app/veille",1)
       }
+      else{
+        this.sendEv("/app/veille",0)
+      }
+      this.hasVeille = v
+    },
+    promptBeforeSend(action, addr, arg) {
+      // if (alert(`êtes vous sûr de vouloir ${action} le système?`)) {
+        this.sendEv(addr, arg);
+      // }
     },
     sendEv(addr, arg) {
-      this.$emit("radiologic-event", addr, arg);
+      this.$emit("radiologic-event", [addr, arg]);
     },
 
     numGetter(name) {

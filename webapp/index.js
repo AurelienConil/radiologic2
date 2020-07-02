@@ -53,7 +53,7 @@ jsonFile.mv('../datajson.json')
     }
 });
 app.use('/datajson.json',express.static('../datajson.json'))
-app.use('/settings.json',express.static('../settings.json'))
+app.use('/UserSettings.json',express.static('../UserSettings.json'))
 app.use('/', express.static('public/dist'))
 app.use('/', serveIndex('public/dist'))
 

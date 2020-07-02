@@ -2,7 +2,10 @@
   <b-container fluid class="bg-dark py-2 px-3">
     <b-row>
       <b-col v-for="(item, index) in listOfButton" :key="item" class="px-1">
-        <b-button block variant="primary" v-on:click="clickMe(index)">{{item}}</b-button>
+        <b-button block variant="primary" size="lg" v-on:click="clickMe(index)">{{item}}</b-button>
+      </b-col>
+      <b-col v-for="(item) in listOfLight" :key="item" class="px-1">
+        <b-button block variant="secondary" size="lg" v-on:click="sendLightPreset(item)">{{item}}</b-button>
       </b-col>
     </b-row>
   </b-container>
@@ -27,10 +30,7 @@ export default {
       res.push("start video");
       res.push("stop video");
       res.push("clear msg");
-      this.listOfLight.forEach(element => {
-        res.push(element);
-      });
-      res.push("OFF");
+      // res.push("OFF");
       return res;
     }
   },
@@ -61,13 +61,6 @@ export default {
             break;
           case 2:
             this.clearMsg();
-            break;
-          case this.listOfButton.length - 1:
-            this.stopLight();
-            break;
-
-          default:
-            this.sendLightPreset(this.listOfButton[index]);
             break;
         }
       }

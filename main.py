@@ -9,6 +9,8 @@ import subprocess
 import platform
 import json
 from OSC import OSCClient, OSCMessage, OSCServer
+from shutil import copyfile
+
 
 #################################################
 # This is Radiologic Deamon
@@ -22,7 +24,7 @@ from OSC import OSCClient, OSCMessage, OSCServer
 # /player/...  are messages for OF app
 # /messages/... are messages for OF app
 # /rpi/... are system messages
-# /interupteur/... are interupteur messages (from/to)
+# /interrupteur/... are interrupteur messages (from/to)
 ################################################
 
 ################################################
@@ -39,7 +41,7 @@ from OSC import OSCClient, OSCMessage, OSCServer
 # Python in = 12344
 # webapp in = 12345
 # vermuth in = 3000
-# interupteur = ????:??
+# interrupteur = ????:??
 ################################################
 
 
@@ -52,7 +54,9 @@ if (platform.machine().startswith("x86")):
     UNIVERSALMEDIAPLAYER_PATH = "/home/tinmar/Dev/ornormes/universalMediaPlayer"
     VERMUTH_PATH = "/home/tinmar/Dev/vermuth"
 
-SETTINGS_PATH = RADIOLOGIC_PATH+"/settings.json"
+USER_SETTINGS_PATH = RADIOLOGIC_PATH+"/UserSettings.json"
+GLOBAL_SETTINGS_PATH = RADIOLOGIC_PATH+"/datajson.json"
+DEFAULT_GLOBAL_SETTINGS_PATH = RADIOLOGIC_PATH+"/datajson.default.json"
 
 
 class SimpleServer(OSCServer):
@@ -134,7 +138,7 @@ class SimpleServer(OSCServer):
             else:
                 print("Forwarding not supported for light/", splitAddress[2])
         ########### HANDLE "VEILLE" MODE #########
-        elif((splitAddress[1] == "interupteur" and splitAddress[2] == "veille") or splitAddress[1] == "veille"):
+        elif((splitAddress[1] == "interrupteur" and splitAddress[2] == "veille") or splitAddress[1] == "veille"):
             v = len(data) == 0 or data[0] == 1
             setVeille(v)
 
@@ -157,33 +161,35 @@ class SimpleServer(OSCServer):
 veille = False
 
 
-def setVermuthState(name,time = -1):
-    if(time==-1):
-        time = settingsData["lightFade"]
+def setVermuthState(name, time=-1):
+    if(time == -1):
+        time = confSettings["light"]["fadeTime"]
     oscmsg = OSCMessage()
     oscmsg.setAddress("/sequencePlayer/goToStateNamed")
     oscmsg.append(name)
     oscmsg.append(time)
     forwardMsgToVermuth(oscmsg)
 
+
 def notifyVeille(v):
+    global veille
     veille = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/interrupteur/veille")
     oscmsg.append(1 if v else 0)
-    forwardMsgToInterupteur(oscmsg)
+    forwardMsgTointerrupteur(oscmsg)
+
 
 def setVeille(v):
     print("going to sleep mode : ", v)
-    global veille
     notifyVeille(v)
-    if veille:
-        setVermuthState("veille")
+    if v:
+        setVermuthState(confSettings["light"]["veilleStateName"])
         oscmsg = OSCMessage()
         oscmsg.setAddress("/player/stop")
         forwardMsgToOf(oscmsg)
     else:
-        setVermuthState("default")
+        setVermuthState(confSettings["light"]["defaultStateName"])
 
 
 def forwardMessage(client, msg):
@@ -199,8 +205,8 @@ def forwardMsgToOf(msg):
     forwardMessage(client_of, msg)
 
 
-def forwardMsgToInterupteur(msg):
-    client_interupteur.safeSend(msg)
+def forwardMsgTointerrupteur(msg):
+    client_interrupteur.safeSend(msg)
 
 
 def forwardMsgToOfWeb(msg):
@@ -311,14 +317,17 @@ def start_app():
 
 
 def sendVolume(v):
-    settingsData["volume"] = v
+    global userSettingsData
+    userSettingsData["volume"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/player/volume")
     oscmsg.append(v)
     forwardMsgToOf(oscmsg)
 
+
 def sendMasterLight(v):
-    settingsData["masterLight"] = v
+    global userSettingsData
+    userSettingsData["masterLight"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/universe/setGrandMaster")
     oscmsg.append(v)
@@ -328,7 +337,7 @@ def sendMasterLight(v):
 class SafeOSCClient(OSCClient):
     def __init__(self, ipPortTuple):
         self.ipPortTuple = ipPortTuple
-        self.isConnected=False
+        self.isConnected = False
         self.tryConnect()
 
     def tryConnect(self):
@@ -338,48 +347,114 @@ class SafeOSCClient(OSCClient):
         except Exception, e:
             self.isConnected = False
 
-    def safeSend(self,msg):
+    def safeSend(self, msg):
         if(self.isConnected):
             try:
                 self.send(msg)
             except Exception, e:
                 self.tryConnect()
 
-settingsData = {
-    "volume":1,
-    "masterLight":1,
-    "lightFade":3
+
+userSettingsData = {
+    "volume": 1,
+    "masterLight": 1,
 }
 
+confSettings = {
+    "light": {
+        "fadeTime": 3,
+        "veilleStateName": "__black",
+        "defaultStateName": "__full"
+    },
+    "video": {
+        "vFlip": 1
+    },
+    "interrupteur": {
+        "ip": "192.168.2.2",
+        "port": 3005
+    }
+}
+
+
+def mergeSettingIfExist(name, fromOb, toOb):
+    if name in fromOb:
+        toOb[name] = fromOb[name]
+
+
 def loadSettings():
-    with  open(SETTINGS_PATH,'r') as fp:
+    with open(USER_SETTINGS_PATH, 'r') as fp:
         try:
             loodedSettings = json.load(fp)
         except Exception, e:
-            print("error loading settings",e)
-        print("settings",loodedSettings)
+            print("error loading udser settings", e)
+        print("settings", loodedSettings)
         if loodedSettings:
-            if( "volume" in loodedSettings):
+            if("volume" in loodedSettings):
                 sendVolume(loodedSettings["volume"])
-            if( "masterLight" in loodedSettings):
+            if("masterLight" in loodedSettings):
                 sendMasterLight(loodedSettings["masterLight"])
-            if( "lightFade" in loodedSettings):
-                settingsData["lightFade"] = loodedSettings["lightFade"]
-def saveSettings():
-    global settingsData
-    if( not ("volume" in settingsData )or not ("masterLight" in settingsData) ):
-        print("invalid settings ",settingsData)
-        return 
 
-    with  open(SETTINGS_PATH,'w') as fp:
+    global confSettings
+    with open(GLOBAL_SETTINGS_PATH, 'r') as fp:
         try:
-                json.dump(settingsData,fp)
+            conf = json.load(fp)
+            if("metadata" in conf):
+                ls = conf["metadata"]
+                if("light" in ls):
+                    for k in confSettings["light"].keys():
+                        mergeSettingIfExist(
+                            k, ls["light"], confSettings["light"])
+                if("video" in ls):
+                    for k in confSettings["video"].keys():
+                        mergeSettingIfExist(
+                            k, ls["video"], confSettings["video"])
+
         except Exception, e:
-            print("error saving settings",e,settingsData)
-        print("settings",settingsData)
-    
+            print("error loading udser settings", e)
+
+
+def saveSettings():
+    global userSettingsData
+    if(not ("volume" in userSettingsData) or not ("masterLight" in userSettingsData)):
+        print("invalid settings ", userSettingsData)
+        return
+
+    with open(USER_SETTINGS_PATH, 'w') as fp:
+        try:
+                json.dump(userSettingsData, fp)
+        except Exception, e:
+            print("error saving settings", e, userSettingsData)
+        print("settings", userSettingsData)
+
+def initSettings():
+    if(not os.path.exists(USER_SETTINGS_PATH)):
+        print("creating default settings", userSettingsData)
+        saveSettings()
+
+    # checking if new option have been added and merge them if needed
+    if(not os.path.exists(GLOBAL_SETTINGS_PATH)):
+        copyfile(DEFAULT_GLOBAL_SETTINGS_PATH, GLOBAL_SETTINGS_PATH)
+    with open(DEFAULT_GLOBAL_SETTINGS_PATH, 'r') as defFp:
+        defCfg = json.load(defFp)
+    with open(GLOBAL_SETTINGS_PATH,'r') as curFp:
+        curCfg = json.load(curFp)
+    hasMerge = False
+    for (k,v) in defCfg["metadata"].items() :
+        for (kk,vv) in v.items():
+            if (not k in curCfg):
+                curCfg[k] = {}
+                hasMerge = True
+            if (not kk in curCfg[k]):
+                curCfg[k][kk] = vv
+                hasMerge = True
+            
+    if hasMerge :
+        with open(GLOBAL_SETTINGS_PATH,'w') as fp:
+            json.dump(curCfg,fp)
+
 
 def main():
+    initSettings()
 
     # OSC SERVER
     # myip = get_ip()
@@ -421,12 +496,10 @@ def main():
     client_vermuth = OSCClient()
     client_vermuth.connect(('127.0.0.1', 11000))
 
-    global client_interupteur
-    client_interupteur = SafeOSCClient(('192.168.50.50', 3005))
+    global client_interrupteur
+    client_interrupteur = SafeOSCClient((confSettings["interrupteur"]["ip"], confSettings["interrupteur"]["port"]))
 
-    if(not os.path.exists(SETTINGS_PATH)):
-        print("creating default settings",settingsData)
-        saveSettings()
+
     # START ON BOOT
     start_app()
 

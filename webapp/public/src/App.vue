@@ -29,6 +29,7 @@
       v-else
       :title="this.actualScenario"
       :listOfEvent="list"
+      :defaultMessageHoldTime="defaultMessageHoldTime"
       v-on:radio-event="sendMessageFromEvent"
     ></Scenario>
     <bottom-menu
@@ -38,7 +39,7 @@
       v-on:menu-event="sendMessageFromEvent"
     ></bottom-menu>
     <b-modal size="xl" title="Réglages" id="modal-settings" ok-only>
-      <Settings id="settings" :settingsData="settingsData" v-on:save-settings="saveSettings" v-on:change-settings="changeSettings"  />
+      <Settings id="settings" :settingsData="settingsData" v-on:radiologic-event="sendMessageFromEvent" v-on:save-settings="saveSettings" v-on:change-settings="changeSettings"  />
     </b-modal>
   </div>
 </template>
@@ -74,6 +75,9 @@ export default {
     },
     listOfLight() {
       return this.datafile?.metadata?.light?.fastAccessPresets || [];
+    },
+    defaultMessageHoldTime(){
+      return this.datafile?.metadata?.video?.defaultMessageHoldTime || 0;
     },
     isRootPage() {
       return this.actualScenarioIndex < 0;
@@ -168,7 +172,8 @@ export default {
   },
 
   created() {
-    fetch(self.origin + "/datajson.json")
+    const serverURL = "http://" + self.location.host.split(":")[0] + ":3000" // forces to connect to server (useful while debugging npm run serve) 
+    fetch(serverURL + "/datajson.json")
       .then(stream => stream.json())
       .then(json => {
         console.log("fetched session json", json);
@@ -176,10 +181,10 @@ export default {
       })
       .catch(err => console.error("failed to fetch json", err));
 
-    fetch(self.origin + "/settings.json")
+    fetch(serverURL + "/UserSettings.json")
       .then(stream => stream.json())
       .then(json => {
-        console.log("fetched settings json", json);
+        console.log("fetched UserSettings json", json);
         this.settingsData = json;
       })
       .catch(err => console.error("failed to fetch json", err));
