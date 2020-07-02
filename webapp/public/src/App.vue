@@ -39,7 +39,15 @@
       v-on:menu-event="sendMessageFromEvent"
     ></bottom-menu>
     <b-modal size="xl" title="Réglages" id="modal-settings" ok-only>
-      <Settings id="settings" :settingsData="settingsData" v-on:radiologic-event="sendMessageFromEvent" v-on:save-settings="saveSettings" v-on:change-settings="changeSettings" :adminMode="adminMode" />
+      <Settings
+        id="settings"
+        :settingsData="settingsData"
+        :appState="appState"
+        v-on:radiologic-event="sendMessageFromEvent"
+        v-on:save-settings="saveSettings"
+        v-on:change-settings="changeSettings"
+        :adminMode="adminMode"
+      />
     </b-modal>
   </div>
 </template>
@@ -66,7 +74,8 @@ export default {
       port: new osc.WebSocketPort({
         url: "ws://" + self.location.host.split(":")[0] + ":8081" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
       }),
-      settingsData :{volume:1,masterLight:1}
+      settingsData :{volume:1,masterLight:1},
+      appState:{hasVeille:false,busy:false}
     };
   },
   computed: {
@@ -119,6 +128,9 @@ export default {
       console.log("send message from event");
       //Msg must be [ "/oscAdress", [arg1, arg2, arg3]]
       if (msg.length > 1) {
+        if(msg[0].startsWith('/app/update')){
+          this.appState.busy=true
+        }
         this.sendOscMessage(msg[0], msg[1]);
       } else {
         console.log("sendMessageFromEvent : msg format not valid");
@@ -202,9 +214,23 @@ export default {
 
     this.port.on("close", this.portClose);
     this.port.on("error", this.portClose);
+    this.port.on("osc",(msg)=>{
+      if(msg.address=="/app/veille"){
+        this.appState.hasVeille=msg.args.length && msg.args[0]==1
+      }
+      if(msg.address=="/app/busy"){
+        this.appState.busy=msg.args.length && msg.args[0]==1
+      }
+      else if(this.appState.busy){
+        console.warn(" can't be busy if sending osc")
+        this.appState.busy = false
+      }
+      console.log("recieved msg",msg)
+    })
     this.port.on("open", () => {
       console.warn("port send open message");
       this.portOpenState = "open";
+      this.appState.busy = false
     });
     this.portOpenState = "open"; // avoid non connected button flashing on page load
     this.tryOpenPort(true);
@@ -241,7 +267,7 @@ export default {
   position: fixed;
   bottom: 0;
 }
-.modal-dialog{
+.modal-dialog {
   min-width: 80vw;
 }
 </style>

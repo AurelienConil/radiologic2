@@ -100,8 +100,9 @@ class SimpleServer(OSCServer):
                 print("update Universal Media Player")
                 quit_app()
                 time.sleep(2)
-                update_of()
+                update_vermuth()
                 start_app()
+
             if(splitAddress[2] == "update"):
                 print("update Radiologic2")
                 quit_app()
@@ -120,10 +121,10 @@ class SimpleServer(OSCServer):
                 reboot()
         ############ FORWARD TO OPENSTAGECONTROL ###
         elif(splitAddress[1] == "player" or splitAddress[1] == "message"):
-                oscmsg = OSCMessage()
-                oscmsg.setAddress(oscAddress)
-                oscmsg.append(data)
-                forwardMsgToOf(oscmsg)
+            oscmsg = OSCMessage()
+            oscmsg.setAddress(oscAddress)
+            oscmsg.append(data)
+            forwardMsgToOf(oscmsg)
         ############ FORWARD TO OF_WEB ######
         elif(splitAddress[1] == "addMovie" or splitAddress[1] == "playPercentage" or splitAddress[1] == "playIndex"):
             oscmsg = OSCMessage()
@@ -152,6 +153,12 @@ class SimpleServer(OSCServer):
             elif(splitAddress[2] == "save"):
                 saveSettings()
 
+        elif(splitAddress[1] == "echo"):
+            oscmsg = OSCMessage()
+            oscmsg.setAddress(oscAddress)
+            oscmsg.setAddress("/pong")
+            forwardMsgToWebApp(oscmsg)
+
         ############ FORWARD TO WEBAPP #######
         elif(False):
             oscmsg = OSCMessage()
@@ -175,6 +182,7 @@ def setVermuthState(name, time=-1):
 
 def notifyVeille(v):
     global veille
+    print("notifying veille")
     veille = v
     varg = 1 if v else 0
     oscmsg = OSCMessage()
@@ -260,6 +268,12 @@ def get_ip():
         s.close()
     return IP
 
+def send_busy(v):    
+    oscmsg = OSCMessage()
+    oscmsg.setAddress("/app/busy")
+    oscmsg.append(v)
+    forwardMsgToWebApp(oscmsg)
+    
 
 def closing_app():
     global runningApp
@@ -269,31 +283,37 @@ def closing_app():
 
 def quit_app():
     print("========= QUIT ALL APP ======")
+    send_busy(1)
     os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(["./quit.sh"])
-    
+    send_busy(0)
     print("======== ALL APP QUITTED ====")
 
 
 def update_of():
     print("========= UPDATE OF APP ======")
+    send_busy(1)
     os.chdir(UNIVERSALMEDIAPLAYER_PATH+"/script")
     subprocess.call(["./update.sh"])
+    send_busy(0)
     print("========= OF APP UPDATED ======")
 
 
 def update_vermuth():
-    print("========= UPDATE OF APP ======")
+    print("========= UPDATE VERMUTH APP ======")
+    send_busy(1)
     os.chdir(VERMUTH_PATH)
     subprocess.call(["./update.sh"])
-
+    send_busy(0)
     print("========= OF APP UPDATED ======")
 
 
 def update():
     print("========= UPDATE RADIOLOGIC2 ======")
+    send_busy(1)
     os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(["./update.sh"])
+    send_busy(0)
     print("========= RADIOLOGIC2 then reboot ======")
 
 
@@ -304,6 +324,7 @@ def update_all():
     update()
     update_vermuth()
     reboot()
+
 
 def launchCmd(dir, cmd):
     try:
@@ -389,7 +410,7 @@ confSettings = {
         "defaultStateName": "__full"
     },
     "video": {
-        "vFlip": 1
+        "vFlip": 1  # todo implement it
     },
     "interrupteur": {
         "ip": "192.168.2.2",
@@ -409,7 +430,7 @@ def loadSettings():
             loodedSettings = json.load(fp)
         except Exception, e:
             print("error loading udser settings", e)
-        print("settings", loodedSettings)
+        print("user settings", loodedSettings)
         if loodedSettings:
             if("volume" in loodedSettings):
                 sendVolume(loodedSettings["volume"])
@@ -443,10 +464,11 @@ def saveSettings():
 
     with open(USER_SETTINGS_PATH, 'w') as fp:
         try:
-                json.dump(userSettingsData, fp)
+            json.dump(userSettingsData, fp)
         except Exception, e:
             print("error saving settings", e, userSettingsData)
         print("settings", userSettingsData)
+
 
 def initSettings():
     if(not os.path.exists(USER_SETTINGS_PATH)):
@@ -458,25 +480,25 @@ def initSettings():
         copyfile(DEFAULT_GLOBAL_SETTINGS_PATH, GLOBAL_SETTINGS_PATH)
     with open(DEFAULT_GLOBAL_SETTINGS_PATH, 'r') as defFp:
         defCfg = json.load(defFp)
-    with open(GLOBAL_SETTINGS_PATH,'r') as curFp:
+    with open(GLOBAL_SETTINGS_PATH, 'r') as curFp:
         curCfg = json.load(curFp)
     if(not "metadata" in curCfg):
         curCfg["meatadata"] = {}
     curCfg = curCfg["metadata"]
     defCfg = defCfg["metadata"]
     hasMerge = False
-    for (k,v) in defCfg.items() :
-        for (kk,vv) in v.items():
+    for (k, v) in defCfg.items():
+        for (kk, vv) in v.items():
             if (not k in curCfg):
                 curCfg[k] = {}
                 hasMerge = True
             if (not kk in curCfg[k]):
                 curCfg[k][kk] = vv
                 hasMerge = True
-            
-    if hasMerge :
-        with open(GLOBAL_SETTINGS_PATH,'w') as fp:
-            json.dump(curCfg,fp,indent=2)
+
+    if hasMerge:
+        with open(GLOBAL_SETTINGS_PATH, 'w') as fp:
+            json.dump(curCfg, fp, indent=2)
 
 
 def main():
@@ -523,8 +545,8 @@ def main():
     client_vermuth.connect(('127.0.0.1', 11000))
 
     global client_interrupteur
-    client_interrupteur = SafeOSCClient((confSettings["interrupteur"]["ip"], confSettings["interrupteur"]["port"]))
-
+    client_interrupteur = SafeOSCClient(
+        (confSettings["interrupteur"]["ip"], confSettings["interrupteur"]["port"]))
 
     # START ON BOOT
     start_app()

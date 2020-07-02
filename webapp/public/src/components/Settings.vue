@@ -1,6 +1,6 @@
 <template>
   <b-container fluid class="bg-light py-2 px-3">
-    <b-container fluid class="py-5 px-3 app-buttons">
+    <b-container fluid class="py-0 px-3 app-buttons">
       <b-form-input
         type="range"
         :value="numGetter('volume')"
@@ -29,14 +29,14 @@
         block
         size="lg"
         variant="danger"
-        @click="promptBeforeSend('éteindre','/app/shutdown')"
+        @click="promptBeforeSend('éteindre','/rpi/shutdown')"
       >Eteindre</b-button>
 
       <b-button
         block
         size="lg"
         variant="warning"
-        @click="promptBeforeSend('redémarrer','/app/reboot')"
+        @click="promptBeforeSend('redémarrer','/rpi/reboot')"
       >Redémarrer</b-button>
 
       <b-button
@@ -49,11 +49,15 @@
 
     <div v-if="adminMode">
       Admin Section
-      
+      <div v-if="busy">Busy
+      </div>
+    <div v-else>
        <b-button block size="lg" @click="sendEv('/app/update')">update UI</b-button>
        <b-button block size="lg" @click="sendEv('/app/update_of')">update Video</b-button>
        <b-button block size="lg" @click="sendEv('/app/update_vermuth')">update Vermuth</b-button>
        <b-button block size="lg" @click="sendEv('/app/update_all')">update all</b-button>
+        <b-button block size="lg" @click="sendEv('/echo')">echo</b-button>
+      </div>
     </div>
   </b-container>
 </template>
@@ -66,12 +70,21 @@ export default {
     //   return {};
     // }
     adminMode: { default: false },
-    settingsData: {}
+    settingsData: {},
+    appState:{}
   },
   data: function() {
     return {
-      hasVeille: false
+      // hasVeille: false
     };
+  },
+  computed:{
+    hasVeille(){
+      return this.appState.hasVeille
+    },
+    busy(){
+      return this.appState.busy
+    }
   },
 
   methods: {
@@ -84,7 +97,7 @@ export default {
       } else {
         this.sendEv("/app/veille", 0);
       }
-      this.hasVeille = v;
+      // this.hasVeille = v;
     },
     promptBeforeSend(action, addr, arg) {
       // if (alert(`êtes vous sûr de vouloir ${action} le système?`)) {
