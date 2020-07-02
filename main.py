@@ -71,8 +71,10 @@ class SimpleServer(OSCServer):
 
         ############## APP itself #############
         if(splitAddress[1] == "app"):
-            if(splitAddress[2] == "saveSettings"):
-                saveSettings()
+            if(splitAddress[2] == "veille"):
+                v = len(data) == 0 or data[0] == 1
+                setVeille(v)
+
             if(splitAddress[2] == "close"):
                 print("closing the app")
                 quit_app()
@@ -126,27 +128,22 @@ class SimpleServer(OSCServer):
         ########### FORWARD TO VERMUTH #######
         elif(splitAddress[1] == "light"):
             if(splitAddress[2] == "preset"):
-                setVeille(data=="veille") # out from veille mode if other lilght state are called
-                oscmsg = OSCMessage()
-                oscmsg.setAddress("/stateList/recallStateNamed")
-                oscmsg.append(data)
-                forwardMsgToVermuth(oscmsg)
+                # out from veille mode if other lilght state are called
+                notifyVeille(False)
+                setVermuthState(data)
             else:
                 print("Forwarding not supported for light/", splitAddress[2])
         ########### HANDLE "VEILLE" MODE #########
         elif((splitAddress[1] == "interupteur" and splitAddress[2] == "veille") or splitAddress[1] == "veille"):
             v = len(data) == 0 or data[0] == 1
             setVeille(v)
-            oscmsg = OSCMessage()
-            oscmsg.setAddress(oscAddress)
-            oscmsg.append(data)
-            forwardMsgToVermuth(oscmsg)
-        elif splitAddress[1] == "settings" :
-            if(splitAddress[2]== "masterLight"):
+
+        elif splitAddress[1] == "settings":
+            if(splitAddress[2] == "masterLight"):
                 sendMasterLight(data[0])
-            elif(splitAddress[2]== "volume"):
+            elif(splitAddress[2] == "volume"):
                 sendVolume(data[0])
-            elif(splitAddress[2]=="save"):
+            elif(splitAddress[2] == "save"):
                 saveSettings()
 
         ############ FORWARD TO WEBAPP #######
@@ -160,15 +157,33 @@ class SimpleServer(OSCServer):
 veille = False
 
 
+def setVermuthState(name,time = -1):
+    if(time==-1):
+        time = settingsData["lightFade"]
+    oscmsg = OSCMessage()
+    oscmsg.setAddress("/sequencePlayer/goToStateNamed")
+    oscmsg.append(name)
+    oscmsg.append(time)
+    forwardMsgToVermuth(oscmsg)
+
+def notifyVeille(v):
+    veille = v
+    oscmsg = OSCMessage()
+    oscmsg.setAddress("/interrupteur/veille")
+    oscmsg.append(1 if v else 0)
+    forwardMsgToInterupteur(oscmsg)
 
 def setVeille(v):
     print("going to sleep mode : ", v)
     global veille
-    veille = (1 if v == 1 else 0)
-    oscmsg = OSCMessage()
-    oscmsg.setAddress(oscAddress)
-    oscmsg.append(v)
-    forwardMsgToInterupteur(oscmsg)
+    notifyVeille(v)
+    if veille:
+        setVermuthState("veille")
+        oscmsg = OSCMessage()
+        oscmsg.setAddress("/player/stop")
+        forwardMsgToOf(oscmsg)
+    else:
+        setVermuthState("default")
 
 
 def forwardMessage(client, msg):
@@ -313,6 +328,7 @@ def sendMasterLight(v):
 class SafeOSCClient(OSCClient):
     def __init__(self, ipPortTuple):
         self.ipPortTuple = ipPortTuple
+        self.isConnected=False
         self.tryConnect()
 
     def tryConnect(self):
@@ -322,8 +338,8 @@ class SafeOSCClient(OSCClient):
         except Exception, e:
             self.isConnected = False
 
-    def safeSend(msg):
-        if(isConnected):
+    def safeSend(self,msg):
+        if(self.isConnected):
             try:
                 self.send(msg)
             except Exception, e:
@@ -331,9 +347,10 @@ class SafeOSCClient(OSCClient):
 
 settingsData = {
     "volume":1,
-    "masterLight":1
-
+    "masterLight":1,
+    "lightFade":3
 }
+
 def loadSettings():
     with  open(SETTINGS_PATH,'r') as fp:
         try:
@@ -346,7 +363,8 @@ def loadSettings():
                 sendVolume(loodedSettings["volume"])
             if( "masterLight" in loodedSettings):
                 sendMasterLight(loodedSettings["masterLight"])
-
+            if( "lightFade" in loodedSettings):
+                settingsData["lightFade"] = loodedSettings["lightFade"]
 def saveSettings():
     global settingsData
     if( not ("volume" in settingsData )or not ("masterLight" in settingsData) ):
