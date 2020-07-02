@@ -30,6 +30,7 @@
       :title="this.actualScenario"
       :listOfEvent="list"
       :defaultMessageHoldTime="defaultMessageHoldTime"
+      :fadeMessageTime="3"
       v-on:radio-event="sendMessageFromEvent"
     ></Scenario>
     <bottom-menu

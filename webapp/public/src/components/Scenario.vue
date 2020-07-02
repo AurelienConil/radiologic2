@@ -25,7 +25,8 @@
         :title="item.nom"
         :msg="item.message"
         :countdown="item.countdown"
-        :holdTime="item.display!==undefined?item.display: defaultMessageHoldTime"
+        :holdTime="(item.display!==undefined?(item.display?item.display+fadeMsgTime:0): defaultMessageHoldTime)"
+        :fadeTime="fadeMsgTime"
         :light="item.light"
         :isSelected="index==currentSelection"
         v-on:radiologic-event="sendRadiologicEvent"
@@ -45,6 +46,7 @@ export default {
     title: String,
     listOfEvent: Array,
     defaultMessageHoldTime:Number,
+    fadeMsgTime:Number,
   },
   methods: {
     sendRadiologicEvent: function(data) {

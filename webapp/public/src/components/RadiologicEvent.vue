@@ -41,7 +41,7 @@ export default {
     countdown: Number,
     holdTime: Number,
     light: String,
-    isSelected: Boolean
+    isSelected: Boolean,
   },
 
   methods: {

@@ -50,6 +50,7 @@
     <div v-if="adminMode">
       Admin Section
       <div v-if="busy">Busy
+      <b-spinner></b-spinner>
       </div>
     <div v-else>
        <b-button block size="lg" @click="sendEv('/app/update')">update UI</b-button>
