@@ -30,7 +30,7 @@
       :title="this.actualScenario"
       :listOfEvent="list"
       :defaultMessageHoldTime="defaultMessageHoldTime"
-      :fadeMessageTime="3"
+      :fadeMsgTime="3"
       v-on:radio-event="sendMessageFromEvent"
     ></Scenario>
     <bottom-menu
@@ -42,7 +42,7 @@
     <b-modal size="xl" title="Réglages" id="modal-settings" ok-only>
       <Settings
         id="settings"
-        :settingsData="settingsData"
+        :settingsData="userSettings"
         :appState="appState"
         v-on:radiologic-event="sendMessageFromEvent"
         v-on:save-settings="saveSettings"
@@ -75,8 +75,8 @@ export default {
       port: new osc.WebSocketPort({
         url: "ws://" + self.location.host.split(":")[0] + ":8081" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
       }),
-      settingsData :{volume:1,masterLight:1},
-      appState:{hasVeille:false,busy:false}
+      userSettings: { volume: 1, masterLight: 1 },
+      appState: { hasVeille: false, busy: false }
     };
   },
   computed: {
@@ -86,23 +86,21 @@ export default {
     listOfLight() {
       return this.datafile?.metadata?.light?.fastAccessPresets || [];
     },
-    defaultMessageHoldTime(){
+    defaultMessageHoldTime() {
       return this.datafile?.metadata?.video?.defaultMessageHoldTime || 0;
     },
     isRootPage() {
       return this.actualScenarioIndex < 0;
     },
-    adminMode(){
-
-      const urlSplit = window.location.href.split('?');
-      if( urlSplit.length>1){
-        if(urlSplit[1].toLowerCase()==="admin"){
-          return true
+    adminMode() {
+      const urlSplit = window.location.href.split("?");
+      if (urlSplit.length > 1) {
+        if (urlSplit[1].toLowerCase() === "admin") {
+          return true;
         }
       }
       return false;
     }
-
   },
   methods: {
     addButton: function() {
@@ -129,8 +127,8 @@ export default {
       console.log("send message from event");
       //Msg must be [ "/oscAdress", [arg1, arg2, arg3]]
       if (msg.length > 1) {
-        if(msg[0].startsWith('/app/update')){
-          this.appState.busy=true
+        if (msg[0].startsWith("/app/update")) {
+          this.appState.busy = true;
         }
         this.sendOscMessage(msg[0], msg[1]);
       } else {
@@ -175,63 +173,62 @@ export default {
           this.tryOpenPort();
         }, 3000);
       }
-    }
-    ,saveSettings(){
-      this.sendOscMessage("/settings/save")
-      console.log("save settings")
-    }
-    ,changeSettings(name,v){
-      if(name=="volume"){
-        this.sendOscMessage("/settings/volume",v)
+    },
+    saveSettings() {
+      this.sendOscMessage("/settings/save");
+      console.log("save settings");
+    },
+    changeSettings(name, v) {
+      if (name == "volume") {
+        this.sendOscMessage("/settings/volume", v);
+      } else if (name === "masterLight") {
+        this.sendOscMessage("/settings/masterLight", v);
+      } else {
+        console.error("setting not supported", name);
       }
-      else if(name==="masterLight"){
-        this.sendOscMessage("/settings/masterLight",v)
-      }
-      else{
-        console.error("setting not supported",name)
-      }
+    },
+    loadSession() {
+      const serverURL = "http://" + self.location.host.split(":")[0] + ":3000"; // forces to connect to server (useful while debugging npm run serve)
+      fetch(serverURL + "/datajson.json")
+        .then(stream => stream.json())
+        .then(json => {
+          console.log("fetched session json", json);
+          this.datafile = json;
+        })
+        .catch(err => console.error("failed to fetch json", err));
+
+      fetch(serverURL + "/UserSettings.json")
+        .then(stream => stream.json())
+        .then(json => {
+          console.log("fetched UserSettings json", json);
+          this.userSettings = json;
+        })
+        .catch(err => console.error("failed to fetch json", err));
     }
   },
 
   created() {
-    const serverURL = "http://" + self.location.host.split(":")[0] + ":3000" // forces to connect to server (useful while debugging npm run serve) 
-    fetch(serverURL + "/datajson.json")
-      .then(stream => stream.json())
-      .then(json => {
-        console.log("fetched session json", json);
-        this.datafile = json;
-      })
-      .catch(err => console.error("failed to fetch json", err));
-
-    fetch(serverURL + "/UserSettings.json")
-      .then(stream => stream.json())
-      .then(json => {
-        console.log("fetched UserSettings json", json);
-        this.settingsData = json;
-      })
-      .catch(err => console.error("failed to fetch json", err));
-
-          
+    this.loadSession();
 
     this.port.on("close", this.portClose);
     this.port.on("error", this.portClose);
-    this.port.on("osc",(msg)=>{
-      if(msg.address=="/app/veille"){
-        this.appState.hasVeille=msg.args.length && msg.args[0]==1
+    this.port.on("osc", msg => {
+      if (msg.address == "/app/veille") {
+        this.appState.hasVeille = msg.args.length && msg.args[0] == 1;
       }
-      if(msg.address=="/app/busy"){
-        this.appState.busy=msg.args.length && msg.args[0]==1
+      if (msg.address == "/app/busy") {
+        this.appState.busy = msg.args.length && msg.args[0] == 1;
+      } else if (this.appState.busy) {
+        console.warn(" can't be busy if sending osc");
+        this.appState.busy = false;
       }
-      else if(this.appState.busy){
-        console.warn(" can't be busy if sending osc")
-        this.appState.busy = false
-      }
-      console.log("recieved msg",msg)
-    })
+      console.log("recieved msg", msg);
+    });
     this.port.on("open", () => {
       console.warn("port send open message");
       this.portOpenState = "open";
-      this.appState.busy = false
+      this.appState.busy = false;
+      this.loadSession()
     });
     this.portOpenState = "open"; // avoid non connected button flashing on page load
     this.tryOpenPort(true);

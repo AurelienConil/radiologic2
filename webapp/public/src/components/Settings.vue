@@ -67,9 +67,6 @@
 export default {
   name: "Settings",
   props: {
-    // settingsData: () => {
-    //   return {};
-    // }
     adminMode: { default: false },
     settingsData: {},
     appState:{}

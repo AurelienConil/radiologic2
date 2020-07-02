@@ -21,35 +21,35 @@
         {
             "nom": "Scan1",
             "message": "Ne bougééérzz plus",
-            "display": 3,
+            "holdTime": 0,
             "countdown": 0,
             "light": ""
         },
         {
             "nom": "Scan2",
             "message": "Respire",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 0,
             "light": "bleu"
         },
         {
             "nom": "Scan3",
             "message": "Crie",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 3,
             "light": ""
         },
         {
             "nom": "Scan4",
             "message": "Baisse les yeux",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 0,
             "light": ""
         },
         {
             "nom": "Scan5",
             "message": "Dis merci",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 5,
             "light": "rouge"
         }
@@ -58,35 +58,35 @@
         {
             "nom": "gnx1",
             "message": "**Ne bouge plus",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 0,
             "light": ""
         },
         {
             "nom": "gnx2",
             "message": "**Respire",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 0,
             "light": "bleu"
         },
         {
             "nom": "gnx3",
             "message": "**Crie",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 3,
             "light": ""
         },
         {
             "nom": "gnx4",
             "message": "**Baisse les yeux",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 0,
             "light": ""
         },
         {
             "nom": "Scan5",
             "message": "**Dis merci",
-            "display": 3,
+            "holdTime": 3,
             "countdown": 5,
             "light": "rouge"
         }
