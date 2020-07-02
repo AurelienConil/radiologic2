@@ -15,7 +15,7 @@
         <div>{{msg}}</div>
                 <div v-if="isSelected && (holdProgress>0)">
           <b-spinner small></b-spinner>
-          {{parseInt(holdTime - holdProgress)+1}}
+          {{parseInt(trueHoldTime - holdProgress)+1}}
         </div>
       </b-col>
 
@@ -40,8 +40,17 @@ export default {
     msg: String,
     countdown: Number,
     holdTime: Number,
+    fadeMsgTime:Number,
     light: String,
     isSelected: Boolean,
+  },
+  computed:{
+    trueHoldTime(){
+      if(this.holdTime){
+        return this.holdTime+this.fadeMsgTime;
+      }
+      return 0;
+    }
   },
 
   methods: {
@@ -62,7 +71,7 @@ export default {
       let interval = setInterval(() => {
         if (
           this.isSelected &&
-          this.holdProgress + deltaT / 1000 < this.holdTime
+          this.holdProgress + deltaT / 1000 < this.trueHoldTime
         ) {
           this.holdProgress += deltaT / 1000;
         } else {
