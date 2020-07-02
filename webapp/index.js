@@ -5,13 +5,61 @@
 
 const express = require('express');
 const app = express();
+const cors = require("cors")
 const serveIndex = require('serve-index');
+const expressUpload = require('express-fileupload');
 
 //location to /dist with final deployment
+app.use(cors())
+app.use(expressUpload({
+    createParentPath:true
+}))
+app.use('/json',
+function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+    res.write('<input type="file" name="settingsFile"><br>');
+    res.write('<input type="submit">');
+    res.write('</form>');
+    return res.end();
+})
+app.post('/fileupload', async (req, res) => {
+
+    try {
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else {
+           
+            let jsonFile = req.files.settingsFile;
+            
+            // jsonFile.mv('public/dist/datajson.json');
+jsonFile.mv('../datajson.json')
+            //send response
+            res.send({
+                status: true,
+                message: 'File is uploaded',
+                data: {
+                    name: jsonFile.name,
+                    mimetype: jsonFile.mimetype,
+                    size: jsonFile.size
+                }
+            });
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+app.use('/datajson.json',express.static('../datajson.json'))
+app.use('/settings.json',express.static('../settings.json'))
 app.use('/', express.static('public/dist'))
 app.use('/', serveIndex('public/dist'))
 
 app.listen(3000, () => console.log('Server OPEN on port 3000!'));
+
+
 
 
 //--------------------------------------------------
@@ -19,6 +67,7 @@ app.listen(3000, () => console.log('Server OPEN on port 3000!'));
 //--------------------------------------------------
 var osc = require("osc"),
     WebSocket = require("ws");
+const { fstat } = require('fs');
 
 var getIPAddresses = function () {
     var os = require("os"),
@@ -72,3 +121,5 @@ wss.on("connection", function (socket) {
         raw: true
     });
 });
+
+

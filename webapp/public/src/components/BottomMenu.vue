@@ -17,8 +17,22 @@ export default {
   },
   data: function() {
     return {
-      listOfButton: []
+      // listOfButton: []
     };
+  },
+  computed: {
+    listOfButton() {
+      console.log("update list of button");
+      const res = [];
+      res.push("start video");
+      res.push("stop video");
+      res.push("clear msg");
+      this.listOfLight.forEach(element => {
+        res.push(element);
+      });
+      res.push("OFF");
+      return res;
+    }
   },
   methods: {
     startVideo: function() {
@@ -33,7 +47,7 @@ export default {
     clearMsg: function() {
       this.$emit("menu-event", ["/message/clear", [1]]);
     },
-    sendLightPreset:function(name){
+    sendLightPreset: function(name) {
       this.$emit("menu-event", ["/light/preset", [name]]);
     },
     clickMe: function(index) {
@@ -53,26 +67,12 @@ export default {
             break;
 
           default:
-            this.sendLightPreset(this.listOfButton[index])
+            this.sendLightPreset(this.listOfButton[index]);
             break;
         }
       }
     },
-    updateListOfButton: function() {
-      console.log("update list of button");
-
-      this.listOfButton.push("start video");
-      this.listOfButton.push("stop video");
-      this.listOfButton.push("clear msg");
-      this.listOfLight.forEach(element => {
-        this.listOfButton.push(element);
-      });
-      this.listOfButton.push("OFF");
-    }
   },
-  beforeMount: function() {
-    //console.log("Bottom Menu, before Mount");
-    this.updateListOfButton();
-  }
+
 };
 </script>

@@ -7,6 +7,7 @@ import struct
 import socket
 import subprocess
 import platform
+import json
 from OSC import OSCClient, OSCMessage, OSCServer
 
 #################################################
@@ -51,6 +52,8 @@ if (platform.machine().startswith("x86")):
     UNIVERSALMEDIAPLAYER_PATH = "/home/tinmar/Dev/ornormes/universalMediaPlayer"
     VERMUTH_PATH = "/home/tinmar/Dev/vermuth"
 
+SETTINGS_PATH = RADIOLOGIC_PATH+"/settings.json"
+
 
 class SimpleServer(OSCServer):
     def __init__(self, t):
@@ -68,6 +71,8 @@ class SimpleServer(OSCServer):
 
         ############## APP itself #############
         if(splitAddress[1] == "app"):
+            if(splitAddress[2] == "saveSettings"):
+                saveSettings()
             if(splitAddress[2] == "close"):
                 print("closing the app")
                 quit_app()
@@ -107,10 +112,10 @@ class SimpleServer(OSCServer):
                 reboot()
         ############ FORWARD TO OPENSTAGECONTROL ###
         elif(splitAddress[1] == "player" or splitAddress[1] == "message"):
-            oscmsg = OSCMessage()
-            oscmsg.setAddress(oscAddress)
-            oscmsg.append(data)
-            forwardMsgToOf(oscmsg)
+                oscmsg = OSCMessage()
+                oscmsg.setAddress(oscAddress)
+                oscmsg.append(data)
+                forwardMsgToOf(oscmsg)
         ############ FORWARD TO OF_WEB ######
         elif(splitAddress[1] == "addMovie" or splitAddress[1] == "playPercentage" or splitAddress[1] == "playIndex"):
             oscmsg = OSCMessage()
@@ -121,6 +126,7 @@ class SimpleServer(OSCServer):
         ########### FORWARD TO VERMUTH #######
         elif(splitAddress[1] == "light"):
             if(splitAddress[2] == "preset"):
+                setVeille(data=="veille") # out from veille mode if other lilght state are called
                 oscmsg = OSCMessage()
                 oscmsg.setAddress("/stateList/recallStateNamed")
                 oscmsg.append(data)
@@ -135,6 +141,14 @@ class SimpleServer(OSCServer):
             oscmsg.setAddress(oscAddress)
             oscmsg.append(data)
             forwardMsgToVermuth(oscmsg)
+        elif splitAddress[1] == "settings" :
+            if(splitAddress[2]== "masterLight"):
+                sendMasterLight(data[0])
+            elif(splitAddress[2]== "volume"):
+                sendVolume(data[0])
+            elif(splitAddress[2]=="save"):
+                saveSettings()
+
         ############ FORWARD TO WEBAPP #######
         elif(False):
             oscmsg = OSCMessage()
@@ -144,6 +158,7 @@ class SimpleServer(OSCServer):
 
 
 veille = False
+
 
 
 def setVeille(v):
@@ -257,6 +272,7 @@ def launchCmd(dir, cmd):
 
 
 def start_app():
+
     if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
         print("========= START OF_APP ======")
         launchCmd(UNIVERSALMEDIAPLAYER_PATH +
@@ -279,6 +295,21 @@ def start_app():
         # print("========= OPEN STAGE CONTROL STARTED ======")
 
 
+def sendVolume(v):
+    settingsData["volume"] = v
+    oscmsg = OSCMessage()
+    oscmsg.setAddress("/player/volume")
+    oscmsg.append(v)
+    forwardMsgToOf(oscmsg)
+
+def sendMasterLight(v):
+    settingsData["masterLight"] = v
+    oscmsg = OSCMessage()
+    oscmsg.setAddress("/universe/setGrandMaster")
+    oscmsg.append(v)
+    forwardMsgToVermuth(oscmsg)
+
+
 class SafeOSCClient(OSCClient):
     def __init__(self, ipPortTuple):
         self.ipPortTuple = ipPortTuple
@@ -298,11 +329,42 @@ class SafeOSCClient(OSCClient):
             except Exception, e:
                 self.tryConnect()
 
+settingsData = {
+    "volume":1,
+    "masterLight":1
+
+}
+def loadSettings():
+    with  open(SETTINGS_PATH,'r') as fp:
+        try:
+            loodedSettings = json.load(fp)
+        except Exception, e:
+            print("error loading settings",e)
+        print("settings",loodedSettings)
+        if loodedSettings:
+            if( "volume" in loodedSettings):
+                sendVolume(loodedSettings["volume"])
+            if( "masterLight" in loodedSettings):
+                sendMasterLight(loodedSettings["masterLight"])
+
+def saveSettings():
+    global settingsData
+    if( not ("volume" in settingsData )or not ("masterLight" in settingsData) ):
+        print("invalid settings ",settingsData)
+        return 
+
+    with  open(SETTINGS_PATH,'w') as fp:
+        try:
+                json.dump(settingsData,fp)
+        except Exception, e:
+            print("error saving settings",e,settingsData)
+        print("settings",settingsData)
+    
 
 def main():
 
     # OSC SERVER
-    #myip = get_ip()
+    # myip = get_ip()
     myip = "0.0.0.0"
     print("IP adress is : "+myip)
     try:
@@ -344,13 +406,19 @@ def main():
     global client_interupteur
     client_interupteur = SafeOSCClient(('192.168.50.50', 3005))
 
+    if(not os.path.exists(SETTINGS_PATH)):
+        print("creating default settings",settingsData)
+        saveSettings()
     # START ON BOOT
     start_app()
 
     # MAIN LOOP
     global runningApp
     runningApp = True
+    print(" ===== Load settings ====")
 
+    time.sleep(3)
+    loadSettings()
     print(" ===== STARTING MAIN LOOP ====")
     while runningApp:
         # This is the main loop

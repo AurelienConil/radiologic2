@@ -3,7 +3,11 @@
     <div class="container-fluid bg-dark m-0">
       <b-row align-v="stretch" class="p-2 justify-content-center">
         <b-col cols="1" class="py-2" align-v="center">
-          <img src="./assets/left-white.png" v-on:click="backToMenu" />
+          <img
+            src="./assets/left-white.png"
+            v-on:click="backToMenu"
+            :style="{display:isRootPage?'none':'block'}"
+          />
         </b-col>
         <b-col align-v="end" class>
           <h5 class="text-light my-3">RADIOLOGIC</h5>
@@ -18,23 +22,23 @@
     <MenuScenario
       :listOfScenario="listOfScenario"
       v-on:scenario-event="switchScenario"
-      v-if="actualScenarioIndex<0"
+      v-if="isRootPage"
     ></MenuScenario>
 
     <Scenario
+      v-else
       :title="this.actualScenario"
       :listOfEvent="list"
       v-on:radio-event="sendMessageFromEvent"
-      v-if="actualScenarioIndex>=0"
     ></Scenario>
     <bottom-menu
       id="bottommenu"
       title="menu"
-      v-bind:listOfLight="['truc', 'machin']"
+      :listOfLight="listOfLight"
       v-on:menu-event="sendMessageFromEvent"
     ></bottom-menu>
-    <b-modal title="Settings" id="modal-settings">
-      <p class="my-4">Hello from modal!</p>
+    <b-modal size="xl" title="Réglages" id="modal-settings" ok-only>
+      <Settings id="settings" :settingsData="settingsData" v-on:save-settings="saveSettings" v-on:change-settings="changeSettings"  />
     </b-modal>
   </div>
 </template>
@@ -43,7 +47,8 @@
 import Scenario from "./components/Scenario.vue";
 import MenuScenario from "./components/MenuScenario.vue";
 import BottomMenu from "./components/BottomMenu.vue";
-import datafilejson from "./datajson.json";
+import Settings from "./components/Settings.vue";
+// import datafilejson from "./datajson.json";
 import osc from "osc";
 
 export default {
@@ -51,17 +56,30 @@ export default {
   data: function() {
     return {
       displayMenuSettings: true,
-      datafile: datafilejson,
+      datafile: {},
       actualScenario: "none",
       actualScenarioIndex: -1,
-      listOfScenario: [],
       list: [],
       listOfButton: ["edit", "new", "undo", "reset"],
       portOpenState: "closed",
       port: new osc.WebSocketPort({
         url: "ws://" + self.location.host.split(":")[0] + ":8081" // get the host ip xx.xx.xx.xx:3000 then remove ":3000"
-      })
+      }),
+      settingsData :{volume:1,masterLight:1}
     };
+  },
+  computed: {
+    listOfScenario() {
+      return Object.keys(this.datafile).filter(n => n !== "metadata");
+    },
+    listOfLight() {
+      return this.datafile?.metadata?.light?.fastAccessPresets || [];
+    },
+    isRootPage() {
+      return this.actualScenarioIndex < 0;
+    },
+
+
   },
   methods: {
     addButton: function() {
@@ -132,9 +150,41 @@ export default {
         }, 3000);
       }
     }
+    ,saveSettings(){
+      this.sendOscMessage("/settings/save")
+      console.log("save settings")
+    }
+    ,changeSettings(name,v){
+      if(name=="volume"){
+        this.sendOscMessage("/settings/volume",v)
+      }
+      else if(name==="masterLight"){
+        this.sendOscMessage("/settings/masterLight",v)
+      }
+      else{
+        console.error("setting not supported",name)
+      }
+    }
   },
+
   created() {
-    console.log("before mount is called");
+    fetch(self.origin + "/datajson.json")
+      .then(stream => stream.json())
+      .then(json => {
+        console.log("fetched session json", json);
+        this.datafile = json;
+      })
+      .catch(err => console.error("failed to fetch json", err));
+
+    fetch(self.origin + "/settings.json")
+      .then(stream => stream.json())
+      .then(json => {
+        console.log("fetched settings json", json);
+        this.settingsData = json;
+      })
+      .catch(err => console.error("failed to fetch json", err));
+
+          
 
     this.port.on("close", this.portClose);
     this.port.on("error", this.portClose);
@@ -142,20 +192,23 @@ export default {
       console.warn("port send open message");
       this.portOpenState = "open";
     });
-
+    this.portOpenState = "open"; // avoid non connected button flashing on page load
     this.tryOpenPort(true);
   },
   beforeMount() {
-    if (this.datafile == null) {
-      console.log("data file is null");
-    } else {
-      this.listOfScenario = Object.keys(this.datafile);
-    }
+    // if (this.datafile == null) {
+    //   console.log("data file is null");
+    // } else {
+    //   this.listOfScenario = Object.keys(this.datafile);
+    // }
   },
+  mounted() {},
+
   components: {
     Scenario,
     MenuScenario,
-    BottomMenu
+    BottomMenu,
+    Settings
   }
 };
 </script>
@@ -173,5 +226,8 @@ export default {
 #bottommenu {
   position: fixed;
   bottom: 0;
+}
+.modal-dialog{
+  min-width: 80vw;
 }
 </style>
