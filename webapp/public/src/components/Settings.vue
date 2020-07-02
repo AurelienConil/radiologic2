@@ -1,6 +1,6 @@
 <template>
   <b-container fluid class="bg-light py-2 px-3">
-    <b-container fluid class=" py-5 px-3 app-buttons">
+    <b-container fluid class="py-5 px-3 app-buttons">
       <b-form-input
         type="range"
         :value="numGetter('volume')"
@@ -12,7 +12,7 @@
       ></b-form-input>
       <div>Volume</div>
     </b-container>
-    <b-container fluid class=" py-5 px-3 app-buttons">
+    <b-container fluid class="py-5 px-3 app-buttons">
       <b-form-input
         type="range"
         :value="numGetter('masterLight')"
@@ -46,43 +46,51 @@
         @click="toggleVeille"
       >{{hasVeille?"Allumer":"Veille"}}</b-button>
     </div>
+
+    <div v-if="adminMode">
+      Admin Section
+      
+       <b-button block size="lg" @click="sendEv('/app/update')">update UI</b-button>
+       <b-button block size="lg" @click="sendEv('/app/update_of')">update Video</b-button>
+       <b-button block size="lg" @click="sendEv('/app/update_vermuth')">update Vermuth</b-button>
+       <b-button block size="lg" @click="sendEv('/app/update_all')">update all</b-button>
+    </div>
   </b-container>
 </template>
 
 <script>
 export default {
-  name: "BottomMenu",
+  name: "Settings",
   props: {
     // settingsData: () => {
     //   return {};
     // }
+    adminMode: { default: false },
     settingsData: {}
   },
   data: function() {
     return {
-      hasVeille:false
+      hasVeille: false
     };
   },
 
   methods: {
-    toggleVeille(){
-      this.setVeille(!this.hasVeille)
-
+    toggleVeille() {
+      this.setVeille(!this.hasVeille);
     },
-    setVeille(v){
-      if(v){
-      this.sendEv("/app/veille",1)
+    setVeille(v) {
+      if (v) {
+        this.sendEv("/app/veille", 1);
+      } else {
+        this.sendEv("/app/veille", 0);
       }
-      else{
-        this.sendEv("/app/veille",0)
-      }
-      this.hasVeille = v
+      this.hasVeille = v;
     },
     promptBeforeSend(action, addr, arg) {
       // if (alert(`êtes vous sûr de vouloir ${action} le système?`)) {
-        this.sendEv(addr, arg);
+      this.sendEv(addr, arg);
       // }
-    },
+    },  :variant="hasVeille?'outline-':''+'secondary'"
     sendEv(addr, arg) {
       this.$emit("radiologic-event", [addr, arg]);
     },
@@ -100,7 +108,7 @@ export default {
         //  Vue.set(this.settingsData,name, v)
         this.settingsData[name] = v;
       }
-      this.$emit("change-settings", name,v);
+      this.$emit("change-settings", name, v);
     },
     saveSettings() {
       this.$emit("save-settings", this.settingsData);

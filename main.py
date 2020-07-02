@@ -96,17 +96,19 @@ class SimpleServer(OSCServer):
                 time.sleep(2)
                 update_of()
                 start_app()
+            if(splitAddress[2] == "update_vermuth"):
+                print("update Universal Media Player")
+                quit_app()
+                time.sleep(2)
+                update_of()
+                start_app()
             if(splitAddress[2] == "update"):
                 print("update Radiologic2")
                 quit_app()
                 update()
                 reboot()
             if(splitAddress[2] == "update_all"):
-                print("update all")
-                quit_app()
-                update_of()
-                update()
-                reboot()
+                update_all()
 
         ############## RPI itself #############
         elif(splitAddress[1] == "rpi"):
@@ -174,10 +176,13 @@ def setVermuthState(name, time=-1):
 def notifyVeille(v):
     global veille
     veille = v
+    varg = 1 if v else 0
     oscmsg = OSCMessage()
     oscmsg.setAddress("/interrupteur/veille")
-    oscmsg.append(1 if v else 0)
+    oscmsg.append(varg)
     forwardMsgTointerrupteur(oscmsg)
+    oscmsg.setAddress("/app/veille")
+    forwardMsgToWebApp(oscmsg)
 
 
 def setVeille(v):
@@ -266,6 +271,7 @@ def quit_app():
     print("========= QUIT ALL APP ======")
     os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(["./quit.sh"])
+    
     print("======== ALL APP QUITTED ====")
 
 
@@ -276,12 +282,28 @@ def update_of():
     print("========= OF APP UPDATED ======")
 
 
+def update_vermuth():
+    print("========= UPDATE OF APP ======")
+    os.chdir(VERMUTH_PATH)
+    subprocess.call(["./update.sh"])
+
+    print("========= OF APP UPDATED ======")
+
+
 def update():
     print("========= UPDATE RADIOLOGIC2 ======")
     os.chdir(RADIOLOGIC_PATH+"/script")
     subprocess.call(["./update.sh"])
     print("========= RADIOLOGIC2 then reboot ======")
 
+
+def update_all():
+    print("update all")
+    quit_app()
+    update_of()
+    update()
+    update_vermuth()
+    reboot()
 
 def launchCmd(dir, cmd):
     try:
@@ -438,8 +460,12 @@ def initSettings():
         defCfg = json.load(defFp)
     with open(GLOBAL_SETTINGS_PATH,'r') as curFp:
         curCfg = json.load(curFp)
+    if(not "metadata" in curCfg):
+        curCfg["meatadata"] = {}
+    curCfg = curCfg["metadata"]
+    defCfg = defCfg["metadata"]
     hasMerge = False
-    for (k,v) in defCfg["metadata"].items() :
+    for (k,v) in defCfg.items() :
         for (kk,vv) in v.items():
             if (not k in curCfg):
                 curCfg[k] = {}
@@ -450,7 +476,7 @@ def initSettings():
             
     if hasMerge :
         with open(GLOBAL_SETTINGS_PATH,'w') as fp:
-            json.dump(curCfg,fp)
+            json.dump(curCfg,fp,indent=2)
 
 
 def main():

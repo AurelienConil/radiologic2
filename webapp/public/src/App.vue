@@ -10,7 +10,7 @@
           />
         </b-col>
         <b-col align-v="end" class>
-          <h5 class="text-light my-3">RADIOLOGIC</h5>
+          <h5 class="text-light my-3">RADIOLOGIC {{adminMode?'(adminMode)':'' }}</h5>
           <b-badge v-if="portOpenState!=='open'" variant="warning">Server déconnecté</b-badge>
         </b-col>
 
@@ -39,7 +39,7 @@
       v-on:menu-event="sendMessageFromEvent"
     ></bottom-menu>
     <b-modal size="xl" title="Réglages" id="modal-settings" ok-only>
-      <Settings id="settings" :settingsData="settingsData" v-on:radiologic-event="sendMessageFromEvent" v-on:save-settings="saveSettings" v-on:change-settings="changeSettings"  />
+      <Settings id="settings" :settingsData="settingsData" v-on:radiologic-event="sendMessageFromEvent" v-on:save-settings="saveSettings" v-on:change-settings="changeSettings" :adminMode="adminMode" />
     </b-modal>
   </div>
 </template>
@@ -82,7 +82,16 @@ export default {
     isRootPage() {
       return this.actualScenarioIndex < 0;
     },
+    adminMode(){
 
+      const urlSplit = window.location.href.split('?');
+      if( urlSplit.length>1){
+        if(urlSplit[1].toLowerCase()==="admin"){
+          return true
+        }
+      }
+      return false;
+    }
 
   },
   methods: {
