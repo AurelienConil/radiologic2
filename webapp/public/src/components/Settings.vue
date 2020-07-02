@@ -98,9 +98,9 @@ export default {
       // this.hasVeille = v;
     },
     promptBeforeSend(action, addr, arg) {
-      // if (alert(`êtes vous sûr de vouloir ${action} le système?`)) {
+      if (alert(`êtes vous sûr de vouloir ${action} le système?`)) {
       this.sendEv(addr, arg);
-      // }
+      }
     }, 
     sendEv(addr, arg) {
       this.$emit("radiologic-event", [addr, arg]);
