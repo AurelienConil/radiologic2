@@ -115,9 +115,11 @@ class SimpleServer(OSCServer):
         elif(splitAddress[1] == "rpi"):
             if(splitAddress[2] == "shutdown"):
                 print("Turning off the rpi")
+                setVeille(1)
                 powerOff()
             if(splitAddress[2] == "reboot"):
                 print("Reboot the machine")
+                setVeille(1)
                 reboot()
         ############ FORWARD TO OPENSTAGECONTROL ###
         elif(splitAddress[1] == "player" or splitAddress[1] == "message"):
@@ -141,7 +143,7 @@ class SimpleServer(OSCServer):
             else:
                 print("Forwarding not supported for light/", splitAddress[2])
         ########### HANDLE "VEILLE" MODE #########
-        elif((splitAddress[1] == "interrupteur" and splitAddress[2] == "veille") or splitAddress[1] == "veille"):
+        elif((splitAddress[1] == "interrupteur" and splitAddress[2] == "services") or splitAddress[1] == "services"):
             v = len(data) == 0 or data[0] == 1
             setVeille(v)
 
@@ -186,11 +188,16 @@ def notifyVeille(v):
     veille = v
     varg = 1 if v else 0
     oscmsg = OSCMessage()
-    oscmsg.setAddress("/interrupteur/veille")
+    oscmsg.setAddress("/interrupteur/services")
     oscmsg.append(varg)
     forwardMsgTointerrupteur(oscmsg)
     oscmsg.setAddress("/app/veille")
     forwardMsgToWebApp(oscmsg)
+    oscmsg2 = OSCMessage()
+    oscmsg2.setAddress("/messages/message")
+    oscmsg2.append("")
+    forwardMsgToOf(oscmsg2)
+    
 
 
 def setVeille(v):
