@@ -8,6 +8,7 @@ import socket
 import subprocess
 import platform
 import json
+import getpass
 from OSC import OSCClient, OSCMessage, OSCServer
 from shutil import copyfile
 
@@ -50,9 +51,18 @@ UNIVERSALMEDIAPLAYER_PATH = "/home/pi/Documents/openFrameworks/apps/universalMed
 VERMUTH_PATH = "/home/pi/Documents/vermuth"
 
 if (platform.machine().startswith("x86")):
-    RADIOLOGIC_PATH = "/home/tinmar/Dev/ornormes/radiologic2"
-    UNIVERSALMEDIAPLAYER_PATH = "/home/tinmar/Dev/ornormes/universalMediaPlayer"
-    VERMUTH_PATH = "/home/tinmar/Dev/vermuth"
+    if(platform.system() == "Darwin" && getpass.getuser()=='adminmac'):
+        #mac os et Aurelien Conil
+        RADIOLOGIC_PATH = "/Users/adminmac/Boulot/Radiologic/GIT/radiologic2"
+        UNIVERSALMEDIAPLAYER_PATH = "/Users/adminmac/Boulot/Universal-Media-Player/GIT/universalMediaPlayer"
+        VERMUTH_PATH = "/Users/adminmac/Boulot/vermuth"
+    elif(platform.system() == "Darwin" && getpass.getuser()!='martinrossi'):
+        print("Martin Rossi, tu dois mettre les chemin à l'interrieur du programme python")
+    else :
+        # ORDINATEUR DE MARTIN
+        RADIOLOGIC_PATH = "/home/tinmar/Dev/ornormes/radiologic2"
+        UNIVERSALMEDIAPLAYER_PATH = "/home/tinmar/Dev/ornormes/universalMediaPlayer"
+        VERMUTH_PATH = "/home/tinmar/Dev/vermuth"
 
 USER_SETTINGS_PATH = RADIOLOGIC_PATH+"/UserSettings.json"
 GLOBAL_SETTINGS_PATH = RADIOLOGIC_PATH+"/datajson.json"
