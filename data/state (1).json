@@ -1,0 +1,247 @@
+{
+  "universe": {
+    "testedFixture": {
+      "ftype": "base",
+      "pchannels": [
+        {
+          "_circ": -1,
+          "name": "tested"
+        }
+      ],
+      "pdimmerValue": 0,
+      "_baseCirc": 0,
+      "name": "testedFixture"
+    },
+    "driverName": "none",
+    "fixtures": {
+      "amb": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 1,
+        "name": "amb"
+      }
+    },
+    "groups": {},
+    "_master": 1
+  },
+  "sequenceList": {
+    "list": []
+  },
+  "sequencePlayer": {
+    "pctDone": 0,
+    "playState": "stopped",
+    "pcurPlayedIdx": -1,
+    "pisPlaying": false
+  },
+  "globalTransport": {
+    "_bpm": 60,
+    "_time": 0,
+    "_isPlaying": false
+  },
+  "curveStore": [],
+  "curvePlayer": {
+    "name": "CurvePlayer",
+    "curveLinkStore": {
+      "factory": {}
+    },
+    "curveLinkRefList": []
+  },
+  "fixtureFactory": {},
+  "stateList": {
+    "states": {
+      "noir": {
+        "name": "noir",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "service": {
+        "name": "service",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "bleu": {
+        "name": "bleu",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "vert": {
+        "name": "vert",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "rouge": {
+        "name": "rouge",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      }
+    },
+    "presetableNames": [
+      "amb:R",
+      "amb:G",
+      "amb:B",
+      "amb:W",
+      "amb:Dim"
+    ],
+    "currentState": {
+      "name": "current",
+      "full": true,
+      "fixtureStates": [
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 0
+            },
+            "B": {
+              "preseted": true,
+              "value": 0
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb",
+          "pChannelValues": {
+            "R": 0,
+            "G": 0,
+            "B": 0,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        }
+      ],
+      "linkedStates": [],
+      "actions": {
+        "list": [],
+        "forbiddenNames": []
+      }
+    },
+    "loadedStateName": ""
+  },
+  "dmxController": {
+    "selectedPortName": "/dev/ttyUSB0",
+    "selectedDriverName": "enttec-usb-dmx-pro"
+  }
+}
