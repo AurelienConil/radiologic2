@@ -1,0 +1,123 @@
+{
+    "metadata": {
+        "light": {
+            "fastAccessPresets": [
+                "noir",
+                "bleuVertCanard"
+            ],
+            "fadeTime": 3,
+            "veilleStateName": "__black",
+            "defaultStateName": "__full"
+        },
+        "interrupteur": {
+            "ip": "192.168.10.10",
+            "port": 12333
+        },
+        "video": {
+            "defaultMessageHoldTime": 2,
+            "vFlip" : true
+        }
+    },
+    "Tête": [
+        {
+          "nom": "scan1",
+          "message": "message1",
+          "holdTime": 2,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan2",
+          "message": "message2",
+          "holdTime": 1,
+          "countdown": 3,
+          "light": ""
+        },
+        {
+          "nom": "scan3",
+          "message": "message3",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan4",
+          "message": "message4",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan5",
+          "message": "message5",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": "blanc"
+        },
+        {
+          "nom": "scan6",
+          "message": "message6",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": "blanc"
+        },
+        {
+          "nom": "scan7",
+          "message": "message7",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": "blanc"
+        }
+      ],
+      "Genoux": [
+        {
+          "nom": "scan1",
+          "message": "message1",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan2",
+          "message": "message2",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan3",
+          "message": "message3",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan4",
+          "message": "message4",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": ""
+        },
+        {
+          "nom": "scan5",
+          "message": "message5",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": "blanc"
+        },
+        {
+          "nom": "scan6",
+          "message": "message6",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": "blanc"
+        },
+        {
+          "nom": "scan7",
+          "message": "message7",
+          "holdTime": 1,
+          "countdown": 1,
+          "light": "blanc"
+        }
+      ]
+}
