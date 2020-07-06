@@ -14,7 +14,8 @@
             "port": 12333
         },
         "video": {
-            "defaultMessageHoldTime": 2
+            "defaultMessageHoldTime": 2,
+            "vFlip" : true
         }
     },
     "tete": [

@@ -7,6 +7,12 @@ This is the only that start on boot
 Then all the others app are started inside this programm when it starts
 This programm has the ability to start and stop all the other programm
 
+# address of webpages
+address are in form of radiologic.local:<PORT> where PORT can be : 
+ * 3000 : main web app
+ * 3001 : universalPlayer web app
+ * 3003 : vermuth
+
 # conf json files
 UserSettings.json and datajson.json will be created on the first run if non existent
 then, git update mechanism wont override it
@@ -21,7 +27,7 @@ meaning of datajson params :
 
 
 # admin tips
- * by adding ```?admin``` (for example ```radiologic.local:3000/?admin``` )at the end of the url update settings are available
+ * by adding ```?admin``` (for example ```radiologic.local:3000/?admin``` )at the end of the url update settings are available when clicking gear icon on top right
  * navigating to  ```radiologic.local:3000/json``` allow to upload a custom datajson.json
  * navigating to  ```radiologic.local:3000/datajson.json``` gets the currently loaded
 

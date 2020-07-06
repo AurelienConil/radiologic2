@@ -246,6 +246,18 @@ def forwardMsgToVermuth(msg):
     # oscmsg.append('HELLO')
     # c.send(oscmsg)
 
+def buildSimpleMessage(addr,arg = None):
+    oscmsg = OSCMessage()
+    oscmsg.setAddress(addr)
+    if(arg !=None):
+        oscmsg.append(arg)
+    return oscmsg
+
+def sendInitConfigToApps():
+    # this function sends config from datajson/metadata to launched apps
+    forwardMsgToOf(buildSimpleMessage("/player/vflip",1.0 if confSettings["video"]["vFlip"] else 0.0))
+    sendVolume(userSettingsData['volume'])
+    sendMasterLight(userSettingsData["masterLight"])
 
 def powerOff():
 
@@ -417,7 +429,7 @@ confSettings = {
         "defaultStateName": "__full"
     },
     "video": {
-        "vFlip": 1  # todo implement it
+        "vFlip": 1  
     },
     "interrupteur": {
         "ip": "192.168.2.2",
@@ -425,42 +437,6 @@ confSettings = {
     }
 }
 
-
-def mergeSettingIfExist(name, fromOb, toOb):
-    if name in fromOb:
-        toOb[name] = fromOb[name]
-
-
-def loadSettings():
-    with open(USER_SETTINGS_PATH, 'r') as fp:
-        try:
-            loodedSettings = json.load(fp)
-        except Exception, e:
-            print("error loading udser settings", e)
-        print("user settings", loodedSettings)
-        if loodedSettings:
-            if("volume" in loodedSettings):
-                sendVolume(loodedSettings["volume"])
-            if("masterLight" in loodedSettings):
-                sendMasterLight(loodedSettings["masterLight"])
-
-    global confSettings
-    with open(GLOBAL_SETTINGS_PATH, 'r') as fp:
-        try:
-            conf = json.load(fp)
-            if("metadata" in conf):
-                ls = conf["metadata"]
-                if("light" in ls):
-                    for k in confSettings["light"].keys():
-                        mergeSettingIfExist(
-                            k, ls["light"], confSettings["light"])
-                if("video" in ls):
-                    for k in confSettings["video"].keys():
-                        mergeSettingIfExist(
-                            k, ls["video"], confSettings["video"])
-
-        except Exception, e:
-            print("error loading udser settings", e)
 
 
 def saveSettings():
@@ -478,38 +454,52 @@ def saveSettings():
 
 
 def initSettings():
+    global userSettingsData
+    global confSettings
+    # save default user settings if non existent
     if(not os.path.exists(USER_SETTINGS_PATH)):
-        print("creating default settings", userSettingsData)
+        print("creating default user settings", userSettingsData)
         saveSettings()
+    # load existing user settings
+    with open(USER_SETTINGS_PATH, 'r') as userFp:
+        userSettingsData = json.load(userFp)
 
-    # checking if new option have been added and merge them if needed
+
+    # checking if new option have been added in  default datajson.default/metadata and merge them in datajson/metadata if needed
     if(not os.path.exists(GLOBAL_SETTINGS_PATH)):
         copyfile(DEFAULT_GLOBAL_SETTINGS_PATH, GLOBAL_SETTINGS_PATH)
     with open(DEFAULT_GLOBAL_SETTINGS_PATH, 'r') as defFp:
-        defCfg = json.load(defFp)
+        defCfgFile = json.load(defFp)
     with open(GLOBAL_SETTINGS_PATH, 'r') as curFp:
-        curCfg = json.load(curFp)
-    if(not "metadata" in curCfg):
-        curCfg["meatadata"] = {}
-    curCfg = curCfg["metadata"]
-    defCfg = defCfg["metadata"]
+        curCfgFile = json.load(curFp)
+    
+    if(not "metadata" in curCfgFile):
+        curCfgFile["metadata"] = {}
+    confSettings = curCfgFile["metadata"]
+    defCfg = defCfgFile["metadata"]
     hasMerge = False
     for (k, v) in defCfg.items():
         for (kk, vv) in v.items():
-            if (not k in curCfg):
-                curCfg[k] = {}
+            if (not k in confSettings):
+                confSettings[k] = {}
                 hasMerge = True
-            if (not kk in curCfg[k]):
-                curCfg[k][kk] = vv
+            if (not kk in confSettings[k]):
+                confSettings[k][kk] = vv
                 hasMerge = True
 
     if hasMerge:
+        print ("merged some")
         with open(GLOBAL_SETTINGS_PATH, 'w') as fp:
-            json.dump(curCfg, fp, indent=2)
+            json.dump(confSettings, fp, indent=2)
+
 
 
 def main():
+
+    print(" ===== init settings ====")
+    # will ensure any default settings are present in datajson/metadata
     initSettings()
+
 
     # OSC SERVER
     # myip = get_ip()
@@ -557,14 +547,14 @@ def main():
 
     # START ON BOOT
     start_app()
+    time.sleep(3)
+    print(" ===== sending config to apps ====")
+    sendInitConfigToApps()
 
     # MAIN LOOP
     global runningApp
     runningApp = True
-    print(" ===== Load settings ====")
 
-    time.sleep(3)
-    loadSettings()
     print(" ===== STARTING MAIN LOOP ====")
     while runningApp:
         # This is the main loop
