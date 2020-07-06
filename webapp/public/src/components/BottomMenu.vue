@@ -27,8 +27,8 @@ export default {
     listOfButton() {
       console.log("update list of button");
       const res = [];
-      res.push("start video");
-      res.push("stop video");
+      res.push("Lecture");
+      res.push("Stop");
       res.push("clear msg");
       // res.push("OFF");
       return res;
@@ -64,8 +64,7 @@ export default {
             break;
         }
       }
-    },
-  },
-
+    }
+  }
 };
 </script>
