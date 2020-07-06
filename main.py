@@ -56,8 +56,12 @@ if (platform.machine().startswith("x86")):
         RADIOLOGIC_PATH = "/Users/adminmac/Boulot/Radiologic/GIT/radiologic2"
         UNIVERSALMEDIAPLAYER_PATH = "/Users/adminmac/Boulot/Universal-Media-Player/GIT/universalMediaPlayer"
         VERMUTH_PATH = "/Users/adminmac/Boulot/vermuth"
-    elif(platform.system() == "Darwin" && getpass.getuser()!='martinrossi'):
-        print("Martin Rossi, tu dois mettre les chemin à l'interrieur du programme python")
+    elif(platform.system() == "Darwin" && getpass.getuser()!='collor_nor'):
+        //print("Martin Rossi, tu dois mettre les chemin à l'interrieur du programme python")
+        #mac os et Martin Rossi (COLL OR_NOR)
+        RADIOLOGIC_PATH = "/Users/collor_nor/Documents/DEV/repos/Radiologic\ Project/radiologic2"
+        UNIVERSALMEDIAPLAYER_PATH = "/Users/collor_nor/Documents/DEV/repos/Radiologic\ Project/universalMediaPlayer"
+        VERMUTH_PATH = "/Users/collor_nor/Documents/DEV/repos/Radiologic\ Project/vermuth"
     else :
         # ORDINATEUR DE MARTIN
         RADIOLOGIC_PATH = "/home/tinmar/Dev/ornormes/radiologic2"
