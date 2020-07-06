@@ -20,7 +20,7 @@ export default {
   },
   data: function() {
     return {
-      // listOfButton: []
+      lastLightMemoryCalled: ""
     };
   },
   computed: {
@@ -29,7 +29,7 @@ export default {
       const res = [];
       res.push("Lecture");
       res.push("Stop");
-      res.push("clear msg");
+      //res.push("clear msg");
       // res.push("OFF");
       return res;
     }
@@ -40,6 +40,10 @@ export default {
     },
     stopVideo: function() {
       this.$emit("menu-event", ["/player/stop", [1]]);
+      //SEND THE LAST LIGHT PRESET WHEN STOP VIDEO IS CALLED
+      if (this.lastLightMemoryCalled.length > 0) {
+        this.sendLightPreset(this.lastLightMemoryCalled);
+      }
     },
     stopLight: function() {
       this.$emit("menu-event", ["/light/blackout", [1]]);
@@ -49,6 +53,7 @@ export default {
     },
     sendLightPreset: function(name) {
       this.$emit("menu-event", ["/light/preset", [name]]);
+      this.lastLightMemoryCalled = name;
     },
     clickMe: function(index) {
       if (index < this.listOfButton.length) {
@@ -58,9 +63,6 @@ export default {
             break;
           case 1:
             this.stopVideo();
-            break;
-          case 2:
-            this.clearMsg();
             break;
         }
       }

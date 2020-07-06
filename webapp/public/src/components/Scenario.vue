@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-container fluid class="px-0 border-bottom py-5">
-      <h1 class="display-2 text-muted  ">{{ title }}</h1>
+      <h1 class="display-2 text-muted">{{ title }}</h1>
     </b-container>
-    <b-container fluid >
+    <b-container fluid>
       <b-row class="row my-5 mx-1 p-1">
         <b-col cols="1" class="p-0">
           <b>#</b>
@@ -32,12 +32,12 @@
         v-on:radiologic-event="sendRadiologicEvent"
         v-on:button-clicked="startAtIndex(index)"
       ></radiologicEvent>
+      <b-row class="row py-5">---</b-row>
     </b-container>
   </div>
 </template>
 
 <script>
-
 import RadiologicEvent from "./RadiologicEvent.vue";
 
 export default {
@@ -45,29 +45,25 @@ export default {
   props: {
     title: String,
     listOfEvent: Array,
-    defaultMessageHoldTime:Number,
-    fadeMsgTime:Number,
+    defaultMessageHoldTime: Number,
+    fadeMsgTime: Number
   },
   methods: {
     sendRadiologicEvent: function(data) {
       if (data.length >= 2) {
         this.$emit("radio-event", data);
-      }
-      else{
-        console.error("bad event formatting",data)
+      } else {
+        console.error("bad event formatting", data);
       }
     },
-    startAtIndex(i){
+    startAtIndex(i) {
       this.currentSelection = i;
     }
-
   },
-  computed:{
-
-  },
+  computed: {},
   data: function() {
     return {
-      currentSelection: 2,
+      currentSelection: 2
     };
   },
   mounted: function() {

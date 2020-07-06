@@ -13,17 +13,26 @@
       </b-col>
       <b-col class="py-2" align-v="center">
         <div>{{msg}}</div>
-                <div v-if="isSelected && (holdProgress>0)">
+        <div v-if="isSelected && (holdProgress>0)">
           <b-spinner small></b-spinner>
           {{parseInt(trueHoldTime - holdProgress)+1}}
         </div>
       </b-col>
 
       <b-col cols="3" class="py-2">
-        <b-badge class="p-2" variant="success" v-if="countdown>0">Decompte 
-        <b-spinner small v-if="isSelected && (countdownProgress>0)" ></b-spinner>
-        {{(isSelected && (countdownProgress>0))?(parseInt(countdown- countdownProgress )+1):countdown}}</b-badge>
+        <b-badge class="p-2" variant="success" v-if="countdown>0">
+          Decompte
+          <b-spinner small v-if="isSelected && (countdownProgress>0)"></b-spinner>
+          {{(isSelected && (countdownProgress>0))?(parseInt(countdown- countdownProgress )+1):countdown}}
+        </b-badge>
         <b-badge class="p-2" variant="warning" v-if="light.length>0">Lumiere:{{light}}</b-badge>
+        <b-badge
+          class="p-2"
+          href="#"
+          variant="info"
+          v-if="holdTime==0&&countdown==0"
+          v-on:click="clearMessage"
+        >Vider</b-badge>
       </b-col>
     </b-row>
     <b-row></b-row>
@@ -40,14 +49,14 @@ export default {
     msg: String,
     countdown: Number,
     holdTime: Number,
-    fadeMsgTime:Number,
+    fadeMsgTime: Number,
     light: String,
-    isSelected: Boolean,
+    isSelected: Boolean
   },
-  computed:{
-    trueHoldTime(){
-      if(this.holdTime){
-        return this.holdTime+this.fadeMsgTime;
+  computed: {
+    trueHoldTime() {
+      if (this.holdTime) {
+        return this.holdTime + this.fadeMsgTime;
       }
       return 0;
     }
@@ -58,12 +67,16 @@ export default {
       this.$emit("button-clicked", this.index);
       this.$emit("radiologic-event", [
         "/message/message",
-        [this.msg, this.countdown,this.holdTime]
+        [this.msg, this.countdown, this.holdTime]
       ]);
       if (this.light) {
         this.$emit("radiologic-event", ["/light/preset", [this.light]]);
       }
       this.startCountdown();
+    },
+    clearMessage: function() {
+      console.log("clear message on screen");
+      this.$emit("radiologic-event", ["/message/clear", [1]]);
     },
     startCountdown() {
       const deltaT = 200;
