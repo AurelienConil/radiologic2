@@ -51,13 +51,13 @@ UNIVERSALMEDIAPLAYER_PATH = "/home/pi/Documents/openFrameworks/apps/universalMed
 VERMUTH_PATH = "/home/pi/Documents/vermuth"
 
 if (platform.machine().startswith("x86")):
-    if(platform.system() == "Darwin" && getpass.getuser()=='adminmac'):
+    if(platform.system() == "Darwin" and getpass.getuser()=='adminmac'):
         #mac os et Aurelien Conil
         RADIOLOGIC_PATH = "/Users/adminmac/Boulot/Radiologic/GIT/radiologic2"
         UNIVERSALMEDIAPLAYER_PATH = "/Users/adminmac/Boulot/Universal-Media-Player/GIT/universalMediaPlayer"
         VERMUTH_PATH = "/Users/adminmac/Boulot/vermuth"
-    elif(platform.system() == "Darwin" && getpass.getuser()!='collor_nor'):
-        //print("Martin Rossi, tu dois mettre les chemin à l'interrieur du programme python")
+    elif(platform.system() == "Darwin" and getpass.getuser()!='collor_nor'):
+        #print("Martin Rossi, tu dois mettre les chemin a l'interrieur du programme python")
         #mac os et Martin Rossi (COLL OR_NOR)
         RADIOLOGIC_PATH = "/Users/collor_nor/Documents/DEV/repos/Radiologic\ Project/radiologic2"
         UNIVERSALMEDIAPLAYER_PATH = "/Users/collor_nor/Documents/DEV/repos/Radiologic\ Project/universalMediaPlayer"
