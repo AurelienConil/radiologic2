@@ -2,20 +2,24 @@
     "metadata": {
         "light": {
             "fastAccessPresets": [
-                "noir",
-                "bleuVertCanard"
+                "bleu",
+                "vert",
+                "rouge",
+                "white",
+                "rose",
+                "noir"
             ],
-            "fadeTime": 3,
-            "veilleStateName": "__black",
-            "defaultStateName": "__full"
+            "fadeTime": 2,
+            "veilleStateName": "service",
+            "defaultStateName": "rouge"
         },
         "interrupteur": {
-            "ip": "192.168.10.10",
-            "port": 12333
+            "ip": "192.168.0.102",
+            "port": 12347
         },
         "video": {
             "defaultMessageHoldTime": 2,
-            "vFlip" : true
+            "vFlip" : false
         }
     },
     "Tête": [
@@ -24,7 +28,7 @@
           "message": "message1",
           "holdTime": 2,
           "countdown": 1,
-          "light": ""
+          "light": "vert"
         },
         {
           "nom": "scan2",
@@ -36,7 +40,7 @@
         {
           "nom": "scan3",
           "message": "message3",
-          "holdTime": 1,
+          "holdTime": 0,
           "countdown": 0,
           "light": ""
         },

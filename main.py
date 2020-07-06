@@ -446,8 +446,8 @@ confSettings = {
         "vFlip": 1  
     },
     "interrupteur": {
-        "ip": "192.168.2.2",
-        "port": 3005
+        "ip": "192.168.0.102",
+        "port": 12347
     }
 }
 
