@@ -37,7 +37,7 @@
           "nom": "scan3",
           "message": "message3",
           "holdTime": 1,
-          "countdown": 1,
+          "countdown": 0,
           "light": ""
         },
         {
