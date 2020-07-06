@@ -439,8 +439,8 @@ userSettingsData = {
 confSettings = {
     "light": {
         "fadeTime": 3,
-        "veilleStateName": "rouge",
-        "defaultStateName": "vert"
+        "veilleStateName": "__black",
+        "defaultStateName": "__full"
     },
     "video": {
         "vFlip": 1  
