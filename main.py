@@ -272,6 +272,7 @@ def sendInitConfigToApps():
     forwardMsgToOf(buildSimpleMessage("/player/vflip",1.0 if confSettings["video"]["vFlip"] else 0.0))
     sendVolume(userSettingsData['volume'])
     sendMasterLight(userSettingsData["masterLight"])
+    setVeille(False)
 
 def powerOff():
 
@@ -369,7 +370,7 @@ def launchCmd(dir, cmd):
 
 
 def start_app():
-
+    
     if sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
         print("========= START OF_APP ======")
         launchCmd(UNIVERSALMEDIAPLAYER_PATH +
@@ -412,15 +413,18 @@ def sendMasterLight(v):
 
 class SafeOSCClient(OSCClient):
     def __init__(self, ipPortTuple):
+        OSCClient.__init__(self)
         self.ipPortTuple = ipPortTuple
         self.isConnected = False
         self.tryConnect()
 
     def tryConnect(self):
         try:
+            print("trying to connect to ",self.ipPortTuple[0], self.ipPortTuple[1])
             self.connect((self.ipPortTuple[0], self.ipPortTuple[1]))
             self.isConnected = True
         except Exception, e:
+            print("can't connect",e)
             self.isConnected = False
 
     def safeSend(self, msg):
@@ -429,7 +433,8 @@ class SafeOSCClient(OSCClient):
                 self.send(msg)
             except Exception, e:
                 self.tryConnect()
-
+        else:
+            self.tryConnect()
 
 userSettingsData = {
     "volume": 1,
@@ -437,6 +442,8 @@ userSettingsData = {
 }
 
 confSettings = {
+    '''
+    !!! do not modify this , cf README change metadata in  datajson.json!!!
     "light": {
         "fadeTime": 3,
         "veilleStateName": "__black",
@@ -448,7 +455,7 @@ confSettings = {
     "interrupteur": {
         "ip": "192.168.0.102",
         "port": 12347
-    }
+    }'''
 }
 
 
@@ -505,6 +512,8 @@ def initSettings():
         print ("merged some")
         with open(GLOBAL_SETTINGS_PATH, 'w') as fp:
             json.dump(confSettings, fp, indent=2)
+    print("settings are : ")
+    print(json.dumps(confSettings,indent=2))
 
 
 
