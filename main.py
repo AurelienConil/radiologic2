@@ -418,7 +418,8 @@ def sendVolume(v):
     userSettingsData["volume"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/player/volume")
-    oscmsg.append(v)
+    volMultiplier = 5.0
+    oscmsg.append(v*volMultiplier,_type="f")
     forwardMsgToOf(oscmsg)
 
 
