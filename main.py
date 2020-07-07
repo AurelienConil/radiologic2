@@ -260,16 +260,16 @@ def forwardMsgToVermuth(msg):
     # oscmsg.append('HELLO')
     # c.send(oscmsg)
 
-def buildSimpleMessage(addr,arg = None):
+def buildSimpleMessage(addr,arg = None,_type=None):
     oscmsg = OSCMessage()
     oscmsg.setAddress(addr)
     if(arg !=None):
-        oscmsg.append(arg)
+        oscmsg.append(arg,_type)
     return oscmsg
 
 def sendInitConfigToApps():
     # this function sends config from datajson/metadata to launched apps
-    forwardMsgToOf(buildSimpleMessage("/player/vflip",1.0 if confSettings["video"]["vFlip"] else 0.0))
+    forwardMsgToOf(buildSimpleMessage("/player/vflip",1 if confSettings["video"]["vFlip"] else 0,_type="f"))
     sendVolume(userSettingsData['volume'])
     sendMasterLight(userSettingsData["masterLight"])
     setVeille(False)
