@@ -13,9 +13,9 @@
           <b-row>
             <b-col cols="10 p-3 text-left">
               <!-- <h3>scenario {{index}} : {{item}}</h3> -->
-              <h3>{{item}}</h3>
+              <h4>{{item}}</h4>
             </b-col>
-            <img src="@/assets/right-black.png" height="50px"/>
+            <img src="@/assets/right-black.png" height="40px"/>
             <b-col cols="2"></b-col>
           </b-row>
         </div>
