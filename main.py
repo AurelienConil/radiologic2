@@ -85,6 +85,7 @@ class SimpleServer(OSCServer):
         global client
         global isPlayingMovie
         print("OSC message received on : "+oscAddress)
+        print(data)
 
         splitAddress = oscAddress.split("/")
         print(splitAddress)
@@ -140,11 +141,11 @@ class SimpleServer(OSCServer):
         elif(splitAddress[1] == "rpi"):
             if(splitAddress[2] == "shutdown"):
                 print("Turning off the rpi")
-                setVeille(1)
+                setVeille(True)
                 powerOff()
             if(splitAddress[2] == "reboot"):
                 print("Reboot the machine")
-                setVeille(1)
+                setVeille(True)
                 reboot()
         ############ FORWARD TO OPENSTAGECONTROL ###
         elif(splitAddress[1] == "player" or splitAddress[1] == "message"):
@@ -162,15 +163,15 @@ class SimpleServer(OSCServer):
         ########### FORWARD TO VERMUTH #######
         elif(splitAddress[1] == "light"):
             if(splitAddress[2] == "preset"):
-                # out from veille mode if other lilght state are called
-                notifyVeille(False)
+                # out from services mode if any light state are called
+                setServices(False,False)
                 setVermuthState(data)
             else:
                 print("Forwarding not supported for light/", splitAddress[2])
-        ########### HANDLE "VEILLE" MODE #########
+        ########### HANDLE "SERVICE" MODE #########
         elif((splitAddress[1] == "interrupteur" and splitAddress[2] == "services") or splitAddress[1] == "services"):
             v = len(data) == 0 or data[0] == 1
-            setVeille(v)
+            setServices(v,True)
 
         elif splitAddress[1] == "settings":
             if(splitAddress[2] == "masterLight"):
@@ -206,7 +207,9 @@ def getFloat(strOrFloat):
 
 def setVermuthState(name, time=-1):
     global lastVermuthPreset
-    lastVermuthPreset = name
+    print('setting state %s'%name)
+    if (name!= confSettings["light"]["servicesStateName"]) and( name != confSettings["light"]["veilleStateName"]):
+        lastVermuthPreset = name
     if(time == -1):
         time = getFloat(confSettings["light"]["fadeTime"])
     oscmsg = OSCMessage()
@@ -224,28 +227,26 @@ def setVermuthColor(r,g,b):
     oscmsg.append(b*w[2],"f")
     forwardMsgToVermuth(oscmsg)
 
-def notifyVeille(v):
-    global veille
-    print("notifying veille")
-    veille = v
-    varg = 1 if v else 0
-    oscmsg = OSCMessage()
-    oscmsg.setAddress("/interrupteur/services")
-    oscmsg.append(varg)
-    forwardMsgTointerrupteur(oscmsg)
-    oscmsg.setAddress("/app/veille")
-    forwardMsgToWebApp(oscmsg)
-    oscmsg2 = OSCMessage()
-    oscmsg2.setAddress("/messages/message")
-    oscmsg2.append("")
-    forwardMsgToOf(oscmsg2)
-    
+services = False
+def setServices(v,notifyVermuth):
+    global services
+    services = v
+    if(notifyVermuth):
+        setVermuthState(confSettings["light"]["servicesStateName" if services else "veilleStateName"],0)
+    forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",1 if services else 0))
+
+
 
 
 def setVeille(v):
+    global veille
     print("going to sleep mode : ", v)
-
-    notifyVeille(v)
+    setServices(False,False)
+    print("notifying veille")
+    veille = v
+    forwardMsgToWebApp(buildSimpleMessage("/app/veille",1 if v else 0))
+    forwardMsgToOf(buildSimpleMessage("/messages/message",""))
+    
     if v:
         setVermuthState(confSettings["light"]["veilleStateName"])
         oscmsg = OSCMessage()

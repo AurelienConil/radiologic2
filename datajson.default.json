@@ -3,10 +3,12 @@
         "light": {
             "fastAccessPresets": [
                 "noir",
-                "bleuVertCanard"
+                "bleuVertCanard",
+                "services"
             ],
             "fadeTime": 3,
             "veilleStateName": "__black",
+            "servicesStateName": "services",
             "defaultStateName": "__full"
         },
         "interrupteur": {
