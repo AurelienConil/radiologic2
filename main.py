@@ -49,8 +49,9 @@ from shutil import copyfile
 RADIOLOGIC_PATH = "/home/pi/Documents/radiologic2"
 UNIVERSALMEDIAPLAYER_PATH = "/home/pi/Documents/openFrameworks/apps/universalMediaPlayer"
 VERMUTH_PATH = "/home/pi/Documents/vermuth"
-
+isPi = True
 if (platform.machine().startswith("x86")):
+    isPi = False
     if(platform.system() == "Darwin" and getpass.getuser()=='adminmac'):
         #mac os et Aurelien Conil
         RADIOLOGIC_PATH = "/Users/adminmac/Boulot/Radiologic/GIT/radiologic2"
@@ -240,6 +241,7 @@ def notifyVeille(v):
 
 def setVeille(v):
     print("going to sleep mode : ", v)
+
     notifyVeille(v)
     if v:
         setVermuthState(confSettings["light"]["veilleStateName"])
@@ -248,6 +250,11 @@ def setVeille(v):
         forwardMsgToOf(oscmsg)
     else:
         setVermuthState(confSettings["light"]["defaultStateName"])
+    cmd = "vcgencmd display_power %i"%(1 if v else 0)    
+    print(cmd)
+    if isPi:
+        subprocess.call(cmd)
+    
 
 
 def forwardMessage(client, msg):
