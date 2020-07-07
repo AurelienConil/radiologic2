@@ -181,7 +181,7 @@ class SimpleServer(OSCServer):
 
         elif( splitAddress[1] == "averageColor"):
             if(isPlayingMovie and splitAddress[2]=="color"):
-                setVermuthColor(data[0],data[1],data[3])
+                setVermuthColor(data[0]/255.0,data[1]/255.0,data[2]/255.0)
         elif(splitAddress[1] == "echo"):
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
@@ -293,6 +293,7 @@ def buildSimpleMessage(addr,arg = None,_type=None):
 def sendInitConfigToApps():
     # this function sends config from datajson/metadata to launched apps
     forwardMsgToOf(buildSimpleMessage("/player/vflip",1 if confSettings["video"]["vFlip"] else 0,"f"))
+    forwardMsgToOf(buildSimpleMessage("/averageColor/smooth",getFloat(confSettings["video"]["averageColorSmooth"])))
     sendVolume(userSettingsData['volume'])
     sendMasterLight(userSettingsData["masterLight"])
     setVeille(False)
