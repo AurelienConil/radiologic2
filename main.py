@@ -233,7 +233,7 @@ def setServices(v,notifyVermuth):
     services = v
     if(notifyVermuth):
         setVermuthState(confSettings["light"]["servicesStateName" if services else "veilleStateName"],0)
-    forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",1 if services else 0))
+    forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
 
 
 
@@ -305,6 +305,7 @@ def buildSimpleMessage(addr,arg = None,_type=None):
 def sendInitConfigToApps():
     # this function sends config from datajson/metadata to launched apps
     forwardMsgToOf(buildSimpleMessage("/player/vflip",1 if confSettings["video"]["vFlip"] else 0,"f"))
+    forwardMsgToOf(buildSimpleMessage("/player/hflip",1 if confSettings["video"]["hFlip"] else 0,"f"))
     forwardMsgToOf(buildSimpleMessage("/averageColor/smooth",getFloat(confSettings["video"]["averageColorSmooth"])))
     sendVolume(getFloat(userSettingsData['volume']))
     sendMasterLight(getFloat(userSettingsData["masterLight"]))
