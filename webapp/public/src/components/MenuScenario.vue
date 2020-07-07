@@ -11,12 +11,12 @@
       >
         <div class="container-fluid mt-0">
           <b-row>
-            <b-col cols="11 p-3 text-left">
+            <b-col cols="10 p-3 text-left">
               <!-- <h3>scenario {{index}} : {{item}}</h3> -->
               <h3>{{item}}</h3>
             </b-col>
             <img src="@/assets/right-black.png" />
-            <b-col cols="1"></b-col>
+            <b-col cols="2"></b-col>
           </b-row>
         </div>
       </b-list-group-item>

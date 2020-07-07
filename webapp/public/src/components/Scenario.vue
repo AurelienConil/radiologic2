@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-container fluid class="px-0 border-bottom py-5">
-      <h1 class="display-2 text-muted">{{ title }}</h1>
+    <b-container fluid class="px-0 border-bottom py-2">
+      <h1 class="display-3 text-muted">{{ title }}</h1>
     </b-container>
     <b-container fluid>
-      <b-row class="row my-5 mx-1 p-1">
+      <b-row class="row my-3 mx-1 p-1">
         <b-col cols="1" class="p-0">
           <b>#</b>
         </b-col>
