@@ -222,9 +222,9 @@ def setVermuthColor(r,g,b):
     oscmsg = OSCMessage()
     oscmsg.setAddress("/allColors")
     w = confSettings["video"]["videoColorWeights"]
-    oscmsg.append(r*w[0],"f")
-    oscmsg.append(g*w[1],"f")
-    oscmsg.append(b*w[2],"f")
+    oscmsg.append(r*(math.log1p(w[0]),"f")
+    oscmsg.append(g*(math.log1p(w[1]),"f")
+    oscmsg.append(b*(math.log1p(w[2]),"f")
     forwardMsgToVermuth(oscmsg)
 
 services = False

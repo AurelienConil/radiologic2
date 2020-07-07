@@ -22,110 +22,365 @@
             "defaultMessageHoldTime": 2,
             "vFlip" : false,
             "hFlip" : true,
-            "averageColorSmooth":0.3,
-            "videoColorWeights":[0.6,1,0.6]
+            "averageColorSmooth":1.0,
+            "videoColorWeights":[0.55,1,0.55]
         }
     },
     "Tête": [
-        {
-          "nom": "scan1",
-          "message": "message1",
-          "holdTime": 5,
-          "countdown": 1,
-          "light": "vert"
-        },
-        {
-          "nom": "scan2",
-          "message": "message2",
-          "holdTime": 1,
-          "countdown": 3,
-          "light": ""
-        },
-        {
-          "nom": "scan3",
-          "message": "message3",
-          "holdTime": 0,
-          "countdown": 0,
-          "light": ""
-        },
-        {
-          "nom": "scan4",
-          "message": "message4",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": ""
-        },
-        {
-          "nom": "scan5",
-          "message": "message5",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": "blanc"
-        },
-        {
-          "nom": "scan6",
-          "message": "message6",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": "blanc"
-        },
-        {
-          "nom": "scan7",
-          "message": "message7",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": "blanc"
-        }
-      ],
-      "Genoux": [
-        {
-          "nom": "scan1",
-          "message": "message1",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": ""
-        },
-        {
-          "nom": "scan2",
-          "message": "message2",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": ""
-        },
-        {
-          "nom": "scan3",
-          "message": "message3",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": ""
-        },
-        {
-          "nom": "scan4",
-          "message": "message4",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": ""
-        },
-        {
-          "nom": "scan5",
-          "message": "message5",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": "blanc"
-        },
-        {
-          "nom": "scan6",
-          "message": "message6",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": "blanc"
-        },
-        {
-          "nom": "scan7",
-          "message": "message7",
-          "holdTime": 1,
-          "countdown": 1,
-          "light": "blanc"
-        }
-      ]
+      {
+        "nom": "scan1",
+        "message": "message sans tenu ni décompte",
+        "holdTime": 0,
+        "countdown": 0,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message sans décompte",
+        "holdTime": 1,
+        "countdown": 0,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message avec décompte",
+        "holdTime": 2,
+        "countdown": 3,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdTime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdTime": 1,
+        "countdown": 5,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdTime": 1,
+        "countdown": 5,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdTime": 1,
+        "countdown": 5,
+        "light": ""
+      }
+    ],
+    "Thorax": [
+      {
+        "nom": "scan1",
+        "message": "message1",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message2",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message3",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      }
+    ],
+    "Poitrine": [
+      {
+        "nom": "scan1",
+        "message": "message1",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message2",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message3",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      }
+    ],
+    "Estomac": [
+      {
+        "nom": "scan1",
+        "message": "message1",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message2",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message3",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      }
+    ],
+    "Hanche": [
+      {
+        "nom": "scan1",
+        "message": "message1",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message2",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message3",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      }
+    ],
+    "Genoux": [
+      {
+        "nom": "scan1",
+        "message": "message1",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message2",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message3",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      }
+    ],
+    "Pied": [
+      {
+        "nom": "scan1",
+        "message": "message1",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan2",
+        "message": "message2",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan3",
+        "message": "message3",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan4",
+        "message": "message4",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan5",
+        "message": "message5",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan6",
+        "message": "message6",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      },
+      {
+        "nom": "scan7",
+        "message": "message7",
+        "holdtime": 1,
+        "countdown": 4,
+        "light": ""
+      }
+    ]
 }
