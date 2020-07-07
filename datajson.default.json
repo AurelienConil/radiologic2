@@ -16,7 +16,8 @@
         "video": {
             "defaultMessageHoldTime": 2,
             "vFlip" : true,
-            "averageColorSmooth":0.3
+            "averageColorSmooth":0.3,
+            "videoColorWeights":[1,1,1]
         }
     },
     "tete": [
