@@ -82,13 +82,23 @@ class SimpleServer(OSCServer):
     def handleMsg(self, oscAddress, tags, data, client_address):
         global machine
         global client
+        global isPlayingMovie
         print("OSC message received on : "+oscAddress)
 
         splitAddress = oscAddress.split("/")
         print(splitAddress)
 
+        ##### from ofUniversalMediaPlayer ####
+        if(splitAddress[1] == "videoPlayingState"):
+            isPlayingMovie = data[0]>0
+            forwardMsgToOf(buildSimpleMessage("/averageColor/activate",1 if isPlayingMovie else 0,_type="i"))
+            if(not isPlayingMovie):
+                presetToRecall = lastVermuthPreset or confSettings["light"]["defaultStateName"]
+                setVermuthState(presetToRecall)
+            
+            
         ############## APP itself #############
-        if(splitAddress[1] == "app"):
+        elif(splitAddress[1] == "app"):
             if(splitAddress[2] == "veille"):
                 v = len(data) == 0 or data[0] == 1
                 setVeille(v)
@@ -169,6 +179,9 @@ class SimpleServer(OSCServer):
             elif(splitAddress[2] == "save"):
                 saveSettings()
 
+        elif( splitAddress[1] == "averageColor"):
+            if(isPlayingMovie and splitAddress[2]=="color"):
+                setVermuthColor(data[0],data[1],data[3])
         elif(splitAddress[1] == "echo"):
             oscmsg = OSCMessage()
             oscmsg.setAddress(oscAddress)
@@ -184,9 +197,10 @@ class SimpleServer(OSCServer):
 
 
 veille = False
-
-
+isPlayingMovie = False
+lastVermuthPreset = ""
 def setVermuthState(name, time=-1):
+    lastVermuthPreset =name
     if(time == -1):
         time = confSettings["light"]["fadeTime"]
     oscmsg = OSCMessage()
@@ -195,6 +209,12 @@ def setVermuthState(name, time=-1):
     oscmsg.append(time)
     forwardMsgToVermuth(oscmsg)
 
+def setVermuthColor(r,g,b):
+    oscmsg.setAddress("/allColors")
+    oscmsg.append(r,_type="f")
+    oscmsg.append(g,_type="f")
+    oscmsg.append(b,_type="f")
+    forwardMsgToVermuth(oscmsg)
 
 def notifyVeille(v):
     global veille
