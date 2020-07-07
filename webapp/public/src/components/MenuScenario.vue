@@ -1,10 +1,10 @@
 <template>
-  <div class="container-fluid py-2">
-    <h2>Choisir une séquence</h2>
+  <div class="container-fluid my-3">
+    <h3>Choisir une séquence</h3>
     <b-list-group>
       <b-list-group-item
         href="#"
-        class="flex-column align-items-start mx-2"
+        class="flex-column align-items-start mx-3"
         v-for="(item, index) in listOfScenario"
         :key="index"
         v-on:click="switchScenario(index)"
