@@ -1,21 +1,21 @@
 <template>
   <div id="app" class="mt-0">
-    <div class="container-fluid bg-dark m-0">
-      <b-row align-v="stretch" class="p-2 justify-content-center">
-        <b-col cols="2" class="py-2" align-v="center">
+    <div class="container-fluid bg-dark m-0 py-0">
+      <b-row align-v="stretch"  class="p-0 justify-content-center">
+        <b-col cols="1" class="py-2" align-v="center">
           <img
-            src="./assets/left-white.png"
+            src="./assets/left-white.png" height="25px"
             v-on:click="backToMenu"
             :style="{display:isRootPage?'none':'block'}"
           />
         </b-col>
-        <b-col cols="8" align-v="end" class>
-          <h5 class="text-light my-3">RADIOLOGIC {{adminMode?'(adminMode)':'' }}</h5>
-          <b-badge v-if="portOpenState!=='open'" variant="warning">Server déconnecté</b-badge>
+        <b-col cols="10" align-v="end" class="py-2">
+          <h5 class="text-light my-1">RADIOLOGIC {{adminMode?'(adminMode)':'' }}</h5>
+          <!-- <b-badge v-if="portOpenState!=='open'" variant="warning">Server déconnecté</b-badge> -->
         </b-col>
 
-        <b-col cols="2" class="py-2" align-v="center">
-          <img src="./assets/gear-white.png" v-on:click="setDisplayMenuSettings(true)" />
+        <b-col cols="1" class="py-2" align-v="center">
+          <img src="./assets/gear-white.png" height="25px" v-on:click="setDisplayMenuSettings(true)" />
         </b-col>
       </b-row>
     </div>

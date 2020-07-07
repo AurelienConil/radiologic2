@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid my-3">
-    <h1>Choisis une séquence</h1>
+    <h2>Choisir une séquence</h2>
     <b-list-group>
       <b-list-group-item
         href="#"
@@ -15,7 +15,7 @@
               <!-- <h3>scenario {{index}} : {{item}}</h3> -->
               <h3>{{item}}</h3>
             </b-col>
-            <img src="@/assets/right-black.png" />
+            <img src="@/assets/right-black.png" height="50px"/>
             <b-col cols="2"></b-col>
           </b-row>
         </div>
