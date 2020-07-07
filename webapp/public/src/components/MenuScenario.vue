@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid my-3">
+  <div class="container-fluid py-2">
     <h2>Choisir une séquence</h2>
     <b-list-group>
       <b-list-group-item
