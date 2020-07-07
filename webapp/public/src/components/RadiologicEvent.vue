@@ -26,13 +26,15 @@
           {{(isSelected && (countdownProgress>0))?(parseInt(countdown- countdownProgress )+1):countdown}}
         </b-badge>
         <b-badge class="p-2" variant="warning" v-if="light.length>0">Lumiere:{{light}}</b-badge>
-        <b-badge
+        <!-- <b-badge class="p-2" href="#" variant="info" v-if="holdTime==0&&countdown==0">Message infini</b-badge> -->
+        <b-button
+          squared
           class="p-2"
           href="#"
-          variant="info"
+          variant="outline-info"
           v-if="holdTime==0&&countdown==0"
           v-on:click="clearMessage"
-        >Vider</b-badge>
+        >Vider</b-button>
       </b-col>
     </b-row>
     <b-row></b-row>

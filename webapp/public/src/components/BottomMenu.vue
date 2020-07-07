@@ -1,11 +1,11 @@
 <template>
   <b-container fluid class="bg-dark py-2 px-3">
     <b-row>
-      <b-col v-for="(item, index) in listOfButton" :key="item" class="px-1">
-        <b-button block variant="primary" size="lg" v-on:click="clickMe(index)">{{item}}</b-button>
+      <b-col v-for="(item, index) in listOfButton" :key="item" class="px-1 mb-1">
+        <b-button block variant="primary" size="sm" v-on:click="clickMe(index)">{{item}}</b-button>
       </b-col>
-      <b-col v-for="(item) in listOfLight" :key="item" class="px-1">
-        <b-button block variant="secondary" size="lg" v-on:click="sendLightPreset(item)">{{item}}</b-button>
+      <b-col v-for="(item) in listOfLight" :key="item" class="px-1 mb-1">
+        <b-button block variant="secondary" size="sm" v-on:click="sendLightPreset(item)">{{item}}</b-button>
       </b-col>
     </b-row>
   </b-container>
