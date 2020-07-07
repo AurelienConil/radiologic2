@@ -42,7 +42,7 @@ export default {
       this.$emit("menu-event", ["/player/stop", [1]]);
       //SEND THE LAST LIGHT PRESET WHEN STOP VIDEO IS CALLED
       if (this.lastLightMemoryCalled.length > 0) {
-        this.sendLightPreset(this.lastLightMemoryCalled);
+        //this.sendLightPreset(this.lastLightMemoryCalled);
       }
     },
     stopLight: function() {
