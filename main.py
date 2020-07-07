@@ -174,9 +174,9 @@ class SimpleServer(OSCServer):
 
         elif splitAddress[1] == "settings":
             if(splitAddress[2] == "masterLight"):
-                sendMasterLight(data[0])
+                sendMasterLight(getFloat(data[0]))
             elif(splitAddress[2] == "volume"):
-                sendVolume(data[0])
+                sendVolume(getFloat(data[0]))
             elif(splitAddress[2] == "save"):
                 saveSettings()
 
@@ -214,6 +214,7 @@ def setVermuthState(name, time=-1):
     forwardMsgToVermuth(oscmsg)
 
 def setVermuthColor(r,g,b):
+    oscmsg = OSCMessage()
     oscmsg.setAddress("/allColors")
     w = confSettings["video"]["videoColorWeights"]
     oscmsg.append(r*w[0],"f")
