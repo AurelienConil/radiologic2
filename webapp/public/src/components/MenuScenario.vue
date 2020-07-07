@@ -4,19 +4,20 @@
     <b-list-group>
       <b-list-group-item
         href="#"
-        class="flex-column align-items-start mx-3"
+        class="flex-column align-items-start mx-2"
         v-for="(item, index) in listOfScenario"
         :key="index"
         v-on:click="switchScenario(index)"
       >
-        <div class="container-fluid mt-0">
+        <div class="container-fluid my-0">
           <b-row>
-            <b-col cols="10 p-3 text-left">
+            <b-col cols="11 px-3 text-left">
               <!-- <h3>scenario {{index}} : {{item}}</h3> -->
               <h4>{{item}}</h4>
+              
             </b-col>
-            <img src="@/assets/right-black.png" height="40px"/>
-            <b-col cols="2"></b-col>
+            <img src="@/assets/right-black.png" height="30px" class="my-0"/>
+            <b-col cols="1"></b-col>
           </b-row>
         </div>
       </b-list-group-item>

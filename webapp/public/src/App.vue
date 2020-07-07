@@ -82,6 +82,7 @@ export default {
   computed: {
     listOfScenario() {
       return Object.keys(this.datafile).filter(n => n !== "metadata");
+      //return "scenario"
     },
     listOfLight() {
       return this.datafile?.metadata?.light?.fastAccessPresets || [];

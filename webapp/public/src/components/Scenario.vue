@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid class="px-0 border-bottom py-2">
-      <h3 class="display-3 text-muted">{{ title }}</h3>
+      <h4 class="display-4 text-muted">{{ title }}</h4>
     </b-container>
     <b-container fluid>
       <b-row class="row my-3 mx-1 p-1">
