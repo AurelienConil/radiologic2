@@ -32,7 +32,7 @@
         v-on:radiologic-event="sendRadiologicEvent"
         v-on:button-clicked="startAtIndex(index)"
       ></radiologicEvent>
-      <b-row class="row py-5">---</b-row>
+      <b-row class="row py-5">&ensp;</b-row>
     </b-container>
   </div>
 </template>
