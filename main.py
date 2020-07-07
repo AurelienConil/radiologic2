@@ -294,8 +294,8 @@ def sendInitConfigToApps():
     # this function sends config from datajson/metadata to launched apps
     forwardMsgToOf(buildSimpleMessage("/player/vflip",1 if confSettings["video"]["vFlip"] else 0,"f"))
     forwardMsgToOf(buildSimpleMessage("/averageColor/smooth",getFloat(confSettings["video"]["averageColorSmooth"])))
-    sendVolume(userSettingsData['volume'])
-    sendMasterLight(userSettingsData["masterLight"])
+    sendVolume(getFloat(userSettingsData['volume']))
+    sendMasterLight(getFloat(userSettingsData["masterLight"]))
     setVeille(False)
 
 def powerOff():
@@ -424,7 +424,7 @@ def sendVolume(v):
     userSettingsData["volume"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/player/volume")
-    volMultiplier = 5.0
+    volMultiplier = 2.0
     oscmsg.append(v*volMultiplier,"f")
     forwardMsgToOf(oscmsg)
 
