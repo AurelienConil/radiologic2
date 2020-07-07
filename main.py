@@ -233,8 +233,8 @@ def setServices(v,notifyVermuth):
     services = v
     if(notifyVermuth):
         setVermuthState(confSettings["light"]["servicesStateName" if services else "veilleStateName"],0)
-        forwardMsgToWebApp(buildSimpleMessage("/app/veille",1 if services else 0))
 
+        
     #forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
     
 

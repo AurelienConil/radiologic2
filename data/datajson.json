@@ -2,16 +2,17 @@
     "metadata": {
         "light": {
             "fastAccessPresets": [
-                "bleu",
-                "vert",
-                "rouge",
-                "white",
-                "rose",
-                "noir"
+                "Bleu",
+                "Vert",
+                "Rouge",
+                "Vermillon",
+                "Rose",
+                "Magenta"
             ],
-            "fadeTime": 2,
-            "veilleStateName": "service",
-            "defaultStateName": "rouge"
+            "fadeTime": 1,
+            "veilleStateName": "Noir",
+            "servicesStateName": "Services",
+            "defaultStateName": "Ambre"
         },
         "interrupteur": {
             "ip": "192.168.0.102",
@@ -19,14 +20,17 @@
         },
         "video": {
             "defaultMessageHoldTime": 2,
-            "vFlip" : false
+            "vFlip" : false,
+            "hFlip" : true,
+            "averageColorSmooth":0.3,
+            "videoColorWeights":[0.6,1,0.6]
         }
     },
     "Tête": [
         {
           "nom": "scan1",
           "message": "message1",
-          "holdTime": 2,
+          "holdTime": 5,
           "countdown": 1,
           "light": "vert"
         },
