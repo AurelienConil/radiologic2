@@ -248,13 +248,13 @@ def setVeille(v):
     forwardMsgToOf(buildSimpleMessage("/messages/message",""))
     
     if v:
-        setVermuthState(confSettings["light"]["veilleStateName"])
+        setVermuthState(confSettings["light"]["servicesStateName"])
         oscmsg = OSCMessage()
         oscmsg.setAddress("/player/stop")
         forwardMsgToOf(oscmsg)
     else:
         setVermuthState(confSettings["light"]["defaultStateName"])
-    cmd = ["vcgencmd","display_power","1" if v else "0"]    
+    cmd = ["vcgencmd","display_power","0" if v else "1"]    
     print(cmd)
     if isPi:
         subprocess.Popen(cmd)
@@ -436,7 +436,7 @@ def sendVolume(v):
     userSettingsData["volume"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/player/volume")
-    volMultiplier = 1.0
+    volMultiplier = 0.5
     oscmsg.append(v*volMultiplier,"f")
     forwardMsgToOf(oscmsg)
 
