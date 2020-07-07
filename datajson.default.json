@@ -20,7 +20,7 @@
             "vFlip" : false,
             "hFlip" : true,
             "averageColorSmooth":0.3,
-            "videoColorWeights":[1,1,1]
+            "videoColorWeights":[0.5,1,0.5]
         }
     },
     "tete": [

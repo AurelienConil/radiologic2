@@ -233,7 +233,7 @@ def setServices(v,notifyVermuth):
     services = v
     if(notifyVermuth):
         setVermuthState(confSettings["light"]["servicesStateName" if services else "veilleStateName"],0)
-    forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
+        forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
 
 
 
@@ -478,7 +478,7 @@ class SafeOSCClient(OSCClient):
             self.tryConnect()
 
 userSettingsData = {
-    "volume": 1,
+    "volume": 0.5,
     "masterLight": 1,
 }
 
@@ -611,7 +611,7 @@ def main():
 
     # START ON BOOT
     start_app()
-    time.sleep(3)
+    time.sleep(5)
     print(" ===== sending config to apps ====")
     sendInitConfigToApps()
 
