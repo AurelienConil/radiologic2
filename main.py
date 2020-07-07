@@ -91,7 +91,7 @@ class SimpleServer(OSCServer):
         ##### from ofUniversalMediaPlayer ####
         if(splitAddress[1] == "videoPlayingState"):
             isPlayingMovie = data[0]>0
-            forwardMsgToOf(buildSimpleMessage("/averageColor/activate",1 if isPlayingMovie else 0,_type="i"))
+            forwardMsgToOf(buildSimpleMessage("/averageColor/activate",1 if isPlayingMovie else 0,"i"))
             if(not isPlayingMovie):
                 presetToRecall = lastVermuthPreset or confSettings["light"]["defaultStateName"]
                 setVermuthState(presetToRecall)
@@ -199,10 +199,13 @@ class SimpleServer(OSCServer):
 veille = False
 isPlayingMovie = False
 lastVermuthPreset = ""
+
+def getFloat(strOrFloat):
+    return float(strOrFloat)
 def setVermuthState(name, time=-1):
     lastVermuthPreset =name
     if(time == -1):
-        time = confSettings["light"]["fadeTime"]
+        time = getFloat(confSettings["light"]["fadeTime"])
     oscmsg = OSCMessage()
     oscmsg.setAddress("/sequencePlayer/goToStateNamed")
     oscmsg.append(name)
@@ -211,9 +214,9 @@ def setVermuthState(name, time=-1):
 
 def setVermuthColor(r,g,b):
     oscmsg.setAddress("/allColors")
-    oscmsg.append(r,_type="f")
-    oscmsg.append(g,_type="f")
-    oscmsg.append(b,_type="f")
+    oscmsg.append(r,"f")
+    oscmsg.append(g,"f")
+    oscmsg.append(b,"f")
     forwardMsgToVermuth(oscmsg)
 
 def notifyVeille(v):
@@ -289,7 +292,7 @@ def buildSimpleMessage(addr,arg = None,_type=None):
 
 def sendInitConfigToApps():
     # this function sends config from datajson/metadata to launched apps
-    forwardMsgToOf(buildSimpleMessage("/player/vflip",1 if confSettings["video"]["vFlip"] else 0,_type="f"))
+    forwardMsgToOf(buildSimpleMessage("/player/vflip",1 if confSettings["video"]["vFlip"] else 0,"f"))
     sendVolume(userSettingsData['volume'])
     sendMasterLight(userSettingsData["masterLight"])
     setVeille(False)
@@ -414,17 +417,20 @@ def start_app():
 
 
 def sendVolume(v):
+    print('setting volume',v)
+    v = getFloat(v)
     global userSettingsData
     userSettingsData["volume"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/player/volume")
     volMultiplier = 5.0
-    oscmsg.append(v*volMultiplier,_type="f")
+    oscmsg.append(v*volMultiplier,"f")
     forwardMsgToOf(oscmsg)
 
 
 def sendMasterLight(v):
     global userSettingsData
+    v = getFloat(v)
     userSettingsData["masterLight"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/universe/setGrandMaster")
