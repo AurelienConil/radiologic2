@@ -28,20 +28,6 @@
       <b-button
         block
         size="lg"
-        variant="danger"
-        @click="promptBeforeSend('éteindre','/rpi/shutdown')"
-      >Eteindre</b-button>
-
-      <b-button
-        block
-        size="lg"
-        variant="warning"
-        @click="promptBeforeSend('redémarrer','/rpi/reboot')"
-      >Redémarrer</b-button>
-
-      <b-button
-        block
-        size="lg"
         :variant="hasVeille?'outline-':''+'secondary'"
         @click="toggleVeille"
       >{{hasVeille?"Allumer":"Veille"}}</b-button>
@@ -49,14 +35,28 @@
 
     <div v-if="adminMode">
       Admin Section
-      <div v-if="busy">Busy
-      <b-spinner></b-spinner>
+      <div v-if="busy">
+        Busy
+        <b-spinner></b-spinner>
       </div>
-    <div v-else>
-       <b-button block size="lg" @click="sendEv('/app/update')">update UI</b-button>
-       <b-button block size="lg" @click="sendEv('/app/update_of')">update Video</b-button>
-       <b-button block size="lg" @click="sendEv('/app/update_vermuth')">update Vermuth</b-button>
-       <b-button block size="lg" @click="sendEv('/app/update_all')">update all</b-button>
+      <div v-else>
+        <b-button
+          block
+          size="lg"
+          variant="danger"
+          @click="promptBeforeSend('éteindre','/rpi/shutdown')"
+        >Eteindre</b-button>
+
+        <b-button
+          block
+          size="lg"
+          variant="warning"
+          @click="promptBeforeSend('redémarrer','/rpi/reboot')"
+        >Redémarrer</b-button>
+        <b-button block size="lg" @click="sendEv('/app/update')">update UI</b-button>
+        <b-button block size="lg" @click="sendEv('/app/update_of')">update Video</b-button>
+        <b-button block size="lg" @click="sendEv('/app/update_vermuth')">update Vermuth</b-button>
+        <b-button block size="lg" @click="sendEv('/app/update_all')">update all</b-button>
         <b-button block size="lg" @click="sendEv('/echo')">echo</b-button>
       </div>
     </div>
@@ -69,19 +69,19 @@ export default {
   props: {
     adminMode: { default: false },
     settingsData: {},
-    appState:{}
+    appState: {}
   },
   data: function() {
     return {
       // hasVeille: false
     };
   },
-  computed:{
-    hasVeille(){
-      return this.appState.hasVeille
+  computed: {
+    hasVeille() {
+      return this.appState.hasVeille;
     },
-    busy(){
-      return this.appState.busy
+    busy() {
+      return this.appState.busy;
     }
   },
 
@@ -99,9 +99,9 @@ export default {
     },
     promptBeforeSend(action, addr, arg) {
       if (confirm(`êtes vous sûr de vouloir ${action} le système?`)) {
-      this.sendEv(addr, arg);
+        this.sendEv(addr, arg);
       }
-    }, 
+    },
     sendEv(addr, arg) {
       this.$emit("radiologic-event", [addr, arg]);
     },
