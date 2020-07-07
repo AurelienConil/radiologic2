@@ -234,7 +234,7 @@ def setServices(v,notifyVermuth):
     if(notifyVermuth):
         setVermuthState(confSettings["light"]["servicesStateName" if services else "veilleStateName"],0)
 
-        
+
     #forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
     
 
@@ -615,7 +615,7 @@ def main():
 
     # START ON BOOT
     start_app()
-    time.sleep(5)
+    time.sleep(10)
     print(" ===== sending config to apps ====")
     sendInitConfigToApps()
 

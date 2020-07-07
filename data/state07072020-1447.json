@@ -1,0 +1,2841 @@
+{
+  "universe": {
+    "testedFixture": {
+      "ftype": "base",
+      "pchannels": [
+        {
+          "_circ": -1,
+          "name": "tested"
+        }
+      ],
+      "pdimmerValue": 0,
+      "_baseCirc": 0,
+      "name": "testedFixture"
+    },
+    "driverName": "none",
+    "fixtures": {
+      "amb": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 1,
+        "name": "amb"
+      },
+      "amb 1": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 11,
+        "name": "amb 1"
+      },
+      "amb 2": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 21,
+        "name": "amb 2"
+      },
+      "amb 3": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 31,
+        "name": "amb 3"
+      },
+      "amb 4": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 41,
+        "name": "amb 4"
+      },
+      "amb 5": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 51,
+        "name": "amb 5"
+      },
+      "amb 6": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 61,
+        "name": "amb 6"
+      },
+      "amb 7": {
+        "ftype": "base",
+        "pchannels": [
+          {
+            "_circ": 0,
+            "name": "R"
+          },
+          {
+            "_circ": 1,
+            "name": "G"
+          },
+          {
+            "_circ": 2,
+            "name": "B"
+          },
+          {
+            "_circ": 3,
+            "name": "W"
+          },
+          {
+            "_circ": 4,
+            "name": "Dim"
+          }
+        ],
+        "pdimmerValue": 0,
+        "_baseCirc": 71,
+        "name": "amb 7"
+      }
+    },
+    "groups": {},
+    "_master": 1
+  },
+  "sequenceList": {
+    "list": []
+  },
+  "sequencePlayer": {
+    "pctDone": 0,
+    "playState": "stopped",
+    "pcurPlayedIdx": -1,
+    "pisPlaying": false
+  },
+  "globalTransport": {
+    "_bpm": 60,
+    "_time": 0,
+    "_isPlaying": false
+  },
+  "curveStore": [],
+  "curvePlayer": {
+    "name": "CurvePlayer",
+    "curveLinkStore": {
+      "factory": {}
+    },
+    "curveLinkRefList": []
+  },
+  "fixtureFactory": {},
+  "stateList": {
+    "states": {
+      "Services": {
+        "name": "Services",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0.004,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Noir": {
+        "name": "Noir",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Neant": {
+        "name": "Neant",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0.004,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 0,
+              "W": 1,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Rouge": {
+        "name": "Rouge",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Vert": {
+        "name": "Vert",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Bleu": {
+        "name": "Bleu",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Cyan": {
+        "name": "Cyan",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Magenta": {
+        "name": "Magenta",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 1,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Jaune": {
+        "name": "Jaune",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Ambre": {
+        "name": "Ambre",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.504,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.5,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.499,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.5,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 1,
+              "B": 0,
+              "W": 0.498,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Jade": {
+        "name": "Jade",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.504,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.5,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.499,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.5,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0,
+              "W": 0.498,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Lavande": {
+        "name": "Lavande",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.498,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.497,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.502,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.501,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.502,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.5,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.5,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 0,
+              "B": 1,
+              "W": 0.499,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Orange": {
+        "name": "Orange",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.498,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.503,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.5,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.501,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.496,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.5,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.498,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0.502,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Azur": {
+        "name": "Azur",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.503,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.496,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.497,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.502,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.502,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.497,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.501,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.5,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Rose": {
+        "name": "Rose",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.5,
+              "W": 0.501,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.497,
+              "W": 0.503,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.5,
+              "W": 0.502,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.499,
+              "W": 0.504,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.496,
+              "W": 0.499,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.502,
+              "W": 0.499,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.501,
+              "W": 0.501,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0.5,
+              "W": 0.496,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Vermillon": {
+        "name": "Vermillon",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.301,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.301,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.304,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.303,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.298,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.3,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.296,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 1,
+              "G": 0,
+              "B": 0,
+              "W": 0.296,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Citron": {
+        "name": "Citron",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0.603,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0.598,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0.6,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0.6,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0.598,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0.599,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0.596,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0.605,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Ecru": {
+        "name": "Ecru",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0.719,
+              "G": 1,
+              "B": 0,
+              "W": 0.444,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0.719,
+              "G": 1,
+              "B": 0,
+              "W": 0.44,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0.724,
+              "G": 1,
+              "B": 0,
+              "W": 0.443,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0.725,
+              "G": 1,
+              "B": 0,
+              "W": 0.437,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0.725,
+              "G": 1,
+              "B": 0,
+              "W": 0.438,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0.721,
+              "G": 1,
+              "B": 0,
+              "W": 0.439,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0.721,
+              "G": 1,
+              "B": 0,
+              "W": 0.443,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0.721,
+              "G": 1,
+              "B": 0,
+              "W": 0.438,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Anis": {
+        "name": "Anis",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0.399,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0.397,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0.399,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0.4,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0.399,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0.399,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0.395,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0.4,
+              "G": 1,
+              "B": 0,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "Menthe": {
+        "name": "Menthe",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.287,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.286,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.286,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.289,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.288,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.289,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.287,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.287,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      },
+      "STOP": {
+        "name": "STOP",
+        "full": false,
+        "fixtureStates": [
+          {
+            "pState": {},
+            "name": "amb",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.287,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 1",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.286,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 2",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.286,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 3",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.289,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 4",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.288,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 5",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.289,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 6",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.287,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          },
+          {
+            "pState": {},
+            "name": "amb 7",
+            "pChannelValues": {
+              "R": 0,
+              "G": 1,
+              "B": 0.287,
+              "W": 0,
+              "Dim": 1
+            },
+            "pChannelCurveLinks": {}
+          }
+        ],
+        "linkedStates": [],
+        "actions": {
+          "list": [],
+          "forbiddenNames": []
+        }
+      }
+    },
+    "presetableNames": [
+      "amb:R",
+      "amb:G",
+      "amb:B",
+      "amb:W",
+      "amb:Dim",
+      "amb 1:R",
+      "amb 1:G",
+      "amb 1:B",
+      "amb 1:W",
+      "amb 1:Dim",
+      "amb 2:R",
+      "amb 2:G",
+      "amb 2:B",
+      "amb 2:W",
+      "amb 2:Dim",
+      "amb 3:R",
+      "amb 3:G",
+      "amb 3:B",
+      "amb 3:W",
+      "amb 3:Dim",
+      "amb 4:R",
+      "amb 4:G",
+      "amb 4:B",
+      "amb 4:W",
+      "amb 4:Dim",
+      "amb 5:R",
+      "amb 5:G",
+      "amb 5:B",
+      "amb 5:W",
+      "amb 5:Dim",
+      "amb 6:R",
+      "amb 6:G",
+      "amb 6:B",
+      "amb 6:W",
+      "amb 6:Dim",
+      "amb 7:R",
+      "amb 7:G",
+      "amb 7:B",
+      "amb 7:W",
+      "amb 7:Dim"
+    ],
+    "currentState": {
+      "name": "current",
+      "full": true,
+      "fixtureStates": [
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.287
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.287,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.286
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 1",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.286,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.286
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 2",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.286,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.289
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 3",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.289,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.288
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 4",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.288,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.289
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 5",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.289,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.287
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 6",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.287,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        },
+        {
+          "pState": {
+            "Dim": {
+              "preseted": true,
+              "value": 0
+            },
+            "R": {
+              "preseted": true,
+              "value": 0
+            },
+            "G": {
+              "preseted": true,
+              "value": 1
+            },
+            "B": {
+              "preseted": true,
+              "value": 0.287
+            },
+            "W": {
+              "preseted": true,
+              "value": 0
+            }
+          },
+          "name": "amb 7",
+          "pChannelValues": {
+            "R": 0,
+            "G": 1,
+            "B": 0.287,
+            "W": 0,
+            "Dim": 0
+          },
+          "pChannelCurveLinks": {}
+        }
+      ],
+      "linkedStates": [],
+      "actions": {
+        "list": [],
+        "forbiddenNames": []
+      }
+    },
+    "loadedStateName": ""
+  },
+  "dmxController": {
+    "selectedPortName": "/dev/ttyUSB0",
+    "selectedDriverName": "enttec-usb-dmx-pro"
+  }
+}
