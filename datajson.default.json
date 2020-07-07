@@ -12,15 +12,15 @@
             "defaultStateName": "__full"
         },
         "interrupteur": {
-            "ip": "192.168.10.10",
-            "port": 12333
+            "ip": "192.168.0.102",
+            "port": 12347
         },
         "video": {
             "defaultMessageHoldTime": 2,
             "vFlip" : false,
             "hFlip" : true,
             "averageColorSmooth":0.3,
-            "videoColorWeights":[0.5,1,0.5]
+            "videoColorWeights":[1,1,1]
         }
     },
     "tete": [
