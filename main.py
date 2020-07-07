@@ -164,7 +164,7 @@ class SimpleServer(OSCServer):
         elif(splitAddress[1] == "light"):
             if(splitAddress[2] == "preset"):
                 # out from services mode if any light state are called
-                setServices(False,False)
+                #setServices(False,False)
                 setVermuthState(data)
             else:
                 print("Forwarding not supported for light/", splitAddress[2])
@@ -233,8 +233,10 @@ def setServices(v,notifyVermuth):
     services = v
     if(notifyVermuth):
         setVermuthState(confSettings["light"]["servicesStateName" if services else "veilleStateName"],0)
-    else:
-        forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
+        forwardMsgToWebApp(buildSimpleMessage("/app/veille",1 if services else 0))
+
+    #forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if services else 1))
+    
 
 
 
@@ -242,11 +244,12 @@ def setServices(v,notifyVermuth):
 def setVeille(v):
     global veille
     print("going to sleep mode : ", v)
-    setServices(False,False)
+    #setServices(False,False)
     print("notifying veille")
     veille = v
     forwardMsgToWebApp(buildSimpleMessage("/app/veille",1 if v else 0))
     forwardMsgToOf(buildSimpleMessage("/messages/message",""))
+    forwardMsgTointerrupteur(buildSimpleMessage("/interrupteur/services",0 if veille else 1))
     
     if v:
         setVermuthState(confSettings["light"]["servicesStateName"])
