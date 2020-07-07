@@ -203,8 +203,10 @@ lastVermuthPreset = ""
 
 def getFloat(strOrFloat):
     return float(strOrFloat)
+
 def setVermuthState(name, time=-1):
-    lastVermuthPreset =name
+    global lastVermuthPreset
+    lastVermuthPreset = name
     if(time == -1):
         time = getFloat(confSettings["light"]["fadeTime"])
     oscmsg = OSCMessage()
@@ -251,10 +253,10 @@ def setVeille(v):
         forwardMsgToOf(oscmsg)
     else:
         setVermuthState(confSettings["light"]["defaultStateName"])
-    cmd = "vcgencmd display_power %i"%(1 if v else 0)    
+    cmd = ["vcgencmd","display_power","1" if v else "0"]    
     print(cmd)
     if isPi:
-        subprocess.call(cmd)
+        subprocess.Popen(cmd)
     
 
 
@@ -433,7 +435,7 @@ def sendVolume(v):
     userSettingsData["volume"] = v
     oscmsg = OSCMessage()
     oscmsg.setAddress("/player/volume")
-    volMultiplier = 2.0
+    volMultiplier = 1.0
     oscmsg.append(v*volMultiplier,"f")
     forwardMsgToOf(oscmsg)
 
