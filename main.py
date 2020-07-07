@@ -556,7 +556,7 @@ def initSettings():
     if hasMerge:
         print ("merged some")
         with open(GLOBAL_SETTINGS_PATH, 'w') as fp:
-            json.dump(confSettings, fp, indent=2)
+            json.dump(curCfgFile, fp, indent=2)
     print("settings are : ")
     print(json.dumps(confSettings,indent=2))
 
