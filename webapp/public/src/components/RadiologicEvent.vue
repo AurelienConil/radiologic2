@@ -1,17 +1,17 @@
 <template>
   <div>
-    <b-row class="row border my-2 mx-1 p-1 bg-light">
-      <b-col cols="1" class="py-2" align-v="center">{{index}}</b-col>
+    <b-row class="row border mb-1 mx-1 p-1 bg-light">
+      <b-col cols="1" class="px-2" align-v="center">{{index}}</b-col>
       <b-col cols="2" class="p-0">
         <b-button
           block
-          class="p-3"
-          size="lg"
+          class="px-3 py-3"
+          size="sm"
           :variant="variantButton"
           v-on:click="clickMe"
         >{{title}}</b-button>
       </b-col>
-      <b-col class="py-2" align-v="center">
+      <b-col class="px-2" align-v="center">
         <div>{{msg}}</div>
         <div v-if="isSelected && (holdProgress>0)">
           <b-spinner small></b-spinner>
@@ -19,17 +19,17 @@
         </div>
       </b-col>
 
-      <b-col cols="3" class="py-2">
-        <b-badge class="p-2" variant="success" v-if="countdown>0">
+      <b-col cols="3" class="p-1">
+        <b-badge class="px-2 py-3 mb-0" variant="success" v-if="countdown>0">
           Decompte
           <b-spinner small v-if="isSelected && (countdownProgress>0)"></b-spinner>
           {{(isSelected && (countdownProgress>0))?(parseInt(countdown- countdownProgress )+1):countdown}}
         </b-badge>
-        <b-badge class="p-2" variant="warning" v-if="light.length>0">Lumiere:{{light}}</b-badge>
+        <b-badge class="p-2 mt-1" variant="warning" v-if="light.length>0">Lumiere:{{light}}</b-badge>
         <!-- <b-badge class="p-2" href="#" variant="info" v-if="holdTime==0&&countdown==0">Message infini</b-badge> -->
         <b-button
-          squared
-          class="p-2"
+          rounded12
+          class="px-4 py-2"
           href="#"
           variant="outline-info"
           v-if="holdTime==0&&countdown==0"
