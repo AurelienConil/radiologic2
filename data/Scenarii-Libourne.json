@@ -1,0 +1,425 @@
+{
+    "metadata": {
+        "light": {
+            "fastAccessPresets": [
+                "Cyan",
+                "Menthe",
+                "Ambre",
+                "Lavande",
+                "Magenta",
+                "Jaune"
+            ],
+            "fadeTime": 1,
+            "veilleStateName": "Noir",
+            "servicesStateName": "Services",
+            "defaultStateName": "Ambre"
+        },
+        "interrupteur": {
+            "ip": "192.168.0.102",
+            "port": 12347
+        },
+        "video": {
+            "defaultMessageHoldTime": 2,
+            "vFlip" : false,
+            "hFlip" : false,
+            "averageColorSmooth":1.0,
+            "videoColorWeights":[0.55,1,0.55]
+        }
+    },
+    "Crâne": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 20 min",
+          "holdTime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdTime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Nous allons injecter le produit",
+          "holdTime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdTime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Rachis cervical": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 15 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Respirez tout doucement",
+          "holdtime": 3,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Avalez la salive tout doucement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "ORL": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 20 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Respirez tout doucement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "N'avalez pas la salive, lorsque vous entendez le bruit de la machine",
+          "holdtime": 5,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan5",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Masse thoracique": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 15 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Gonflez les poumons, ne respirez pas",
+          "holdtime": 3,
+          "countdown": 15,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Respirez normalement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "La table va se déplacer, ne bougez pas",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan5",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan6",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Abdo": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 20 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Respirez tout doucement, régulierement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Gonflez les poumons, ne respirez pas",
+          "holdtime": 3,
+          "countdown": 15,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "Respirez normalement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan5",
+          "message": "La table va se déplacer, ne bougez pas",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan6",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan7",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Pelvis": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 20 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Respirez tout doucement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "La table va se déplacer, ne bougez pas",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan5",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Rachis": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 15 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 25 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "La table va se déplacer, ne bougez pas",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Ostéo articulaire": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 15 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ],
+      "Angio": [
+        {
+          "nom": "Info",
+          "message": "Votre examen durera environ 10 min",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan1",
+          "message": "Ne bougez pas, l'examen va commencer",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan2",
+          "message": "Ne respirez pas",
+          "holdtime": 4,
+          "countdown": 15,
+          "light": ""
+        },
+        {
+          "nom": "Scan3",
+          "message": "Respirez normalement",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan4",
+          "message": "Ne respirez pas, n'avalez pas la salive",
+          "holdtime": 4,
+          "countdown": 15,
+          "light": ""
+        },
+        {
+          "nom": "Scan5",
+          "message": "La table va se déplacer, ne bougez pas",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan6",
+          "message": "Nous allons injecter le produit",
+          "holdtime": 4,
+          "countdown": 0,
+          "light": ""
+        },
+        {
+          "nom": "Scan7",
+          "message": "Ne bougez pas, nous regardons l'examen.",
+          "holdtime": 6,
+          "countdown": 0,
+          "light": ""
+        }
+      ]
+}

@@ -21,7 +21,7 @@
         "video": {
             "defaultMessageHoldTime": 2,
             "vFlip" : false,
-            "hFlip" : true,
+            "hFlip" : false,
             "averageColorSmooth":1.0,
             "videoColorWeights":[0.55,1,0.55]
         }
