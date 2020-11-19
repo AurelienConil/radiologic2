@@ -1,0 +1,209 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf840
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 CourierNewPSMT;\f2\fnil\fcharset0 Consolas;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\froman\fcharset0 Times-Roman;\f5\fswiss\fcharset0 ArialMT;
+}
+{\colortbl;\red255\green255\blue255;\red255\green252\blue171;\red0\green0\blue0;\red255\green250\blue131;
+\red26\green26\blue26;\red0\green0\blue0;\red9\green80\blue208;}
+{\*\expandedcolortbl;;\csgenericrgb\c100000\c98824\c67059;\cssrgb\c0\c0\c0;\csgenericrgb\c100000\c98039\c51373;
+\cssrgb\c13333\c13333\c13333;\cssrgb\c0\c0\c0\c4706;\cssrgb\c0\c41176\c85098;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Documentation RADIOLOGIC\
+\
+\ul D\'e9pots :\ulnone \
+Radiologic : https://github.com/AurelienConil/radiologic2.git\
+UniversalMediaPlayer : https://github.com/AurelienConil/universalMediaPlayer.git\
+Vermout : ??\
+ArduinoServices : https://github.com/siroptinmar/ArduinoRadiologic.git\
+\
+\
+\ul Mat\'e9riel : \ulnone \
+1 raspberry 3 ou 3+\
+1 DmxUSbPro\
+1 splitter (2 HDMI)\
+1 Arduino + Shield \'e9thernet \
+1 bouton poussoir NO avec led (alimentation 5V)\
+2 tablette Huawei 10.1 (R\'e9solution 1920 x 1080)\
+1 Router TPLINK AC1200\
+1 clef USB\
+4 cables \'e9thernet (1m, Xm, Xm, Xm)\
+\
+\ul Configuration WIFI : \ulnone \
+Mat\'e9riel en IP Fixe. \
+Raspberry 192.168.0.101\
+Arduino 192.168.0.102\
+Tablettes ip quelconque\
+Admin : pw: Radiologic1.\
+SSID : radiologic - radiologic_5G\
+\
+SSID PW Libourne :  66805434\
+SSID PW Sarlat : sunnysheep002\
+SSID PW Perigueux : 72613092\
+\
+Router IP : 192.168.0.254\
+\
+DHCP Server Enable - 192.168.0.100 -> 199\
+\
+\ul WebInterface : \ulnone \
+:3000 op\'e9rateur\
+:3000?admin\
+:3000/json\
+:3000/datajson.json\
+\
+:3001 choix du film\
+:3003 lumiere\
+\
+\ul Config manuelle : \
+\
+
+\b \ulnone D\'e9sactiver les logs: 
+\b0 \ul \
+\pard\pardeftab720\partightenfactor0
+
+\f1 \cf0 \cb2 \expnd0\expndtw0\kerning0
+\ulnone cd /etc/systemd/system
+\f0 \
+
+\f1 ls\cb1  \
+
+\f0 puis fichiers *.service \
+
+\f1 \cb4 sudo nano LeNomDuFichier.service\
+
+\f0 \cb1 tu rajoutes ces 2 lignes l\'e0 :\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs26 \cf0 \cb2 [Service]\
+StandardOutput=null\
+StandardError=journal\cb1 \
+Puis enfin\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf0 \cb2 sudo systemctl daemon-reload
+\f0 \kerning1\expnd0\expndtw0 \ul \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \ulnone \
+
+\b ip fixe : \
+
+\b0 Dans cmdline.txt ajouter ip=192.168.0.101\
+\
+
+\b Rotation de le l\'92affichage :
+\b0  \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 sudo nano /boot/config.txt\
+ajouter (ou remplacer si existant) : display_rotate\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf5 \cb6 display_rotate=0 # Normal (landscape)\cb1 \
+\cb6 display_rotate=1 # 90 degrees (portrait, upside down)\cb1 \
+\cb6 display_rotate=2 # 180 degrees (landscape)\cb1 \
+\cb6 display_rotate=3 # 270 degrees (portrait, upside down)\cb1 \
+\cb6 display_rotate=0x10000 # horizontal flip\cb1 \
+\cb6 display_rotate=0x20000 # vertical flip
+\f0 \cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://howchoo.com/g/nzvimjk0nme/raspberry-pi-display-rotation"}}{\fldrslt \cf7 \ul \ulc7 https://howchoo.com/g/nzvimjk0nme/raspberry-pi-display-rotation}}\cf7 \ul \ulc7 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b \cf0 \kerning1\expnd0\expndtw0 \ulnone Ajout de superCondo : \
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf0 \expnd0\expndtw0\kerning0
+mkdir juice4halt \
+cd juice4halt
+\f0 \
+
+\f4 curl -O {\field{\*\fldinst{HYPERLINK "https://juice4halt.com/wp-content/uploads/2019/04/shutdown_script.7z"}}{\fldrslt \cf7 \ul https://juice4halt.com/wp-content/uploads/2019/04/shutdown_script.7z}}    \
+sudo apt-get install p7zip-full\
+7z x {\field{\*\fldinst{HYPERLINK "https://juice4halt.com/wp-content/uploads/2019/04/shutdown_script.7z"}}{\fldrslt \cf7 \ul shutdown_script.7z}}  \
+ls 
+\f0 \
+
+\f4 sudo chmod 775 shutdown_script\
+sudo nano /etc/rc.local
+\f0 \
+\pard\pardeftab720\partightenfactor0
+
+\f5\i \cf0 	descendre dans le fichier tout en bas, et juste avant la ligne exit 0, ins\'e9rer la ligne :
+\f0\i0 \
+\pard\pardeftab720\partightenfactor0
+
+\f4 \cf0 /home/pi/juice4halt/shutdown_script & 
+\f0 \
+
+\f4 CTRL-X pour quitter, touche O, pour enregistrer les modifications
+\f0 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\ul Video\ulnone \
+vid\'e9o : file_name.mp4 (H264 1280x720p) audio AAC\
+Couverture : file_name.jpg (960\
+\
+\ul M\'e9moire lumi\'e8re disponible : \
+\ulnone Noir\
+Services (blanc)\
+Rouge\
+Vert\
+Bleu\
+Cyan\
+Magenta\
+Jaune\
+Ambre\
+Jade (vert clair)\
+Lavande\
+Orange\
+Azur (bleu clair)\
+Rose\
+Vermillon\
+Citron\
+Ecru (blanc chaud)\
+Anis (vert-jaune)\
+Menthe\
+\
+\
+\
+\ul Message OSC : \ulnone \
+Arduino -> rasp /interrupteur/services 1 ou 0 : controle une memoire service lumi\'e8re\
+Rasp -> Arduino /interrupteur/services 1 ou 0 : controle le tag (state) et la led de l\'92interrupteur de service\
+\
+Le serveur python sur la raspberry centralise toutes les interactions des 
+\b tablettes
+\b0  et de 
+\b ArduinoServices
+\b0  et les dispatch vers 
+\b universalMediaPlayer
+\b0 , vers Vermouth et vers 
+\b ArduinoServices
+\b0 . \
+\
+\ul Mise \'e0 jour : \
+\ulnone Mise \'e0 jour via une commande OSC : /app/update_all \
+Cette commande d\'e9clenche les script: \
+\
+\ul Sc\'e9nario : \ulnone \
+Un op\'e9rateur radiologue entre dans la pi\'e8ce allume les services. \
+Sur la tablette il d\'e9marre le syst\'e8me, la lumi\'e8re se colore. \
+Le patient entre et choisi sur la tablette \'e0 l\'92entr\'e9e, l\'92un des films pr\'e9sents sur la clef Usb, en cliquant sur le bouton de ce film. (Nom, cover)\
+L\'92op\'e9rateur choisi un sc\'e9nario de radiologie sur la tablette, \
+Et entame une s\'e9ance. \
+Une s\'e9ance est compos\'e9 de plusieurs envoies de messages informatifs (et possiblement de m\'e9moire lumi\'e8re) qui se superposent aux images du film. \
+Une fois le patient en Place dans l\'92IRM, l\'92op\'e9rateur peut d\'e9marrer le film avec le bouton LECTURE sur la tablette. \
+La lumi\'e8re RGBW de la pi\'e8ce r\'e9agi et rend la moyenne colorim\'e9trique des pixels du film. \
+Si pas besoin de dessin anim\'e9, l\'92op\'e9rateur peut choisir parmi 6 m\'e9moires lumi\'e8res RGBW, avec les boutons sur la tablette.\
+L\'92op\'e9rateur peut maintenant envoy\'e9 les messages informatifs \'e0 l\'92\'e9cran. \
+La s\'e9ance est termin\'e9, l\'92op\'e9rateur peut couper le film, la lumi\'e8re revient \'e0 la m\'e9moire initialement choisie. \
+Le patient a maintenant quitt\'e9 la pi\'e8ce l\'92op\'e9rateur peut METTRE EN VEILLE le syst\'e8me avec le bouton sur la tablette. \
+La lumi\'e8re de service s\'92allume, \
+L\'92op\'e9rateur peut maintenant couper les services avec le bouton poussoir physique. \
+\
+Libourne IRM\
+0557554850\
+\
+\
+\
+}
